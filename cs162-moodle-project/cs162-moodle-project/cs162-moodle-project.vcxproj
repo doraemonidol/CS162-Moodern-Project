@@ -139,7 +139,22 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="allRole.cpp" />
+    <ClCompile Include="finalization.cpp" />
+    <ClCompile Include="initialization.cpp" />
+    <ClCompile Include="lecturer.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="staff.cpp" />
+    <ClCompile Include="student.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="allRole.h" />
+    <ClInclude Include="finalization.h" />
+    <ClInclude Include="initialization.h" />
+    <ClInclude Include="lecturer.h" />
+    <ClInclude Include="main.h" />
+    <ClInclude Include="staff.h" />
+    <ClInclude Include="student.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
