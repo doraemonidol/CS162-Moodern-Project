@@ -35,8 +35,10 @@ void outScoreboards(Scoreboards*& Board){
     }
     cout << n << '\n';
     while (Board){
-        cout << cur->courseName << " " << cur->courseID << " " << cur->midtermScore << " "<< cur->finalScore << " "<< cur->labScore<< " "<< cur->bonusScore << " ";
+        cout << Board->courseName << " " << Board->courseID << " " << Board->midtermScore << " "<< Board->finalScore << " "<< Board->labScore<< " "<< Board->bonusScore << " ";
+		Scoreboards* del = Board;
         Board = Board->next;
+		delete[] Board;
     }
 }
 
@@ -50,6 +52,8 @@ void outStaffs(Staffs*& St){
     cout << n << '\n';
     while(St){
         outAccounts(St->account);
+		Staffs* del = St;
         St = St->next;
+		delete St;
     }
 }
