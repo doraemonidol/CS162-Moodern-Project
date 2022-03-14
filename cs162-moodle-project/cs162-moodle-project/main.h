@@ -86,7 +86,6 @@ struct Scoreboards {
 };
 
 struct CheckinCourse {
-	int bitweek = 0;
 	string courseID, room, startTime, endTime;
 	Date startDate, endDate;
 	CheckinCourse* next = nullptr;
