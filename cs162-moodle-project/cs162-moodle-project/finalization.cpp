@@ -8,7 +8,7 @@
 void outDate(Date& d) {
 	cout << d.day << ' ' << d.month << ' ' << d.year << '\n';
 }
-void outAccounts(Accounts* acc) {
+void outAccounts(Accounts*& acc) {
 	int n = 0;
 	Accounts* tmp = acc;
 	//elements count
@@ -20,6 +20,8 @@ void outAccounts(Accounts* acc) {
 	while (acc) {
 		cout << acc->pwd << ' ' << acc->uName << ' ' << acc->role << ' ' << acc->socialID << ' ' << acc->lastname << ' ' << acc->firstname << ' ' << acc->gender << ' ';
 		outDate(acc->doB);
+		Accounts* erase = acc;
 		acc = acc->next;
+		delete[] erase;
 	}
 }
