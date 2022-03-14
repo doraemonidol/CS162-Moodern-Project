@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <chrono>
 #include <ctime>  
+#include<string>
 using namespace std;
 
 /* struct<type> {
@@ -24,7 +25,8 @@ struct Accounts {
     string socialID;
     string lastname, firstname;
     char gender; //Female Male, Prefer not to say -> F,M,O
-    Date* doB = nullptr;
+    Date doB;
+    Accounts* next = nullptr;
 };
 
 struct Scoreboards {
