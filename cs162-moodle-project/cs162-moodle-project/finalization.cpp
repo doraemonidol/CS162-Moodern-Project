@@ -22,7 +22,7 @@ void outAccounts(Accounts*& acc) {
 		outDate(acc->doB);
 		Accounts* erase = acc;
 		acc = acc->next;
-		delete[] erase;
+		delete erase;
 	}
 }
 
@@ -38,7 +38,7 @@ void outScoreboards(Scoreboards*& Board){
         cout << Board->courseName << " " << Board->courseID << " " << Board->midtermScore << " "<< Board->finalScore << " "<< Board->labScore<< " "<< Board->bonusScore << " ";
 		Scoreboards* del = Board;
         Board = Board->next;
-		delete[] Board;
+		delete del;
     }
 }
 
@@ -54,6 +54,6 @@ void outStaffs(Staffs*& St){
         outAccounts(St->account);
 		Staffs* del = St;
         St = St->next;
-		delete St;
+		delete del;
     }
 }
