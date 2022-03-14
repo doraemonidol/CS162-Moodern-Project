@@ -42,19 +42,6 @@ void inpScoreboards(Scoreboards*& Board){
         cin >> cur->courseName >> cur->courseID >> cur->midtermScore >> cur->finalScore >> cur->labScore >> cur->bonusScore;
     }
 }
-void outScoreboards(Scoreboards*& Board){
-    int n = 0;
-    Scoreboards* cur = Board;
-    while (cur){
-        n++;
-        cur = cur->next;
-    }
-    cout << n << '\n';
-    while (Board){
-        cout << cur->courseName << " " << cur->courseID << " " << cur->midtermScore << " "<< cur->finalScore << " "<< cur->labScore<< " "<< cur->bonusScore << " ";
-        Board = Board->next;
-    }
-}
 
 void inpStaffs(Staffs*& St){
     Staffs* cur;
@@ -70,18 +57,5 @@ void inpStaffs(Staffs*& St){
             cur = cur->next;
         }
         inpAccounts(cur->account);
-    }
-}
-void outStaffs(Staffs*& St){
-    Staffs* cur = St;
-    int n = 0;
-    while (cur){
-        n++;
-        cur = cur->next;
-    }
-    cout << n << '\n';
-    while(St){
-        outAccounts(St->account);
-        St = St->next;
     }
 }
