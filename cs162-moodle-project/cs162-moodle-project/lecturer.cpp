@@ -31,3 +31,17 @@ void inpLecturers(Lecturers* &lec_head){
         //cin>>lec_cur->account->doB->day>> lec_cur->account->doB->month >> lec_cur->account->doB->year;
     }
 }
+
+void outLecturers(Lecturers* &lec_head){
+    Lecturers* lec_cur = lec_head;
+    while (lec_cur){
+        cout << "Username: "<< lec_cur->account->uName << endl;
+        cout << "Password: "<< lec_cur->account->pwd << endl;
+        cout << "Role " << lec_cur->account->role << endl;
+        cout << "Social ID: " << lec_cur->account->socialID << endl;
+        cout << "Name: " << lec_cur->account->lastname <<" "<< lec_cur->account->firstname<< endl ;
+        cout << "Gender: " << lec_cur->account->gender << endl;
+        //cout << "DOB: " << lec_cur->account->doB->day << "/" << lec_cur->account->doB->month << "/" << lec_cur->account->doB->year << endl;    
+        lec_cur= lec_cur->next;
+    }
+}
