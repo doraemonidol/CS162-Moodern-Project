@@ -4,15 +4,64 @@
 #include <iomanip>
 #include <stdio.h>
 #include <chrono>
-#include <ctime>  
-#include<string>
+#include <ctime>
 using namespace std;
 
-/* struct<type> {
-	int data;
-	<type>* next;
-	<type>* sub;
-}; 2D Linked List*/
+struct Schedule {
+    string data;
+    Schedule *next = NULL, *daily = NULL;
+    void initDailySchedule(Schedule* schedule)
+    {
+        Schedule* cur = schedule;
+        for (int i = 0; i < 4; i++) {
+            cur->daily = new Schedule;
+            cur->daily->next = schedule->next;
+            cur = cur->daily;
+        }
+    }
+
+    void init()
+    {
+        Schedule* cur = this;
+        for (int i = 0; i < 5; i++) {
+            cur->next = new Schedule;
+            cur = cur->next;
+        }
+        cur = this;
+        for (int i = 0; i < 6; i++) {
+            initDailySchedule(cur);
+            cur = cur->next;
+        }
+    }
+
+    void deleteDay(Schedule* daySchedule)
+    {
+        if (!daySchedule)
+            return;
+        deleteDay(daySchedule->daily);
+        delete daySchedule;
+    }
+
+    void deallocate(Schedule* schedule)
+    {
+        if (!schedule)
+            return;
+        deallocate(schedule->next);
+        deleteDay(schedule->daily);
+        delete schedule;
+    }
+};
+/*2D Linked List
+How to use:
+`next` is for the next day
+`daily` saves session in a day
+
+Allocation:
+    Schedule *<pointer name> = new Schedule;
+    <pointer name>->init();
+Deallocation:
+    <pointer name>->deallocate(<pointer name>);
+*/
 
 struct Date {
 	string day = "", month = "", year = "";
@@ -47,10 +96,9 @@ struct Students {
 	string studentID;
 	Accounts* account = nullptr;
 	Scoreboards* scoreboards = nullptr;
-
-	string schedule[6][4];
-	CheckinCourse* checkincourse = nullptr;
-	Students* next = nullptr;
+    Schedule schedule;
+    CheckinCourse* checkincourse = nullptr;
+    Students* next = nullptr;
 };
 
 struct CourseDetail {
@@ -60,11 +108,11 @@ struct CourseDetail {
 };
 
 struct Classes {
-	string classID;
-	Students* students = nullptr;
-	string schedule[6][4];
-	CourseDetail* CD = nullptr;
-	Classes* next = nullptr;
+    string classID;
+    Students* students = nullptr;
+    Schedule schedule;
+    CourseDetail* CD = nullptr;
+    Classes* next = nullptr;
 };
 
 struct Staffs {
