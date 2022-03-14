@@ -22,6 +22,38 @@ void outAccounts(Accounts*& acc) {
 		outDate(acc->doB);
 		Accounts* erase = acc;
 		acc = acc->next;
-		delete[] erase;
+		delete erase;
 	}
+}
+
+void outScoreboards(Scoreboards*& Board){
+    int n = 0;
+    Scoreboards* cur = Board;
+    while (cur){
+        n++;
+        cur = cur->next;
+    }
+    cout << n << '\n';
+    while (Board){
+        cout << Board->courseName << " " << Board->courseID << " " << Board->midtermScore << " "<< Board->finalScore << " "<< Board->labScore<< " "<< Board->bonusScore << " ";
+		Scoreboards* del = Board;
+        Board = Board->next;
+		delete del;
+    }
+}
+
+void outStaffs(Staffs*& St){
+    Staffs* cur = St;
+    int n = 0;
+    while (cur){
+        n++;
+        cur = cur->next;
+    }
+    cout << n << '\n';
+    while(St){
+        outAccounts(St->account);
+		Staffs* del = St;
+        St = St->next;
+		delete del;
+    }
 }

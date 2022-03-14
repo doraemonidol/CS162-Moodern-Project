@@ -25,3 +25,37 @@ void inpAccounts(Accounts*& acc) {
 		inpDate(cur->doB);
 	}
 }
+
+void inpScoreboards(Scoreboards*& Board){
+    Scoreboards* cur;
+    int n;
+    cin >> n;
+    while (n--){
+        if (!Board){
+            Board = new Scoreboards;
+            cur = Board;
+        }
+        else{
+            cur->next = new Scoreboards;
+            cur = cur->next;
+        }
+        cin >> cur->courseName >> cur->courseID >> cur->midtermScore >> cur->finalScore >> cur->labScore >> cur->bonusScore;
+    }
+}
+
+void inpStaffs(Staffs*& St){
+    Staffs* cur;
+    int n;
+    cin >> n;
+    while (n--){
+        if (!St){
+            St = new Staffs;
+            cur = St; 
+        }
+        else{
+            cur->next = new Staffs;
+            cur = cur->next;
+        }
+        inpAccounts(cur->account);
+    }
+}
