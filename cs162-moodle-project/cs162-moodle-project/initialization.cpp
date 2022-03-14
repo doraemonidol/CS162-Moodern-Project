@@ -27,7 +27,7 @@ void inpAccounts(Accounts*& acc) {
 }
 
 void inpScoreboards(Scoreboards*& Board){
-    Scoreboards* cur;
+    Scoreboards* cur = nullptr;
     int n;
     cin >> n;
     while (n--){
@@ -44,7 +44,7 @@ void inpScoreboards(Scoreboards*& Board){
 }
 
 void inpStaffs(Staffs*& St){
-    Staffs* cur;
+    Staffs* cur = nullptr;
     int n;
     cin >> n;
     while (n--){
@@ -54,6 +54,22 @@ void inpStaffs(Staffs*& St){
         }
         else{
             cur->next = new Staffs;
+            cur = cur->next;
+        }
+        inpAccounts(cur->account);
+    }
+}
+
+void inpStudents(Students*& studentList) {
+    Students* cur = studentList = nullptr;
+    int n;
+    cin >> n;
+    while (n--) {
+        if (!studentList) {
+            studentList = new Students;
+            cur = studentList;
+        } else {
+            cur->next = new Students;
             cur = cur->next;
         }
         inpAccounts(cur->account);

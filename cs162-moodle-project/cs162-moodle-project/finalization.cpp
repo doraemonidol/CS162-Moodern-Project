@@ -57,3 +57,21 @@ void outStaffs(Staffs*& St){
 		delete del;
     }
 }
+
+void outStudents(Students*& studentList) {
+    Students* cur = studentList;
+    int n = 0;
+    while (cur) {
+        n++;
+        cur = cur->next;
+    }
+
+    cout << n << '\n';
+
+    while (n--) {
+        outAccounts(cur->account);
+        Students* tmp = cur->next;
+        delete cur;
+        cur = tmp;
+    }
+}
