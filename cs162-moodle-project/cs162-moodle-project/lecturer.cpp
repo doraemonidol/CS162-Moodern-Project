@@ -28,7 +28,7 @@ void inpLecturers(Lecturers* &lec_head){
         getline(cin,lec_cur->account->firstname,'\n');
         cin >> lec_cur->account->gender;
         //input date
-        //cin>>lec_cur->account->doB->day>> lec_cur->account->doB->month >> lec_cur->account->doB->year;
+        cin>>lec_cur->account->doB.day>> lec_cur->account->doB.month >> lec_cur->account->doB.year;
     }
 }
 
@@ -41,7 +41,7 @@ void outLecturers(Lecturers* &lec_head){
         cout << "Social ID: " << lec_cur->account->socialID << endl;
         cout << "Name: " << lec_cur->account->lastname <<" "<< lec_cur->account->firstname<< endl ;
         cout << "Gender: " << lec_cur->account->gender << endl;
-        //cout << "DOB: " << lec_cur->account->doB->day << "/" << lec_cur->account->doB->month << "/" << lec_cur->account->doB->year << endl;    
+        cout << "DOB: " << lec_cur->account->doB.day << "/" << lec_cur->account->doB.month << "/" << lec_cur->account->doB.year << endl;    
         lec_cur= lec_cur->next;
     }
 }
