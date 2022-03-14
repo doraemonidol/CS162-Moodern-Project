@@ -5,6 +5,31 @@
 #include "lecturer.h"
 #include "staff.h"
 #include "student.h"
+
+Classes* findClass(Students* student, Classes* classes) {
+    while (classes) {
+        Students* cur = classes->students;
+        while (cur) {
+            if (cur->studentID == student->studentID)
+                return classes;
+            cur = cur->next;
+        }
+        classes = classes->next;
+    }
+}
+
+void viewStudents(Students* studentList, Classes* classes) {
+    cout << setw(10) << "Student ID" << setw(25) << "Full name" << setw(10) << "Class ID" << endl;
+
+    while (studentList) {
+        cout << setw(10) << studentList->studentID;
+        cout << setw(25);
+        cout << studentList->account->lastname + " " + studentList->account->firstname;
+        cout << setw(10) << findClass(studentList, classes)->classID << endl;
+        studentList = studentList->next;
+    }
+}
+
 void viewDate(Date d) {
 	if (d.day.size() != 2) cout << 0;
 	cout << d.day << '/';
@@ -35,7 +60,7 @@ void viewAccounts(Accounts* acc) {
 }
 
 void inpScoreboards(Scoreboards *& pHead){
-    Scoreboards* cur;
+    Scoreboards* cur = nullptr;
     int n;
     cin >> n;
     while (n--){

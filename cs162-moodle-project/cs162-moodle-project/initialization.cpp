@@ -11,7 +11,7 @@ void inpDate(Date& d) {
 void inpAccounts(Accounts*& acc) {
 	int n;
 	cin >> n;
-	Accounts* cur;
+	Accounts* cur = nullptr;
 	while (n--) {
 		if (!acc) {
 			acc = new Accounts;
