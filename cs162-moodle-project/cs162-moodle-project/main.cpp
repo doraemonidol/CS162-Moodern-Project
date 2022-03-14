@@ -8,5 +8,6 @@
 
 int main() {
 	cout << "This is CS162 Moodle Project";
+	cout << "\n ko ong";
 	return 0;
 }
