@@ -34,14 +34,14 @@ void viewAccounts(Accounts* acc) {
 	viewDate(acc->doB);
 }
 
-void inpScoreboards(Scoreboards *& pHead){
+void inpScoreboards(Scoreboards *& Board){
     Scoreboards* cur;
     int n;
     cin >> n;
     while (n--){
-        if (!pHead){
-            pHead = new Scoreboards;
-            cur = pHead;
+        if (!Board){
+            Board = new Scoreboards;
+            cur = Board;
         }
         else{
             cur->next = new Scoreboards;
@@ -50,16 +50,46 @@ void inpScoreboards(Scoreboards *& pHead){
         cin >> cur->courseName >> cur->courseID >> cur->midtermScore >> cur->finalScore >> cur->labScore >> cur->bonusScore;
     }
 }
-void outScorebards(Scoreboards *& pHead){
+void outScorebards(Scoreboards *& Board){
     int n = 0;
-    Scoreboards* cur = pHead;
+    Scoreboards* cur = Board;
     while (cur){
         n++;
         cur = cur->next;
     }
     cout << n << '\n';
-    while (pHead){
+    while (Board){
         cout << cur->courseName << " " << cur->courseID << " " << cur->midtermScore << " "<< cur->finalScore << " "<< cur->labScore<< " "<< cur->bonusScore << " ";
-        pHead = pHead->next;
+        Board = Board->next;
+    }
+}
+
+void inpStaffs(Staffs *& St){
+    Staffs* cur;
+    int n;
+    cin >> n;
+    while (n--){
+        if (!St){
+            St = new Staffs;
+            cur = St; 
+        }
+        else{
+            cur->next = new Staffs;
+            cur = cur->next;
+        }
+        inpAccounts(cur->account);
+    }
+}
+void outStaffs(Staffs *& St){
+    Staffs* cur = St;
+    int n = 0;
+    while (cur){
+        n++;
+        cur = cur->next;
+    }
+    cout << n << '\n';
+    while(St){
+        outAccounts(St->account);
+        St = St->next;
     }
 }
