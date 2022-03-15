@@ -38,14 +38,24 @@ void viewDate(Date d) {
 	cout << d.year << '\n';
 }
 void viewClass(Classes* cl) {
-
+	
 }
 void viewAccounts(Accounts* acc) {
 	cout << "Main Profile\n";
 	cout << "Username: " << acc->uName<<'\n';
 	cout << "Role: ";
 	switch (acc->role) {
-
+	case 1:
+		cout << "Academic Staff\n";
+		break;
+	case 2:
+		cout << "Lecturer\n";
+		break;
+	case 3:
+		cout << "Student\n";
+		break;
+	default:
+		cout << "N/A\n";
 	}
 	cout << '\n';
 	cout << "Last name: " << acc->lastname << '\n';
