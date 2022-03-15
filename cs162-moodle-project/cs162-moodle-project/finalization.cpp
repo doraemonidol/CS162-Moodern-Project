@@ -112,21 +112,3 @@ void outStudents(Students*& studentList) {
         cur = tmp;
     }
 }
-
-void viewScoreboards (Scoreboards*& scoreb){
-    Scoreboards* cur = scoreb;
-    int n=0;
-    while (cur){
-        n++;
-        cur = cur->next;
-    }
-    cout << n << '\n';
-    cur = scoreb;
-
-    while (n--){
-        cout << cur->courseName << endl;
-        cout << cur->courseID << endl;
-        cout << cur->midtermScore << " " << cur->finalScore << " " << cur->labScore << " " << cur->bonusScore;
-        cur = cur->next;
-    }
-}
