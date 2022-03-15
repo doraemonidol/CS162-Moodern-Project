@@ -2,6 +2,5 @@
 #include "allRole.h"
 #include "finalization.h"
 #include "initialization.h"
-#include "lecturer.h"
 #include "staff.h"
 #include "student.h"

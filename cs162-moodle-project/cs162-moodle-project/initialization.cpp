@@ -2,28 +2,16 @@
 #include "allRole.h"
 #include "finalization.h"
 #include "initialization.h"
-#include "lecturer.h"
 #include "staff.h"
 #include "student.h"
 void inpDate(Date& d) {
 	cin >> d.day >> d.month >> d.year;
 }
-void inpAccounts(Accounts*& acc) {
-	int n;
-	cin >> n;
-	Accounts* cur = nullptr;
-	while (n--) {
-		if (!acc) {
-			acc = new Accounts;
-			cur = acc;
-		}
-		else {
-			cur->next = new Accounts;
-			cur = cur->next;
-		}
-		cin >> cur->pwd >> cur->uName >> cur->role >> cur->socialID >> cur->lastname >> cur->firstname >> cur->gender;
-		inpDate(cur->doB);
-	}
+void inpAccount(Accounts*& acc) {
+    cin >> acc->pwd >> acc->uName >> acc->role >> acc->socialID >> acc->lastname;
+    getline(cin, acc->firstname);
+    cin >> acc->gender;
+    inpDate(acc->doB);
 }
 
 void inpScoreboards(Scoreboards*& Board){
@@ -56,7 +44,7 @@ void inpStaffs(Staffs*& St){
             cur->next = new Staffs;
             cur = cur->next;
         }
-        inpAccounts(cur->account);
+        inpAccount(cur->account);
     }
 }
 
@@ -76,37 +64,6 @@ void inpYears(AcademicYears*& yearList) {
     }
 }
 
-void inpCourseClass(CourseClass*& courseClass) {
-    CourseClass* cur = courseClass = nullptr;
-    int n;
-    cin >> n;
-    while (n--) {
-        if (!courseClass) {
-            courseClass = new CourseClass;
-            cur = courseClass;
-        } else {
-            cur->next = new CourseClass;
-            cur = cur->next;
-        }
-        inpDate(cur->startDate);
-        inpDate(cur->endDate);
-        cin >> cur->DayInWeek >> cur->startTime >> cur->endTime >> cur->classID;
-        int m;
-        cin >> m;
-        StudentCourse* sc = cur->studentCourse = nullptr;
-        while (m--) {
-            if (!cur->studentCourse) {
-                cur->studentCourse = new StudentCourse;
-                sc = cur->studentCourse;
-            } else {
-                sc->next = new StudentCourse;
-                sc = sc->next;
-            }
-            cin >> sc->studentID >> sc->classID;
-        }
-    }
-}
-
 void inpCourses(Courses*& courseList) {
     Courses* cur = courseList = nullptr;
     int n;
@@ -119,8 +76,10 @@ void inpCourses(Courses*& courseList) {
             cur->next = new Courses;
             cur = cur->next;
         }
-        cin >> cur->courseID >> cur->courseName >> cur->LecturerName >> cur->room;
-        inpCourseClass(cur->courseclass);
+        cin >> cur->courseID >> cur->courseName >> cur->lecturerName >> cur->room;
+        inpDate(cur->startDate);
+        inpDate(cur->endDate);
+        cin >> cur->day1 >> cur->day2 >> cur->session1 >> cur->session2;
     }
 }
 
@@ -136,6 +95,10 @@ void inpStudents(Students*& studentList) {
             cur->next = new Students;
             cur = cur->next;
         }
-        inpAccounts(cur->account);
+        cin >> cur->studentID;
+        inpAccount(cur->account);
+        cin >> cur->classID;
+        inpScoreboards(cur->scoreboards);
+        inpCourses(cur->enrolledCourse);
     }
 }

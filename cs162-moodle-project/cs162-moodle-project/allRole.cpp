@@ -2,7 +2,6 @@
 #include "allRole.h"
 #include "finalization.h"
 #include "initialization.h"
-#include "lecturer.h"
 #include "staff.h"
 #include "student.h"
 
@@ -25,7 +24,7 @@ void viewStudents(Students* studentList, Classes* classes) {
         cout << setw(10) << studentList->studentID;
         cout << setw(25);
         cout << studentList->account->lastname + " " + studentList->account->firstname;
-        cout << setw(10) << findClass(studentList, classes)->classID << endl;
+        cout << setw(10) << studentList->classID << endl;
         studentList = studentList->next;
     }
 }
@@ -46,20 +45,18 @@ void viewAccounts(Accounts* acc) {
 	cout << "Role: ";
 	switch (acc->role) {
 	case 1:
-		cout << "Academic Staff\n";
+		cout << ">>> Academic Staff <<<\n";
 		break;
-	case 2:
-		cout << "Lecturer\n";
-		break;
-	case 3:
-		cout << "Student\n";
+	case 0:
+		cout << ">>> Student <<<\n";
 		break;
 	default:
 		cout << "N/A\n";
 	}
-	cout << '\n';
-	cout << "Last name: " << acc->lastname << '\n';
-	cout << "First name: " << acc->firstname << '\n';
+	cout << '\n'
+         << "Last name: " << acc->lastname << '\n'
+         << "First name: " << acc->firstname << '\n'
+         << "Social ID: " << acc->socialID << '\n';
 	if (acc->gender != 'O') {
 		cout << "Gender: ";
 		if (acc->gender == 'F') cout << "Female\n";
@@ -68,19 +65,14 @@ void viewAccounts(Accounts* acc) {
 	cout << "Day of birth: ";
 	viewDate(acc->doB);
 }
-//
-void viewCourseclass(CourseClass* CoClass){
-
-}
 
 //
 void viewCourses(Courses* Course){
 	while (Course){
-		cout << " The course id is: " << Course->courseID << '\n';
-		cout << " The course name is: " << Course->courseName << '\n';
-		viewCourseclass(Course->courseclass);
-		cout << " The course's lecturer is: " << Course->LecturerName << '\n';
-		cout << " The room for the course is: " << Course->room << '\n';  
+		cout << "Course ID: " << Course->courseID << '\n';
+		cout << "Course name: " << Course->courseName << '\n';
+		cout << "Lecturer: " << Course->lecturerName << '\n';
+		cout << "Room: " << Course->room << '\n';  
 		Course = Course->next;
 	}
 }
