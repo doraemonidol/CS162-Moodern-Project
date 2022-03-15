@@ -68,3 +68,19 @@ void viewAccounts(Accounts* acc) {
 	cout << "Day of birth: ";
 	viewDate(acc->doB);
 }
+//
+void viewCourseclass(CourseClass* CoClass){
+
+}
+
+//
+void viewCourses(Courses* Course){
+	while (Course){
+		cout << " The course id is: " << Course->courseID << '\n';
+		cout << " The course name is: " << Course->courseName << '\n';
+		viewCourseclass(Course->courseclass);
+		cout << " The course's lecturer is: " << Course->LecturerName << '\n';
+		cout << " The room for the course is: " << Course->room << '\n';  
+		Course = Course->next;
+	}
+}
