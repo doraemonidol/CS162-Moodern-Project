@@ -24,9 +24,6 @@
     <ClCompile Include="staff.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="lecturer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="allRole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,9 +42,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="staff.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lecturer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="initialization.h">
