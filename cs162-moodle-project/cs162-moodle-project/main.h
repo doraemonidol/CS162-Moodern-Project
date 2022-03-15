@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <chrono>
 #include <ctime>
+#include <string>
 using namespace std;
 
 struct Schedule {
@@ -129,10 +130,9 @@ struct StudentCourse {
 };
 struct CourseClass {
 	string classID;
-	Students* students = nullptr;
 	Date startDate, endDate;
 	string startTime, endTime;
-	StudentCourse* studentcourse = nullptr;
+	StudentCourse* studentCourse = nullptr;
 	int DayInWeek;
 	int AtNth; //session
 	CourseClass* next = nullptr;
