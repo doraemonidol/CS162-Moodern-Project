@@ -60,6 +60,70 @@ void inpStaffs(Staffs*& St){
     }
 }
 
+void inpYears(AcademicYears*& yearList) {
+    AcademicYears* cur = yearList = nullptr;
+    int n;
+    cin >> n;
+    while (n--) {
+        if (!yearList) {
+            yearList = new AcademicYears;
+            cur = yearList;
+        } else {
+            cur->next = new AcademicYears;
+            cur = cur->next;
+        }
+        cin >> cur->year;
+    }
+}
+
+void inpCourseClass(CourseClass*& courseClass) {
+    CourseClass* cur = courseClass = nullptr;
+    int n;
+    cin >> n;
+    while (n--) {
+        if (!courseClass) {
+            courseClass = new CourseClass;
+            cur = courseClass;
+        } else {
+            cur->next = new CourseClass;
+            cur = cur->next;
+        }
+        inpDate(cur->startDate);
+        inpDate(cur->endDate);
+        cin >> cur->DayInWeek >> cur->startTime >> cur->endTime >> cur->classID;
+        int m;
+        cin >> m;
+        StudentCourse* sc = cur->studentCourse = nullptr;
+        while (m--) {
+            if (!cur->studentCourse) {
+                cur->studentCourse = new StudentCourse;
+                sc = cur->studentCourse;
+            } else {
+                sc->next = new StudentCourse;
+                sc = sc->next;
+            }
+            cin >> sc->studentID >> sc->classID;
+        }
+    }
+}
+
+void inpCourses(Courses*& courseList) {
+    Courses* cur = courseList = nullptr;
+    int n;
+    cin >> n;
+    while (n--) {
+        if (!courseList) {
+            courseList = new Courses;
+            cur = courseList;
+        } else {
+            cur->next = new Courses;
+            cur = cur->next;
+        }
+        cin >> cur->courseID >> cur->courseName >> cur->LecturerName >> cur->room;
+        inpCourseClass(cur->courseclass);
+    }
+}
+
 void inpStudents(Students*& studentList) {
     Students* cur = studentList = nullptr;
     int n;

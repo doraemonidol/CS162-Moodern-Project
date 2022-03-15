@@ -58,6 +58,77 @@ void outStaffs(Staffs*& St){
     }
 }
 
+void outYears(AcademicYears*& yearList) {
+    AcademicYears* cur = yearList;
+    int n = 0;
+    while (cur) {
+        n++;
+        cur = cur->next;
+    }
+    cout << n << '\n';
+    cur = yearList;
+    while (n--) {
+        cout << cur->year << endl;
+    }
+}
+
+void outCourseClass(CourseClass*& courseClass) {
+    CourseClass* cur = courseClass;
+    int n = 0;
+    while (cur) {
+        n++;
+        cur = cur->next;
+    }
+    cout << n << '\n';
+    cur = courseClass;
+    while (n--) {
+        if (!courseClass) {
+            courseClass = new CourseClass;
+            cur = courseClass;
+        } else {
+            cur->next = new CourseClass;
+            cur = cur->next;
+        }
+        outDate(cur->startDate);
+        outDate(cur->endDate);
+        cout << cur->DayInWeek << endl
+             << cur->startTime << " " << cur->endTime << endl
+             << cur->classID;
+
+        int m = 0;
+        StudentCourse* sc = cur->studentCourse;
+        while (sc) {
+            m++;
+            sc = sc->next;
+        }
+        cout << m << '\n';
+        sc = cur->studentCourse;
+        while (m--) {
+            cin >> sc->studentID << " " << sc->classID << endl;
+        }
+    }
+}
+
+void outCourses(Courses*& courseList) {
+    Courses* cur = courseList;
+    int n = 0;
+    while (cur) {
+        cur = cur->next;
+        n++;
+    }
+    cout << n << '\n';
+    cur = courseList;
+
+    while (n--) {
+        cout << cur->courseID << endl
+             << cur->courseName << endl
+             << cur->LecturerName << endl
+             << cur->room;
+        outCourseClass(cur->courseclass);
+        cout << endl;
+    }
+}
+
 void outStudents(Students*& studentList) {
     Students* cur = studentList;
     int n = 0;
