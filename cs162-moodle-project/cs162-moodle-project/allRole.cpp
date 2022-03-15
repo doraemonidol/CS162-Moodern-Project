@@ -76,3 +76,14 @@ void viewCourses(Courses* Course){
 		Course = Course->next;
 	}
 }
+void viewScoreboards (Scoreboards* scoreb){
+    while (scoreb){
+        cout << "Course name: " << scoreb->courseName << endl;
+        cout << "Course ID: " << scoreb->courseID << endl;
+        cout << "Midterm score: " << scoreb->midtermScore << endl;
+		cout << "Final score: " << scoreb->finalScore << endl;
+		cout << "Lab score: " << scoreb->labScore << endl;
+		cout << "Bonus score: " << scoreb->bonusScore << endl;
+        scoreb = scoreb->next;
+    }
+}
