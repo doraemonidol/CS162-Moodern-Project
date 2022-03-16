@@ -15,6 +15,7 @@ Classes* findClass(Students* student, Classes* classes) {
         }
         classes = classes->next;
     }
+	return nullptr;
 }
 
 void viewStudents(Students* studentList, Classes* classes) {
