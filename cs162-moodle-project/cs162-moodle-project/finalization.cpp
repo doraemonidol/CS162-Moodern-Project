@@ -14,6 +14,24 @@ void outAccount(Accounts*& acc) {
     delete acc;
 }
 
+void outAccounts(Accounts*& acc) {
+    int n = 0;
+    Accounts* tmp = acc;
+    //elements count
+    while (tmp) {
+        n++;
+        tmp = tmp->next;
+    }
+    cout << n << '\n';
+    while (acc) {
+        cout << acc->pwd << '\n' << acc->uName << '\n' << acc->role << '\n' << acc->socialID << '\n' << acc->lastname << '\n' << acc->firstname << '\n' << acc->gender << '\n';
+        outDate(acc->doB);
+        Accounts* erase = acc;
+        acc = acc->next;
+        delete erase;
+    }
+}
+
 void outScoreboards(Scoreboards*& Board){
     int n = 0;
     Scoreboards* cur = Board;
@@ -40,7 +58,7 @@ void outStaffs(Staffs*& St){
     cout << n << '\n';
     while(St){
         outAccount(St->account);
-        cout << endl;
+        //no endl here as outAccount had one already
 		Staffs* del = St;
         St = St->next;
 		delete del;
@@ -82,7 +100,7 @@ void outCourses(Courses*& courseList) {
         outDate(cur->startDate);
         outDate(cur->endDate);
         cout << cur->day1 << " " << cur->day2 << endl;
-        cout << cur->session1 << " " << cur->session2 << endl << endl;
+        cout << cur->session1 << " " << cur->session2 << endl;
         Courses* course = cur->next;
         delete cur;
         cur = course;
@@ -106,7 +124,7 @@ void outStudents(Students*& studentList) {
         cout << cur->classID << endl;
         outScoreboards(cur->scoreboards);
         outCourses(cur->enrolledCourse);
-        cout << endl;
+        //no endl here, same reason
         Students* tmp = cur->next;
         delete cur;
         cur = tmp;

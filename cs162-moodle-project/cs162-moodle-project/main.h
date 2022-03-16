@@ -8,7 +8,6 @@
 #include <string>
 using namespace std;
 
-struct Courses;
 struct Date {
     string day = "", month = "", year = "";
 };
@@ -21,6 +20,7 @@ struct Accounts {
     string lastname = "", firstname = "";
     char gender; //Female Male, Prefer not to say -> F,M,O
     Date doB;
+    Accounts* next = nullptr;
 };
 
 struct Scoreboards {

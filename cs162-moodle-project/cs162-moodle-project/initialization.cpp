@@ -7,8 +7,31 @@
 void inpDate(Date& d) {
 	cin >> d.day >> d.month >> d.year;
 }
+
+void inpAccounts(Accounts*& acc) {
+    Accounts* cur = nullptr;
+    int n;
+    cin >> n;
+    while (n--) {
+        if (!acc) {
+            acc = new Accounts;
+            cur = acc;
+        }
+        else {
+            cur->next = new Accounts;
+            cur = cur->next;
+        }
+        cin >> acc->pwd >> acc->uName >> acc->role >> acc->socialID >> acc->lastname;
+        cin.get();
+        getline(cin, acc->firstname);
+        cin >> acc->gender;
+        inpDate(acc->doB);
+    }
+}
+
 void inpAccount(Accounts*& acc) {
     cin >> acc->pwd >> acc->uName >> acc->role >> acc->socialID >> acc->lastname;
+    cin.get();
     getline(cin, acc->firstname);
     cin >> acc->gender;
     inpDate(acc->doB);
@@ -60,7 +83,8 @@ void inpYears(AcademicYears*& yearList) {
             cur->next = new AcademicYears;
             cur = cur->next;
         }
-        cin >> cur->year;
+        cin.get();
+        getline(cin, cur->year);
     }
 }
 
@@ -76,7 +100,11 @@ void inpCourses(Courses*& courseList) {
             cur->next = new Courses;
             cur = cur->next;
         }
-        cin >> cur->courseID >> cur->courseName >> cur->lecturerName >> cur->room;
+        cin >> cur->courseID;
+        cin.get();
+        getline(cin, cur->courseName);
+        getline(cin, cur->lecturerName);
+        cin >> cur->room;
         inpDate(cur->startDate);
         inpDate(cur->endDate);
         cin >> cur->day1 >> cur->day2 >> cur->session1 >> cur->session2;
