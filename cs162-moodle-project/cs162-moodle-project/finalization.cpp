@@ -8,59 +8,52 @@ void outDate(Date& d) {
 	cout << d.day << ' ' << d.month << ' ' << d.year << '\n';
 }
 
-void outAccount(Accounts*& acc) {
-    cout << acc->pwd << '\n' << acc->uName << '\n' << acc->role << '\n' << acc->socialID << '\n' << acc->lastname << '\n' << acc->firstname << '\n' << acc->gender << '\n';
-    outDate(acc->doB);
-    delete acc;
+void outAccount(Accounts*& account) {
+    cout << account->pwd << '\n'
+         << account->uName << '\n'
+         << account->role << '\n'
+         << account->socialID << '\n'
+         << account->firstname << '\n'
+         << account->lastname << '\n'
+         << account->gender << '\n';
+    outDate(account->doB);
+    delete account;
 }
 
-void outAccounts(Accounts*& acc) {
+void outScoreboards(Scoreboards*& scoreBoard){
     int n = 0;
-    Accounts* tmp = acc;
-    //elements count
-    while (tmp) {
-        n++;
-        tmp = tmp->next;
-    }
-    cout << n << '\n';
-    while (acc) {
-        cout << acc->pwd << '\n' << acc->uName << '\n' << acc->role << '\n' << acc->socialID << '\n' << acc->lastname << '\n' << acc->firstname << '\n' << acc->gender << '\n';
-        outDate(acc->doB);
-        Accounts* erase = acc;
-        acc = acc->next;
-        delete erase;
-    }
-}
-
-void outScoreboards(Scoreboards*& Board){
-    int n = 0;
-    Scoreboards* cur = Board;
+    Scoreboards* cur = scoreBoard;
     while (cur){
         n++;
         cur = cur->next;
     }
     cout << n << '\n';
-    while (Board){
-        cout << Board->courseName << " " << Board->courseID << " " << Board->midtermScore << " "<< Board->finalScore << " "<< Board->labScore<< " "<< Board->bonusScore << "\n";
-		Scoreboards* del = Board;
-        Board = Board->next;
+    while (scoreBoard) {
+        cout << scoreBoard->courseName << " "
+             << scoreBoard->courseID << " " 
+             << scoreBoard->midtermScore << " " 
+             << scoreBoard->finalScore << " " 
+             << scoreBoard->labScore << " " 
+             << scoreBoard->bonusScore << "\n";
+        Scoreboards* del = scoreBoard;
+        scoreBoard = scoreBoard->next;
 		delete del;
     }
 }
 
-void outStaffs(Staffs*& St){
-    Staffs* cur = St;
+void outStaffs(Staffs*& staffList) {
+    Staffs* curStaff = staffList;
     int n = 0;
-    while (cur){
+    while (curStaff) {
         n++;
-        cur = cur->next;
+        curStaff = curStaff->next;
     }
     cout << n << '\n';
-    while(St){
-        outAccount(St->account);
+    while (staffList) {
+        outAccount(staffList->account);
         //no endl here as outAccount had one already
-		Staffs* del = St;
-        St = St->next;
+        Staffs* del = staffList;
+        staffList = staffList->next;
 		delete del;
     }
 }
@@ -122,7 +115,7 @@ void outStudents(Students*& studentList) {
         cout << cur->studentID << endl;
         outAccount(cur->account);
         cout << cur->classID << endl;
-        outScoreboards(cur->scoreboards);
+        outScoreboards(cur->scoreBoards);
         outCourses(cur->enrolledCourse);
         //no endl here, same reason
         Students* tmp = cur->next;

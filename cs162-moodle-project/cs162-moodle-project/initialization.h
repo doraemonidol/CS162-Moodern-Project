@@ -1,9 +1,8 @@
 #pragma once
 void inpDate(Date& d);
-void inpAccounts(Accounts*& acc);
-void inpAccount(Accounts*& acc);
-void inpScoreboards(Scoreboards*& Board);
-void inpStaffs(Staffs*& St);
+void inpAccount(Accounts*& account);
+void inpScoreboards(Scoreboards*& scoreBoard);
+void inpStaffs(Staffs*& staffList, Accounts*& accountList);
 void inpYears(AcademicYears*& yearList);
 void inpCourses(Courses*& courseList);
-void inpStudents(Students*& studentList);
+void inpStudents(Students*& studentList, Accounts*& accountList);

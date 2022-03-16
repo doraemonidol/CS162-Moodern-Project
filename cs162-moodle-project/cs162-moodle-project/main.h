@@ -8,6 +8,7 @@
 #include <string>
 using namespace std;
 
+struct Courses;
 struct Date {
     string day = "", month = "", year = "";
 };
@@ -34,7 +35,7 @@ struct Students {
     string studentID = "";
     Accounts* account = nullptr;
     string classID = "";
-    Scoreboards* scoreboards = nullptr;
+    Scoreboards* scoreBoards = nullptr;
     Courses* enrolledCourse = nullptr;
     Students* next = nullptr;
 };

@@ -8,43 +8,23 @@ void inpDate(Date& d) {
 	cin >> d.day >> d.month >> d.year;
 }
 
-void inpAccounts(Accounts*& acc) {
-    Accounts* cur = nullptr;
-    int n;
-    cin >> n;
-    while (n--) {
-        if (!acc) {
-            acc = new Accounts;
-            cur = acc;
-        }
-        else {
-            cur->next = new Accounts;
-            cur = cur->next;
-        }
-        cin >> acc->pwd >> acc->uName >> acc->role >> acc->socialID >> acc->lastname;
-        cin.get();
-        getline(cin, acc->firstname);
-        cin >> acc->gender;
-        inpDate(acc->doB);
-    }
-}
-
-void inpAccount(Accounts*& acc) {
-    cin >> acc->pwd >> acc->uName >> acc->role >> acc->socialID >> acc->lastname;
+void inpAccount(Accounts*& account) {
+    account = new Accounts;
+    cin >> account->pwd >> account->uName >> account->role >> account->socialID >> account->firstname;
     cin.get();
-    getline(cin, acc->firstname);
-    cin >> acc->gender;
-    inpDate(acc->doB);
+    getline(cin, account->lastname);
+    cin >> account->gender;
+    inpDate(account->doB);
 }
 
-void inpScoreboards(Scoreboards*& Board){
+void inpScoreboards(Scoreboards*& scoreBoard){
     Scoreboards* cur = nullptr;
     int n;
     cin >> n;
     while (n--){
-        if (!Board){
-            Board = new Scoreboards;
-            cur = Board;
+        if (!scoreBoard) {
+            scoreBoard = new Scoreboards;
+            cur = scoreBoard;
         }
         else{
             cur->next = new Scoreboards;
@@ -54,20 +34,27 @@ void inpScoreboards(Scoreboards*& Board){
     }
 }
 
-void inpStaffs(Staffs*& St){
-    Staffs* cur = nullptr;
+void inpStaffs(Staffs*& staffList, Accounts*& accountList){
+    Staffs* curStaff = nullptr;
+    Accounts* curAccount = accountList; // Khong gan nullptr vi luc nay accountList da chua du lieu cua studen
     int n;
     cin >> n;
     while (n--){
-        if (!St){
-            St = new Staffs;
-            cur = St; 
+        if (!staffList) {
+            staffList = new Staffs;
+            curStaff = staffList; 
         }
         else{
-            cur->next = new Staffs;
-            cur = cur->next;
+            curStaff->next = new Staffs;
+            curStaff = curStaff->next;
         }
-        inpAccount(cur->account);
+        inpAccount(curStaff->account);
+        if (!accountList) {
+            accountList = curAccount = curStaff->account;
+        } else {
+            curAccount->next = curStaff->account;
+            curAccount = curAccount->next;
+        }
     }
 }
 
@@ -111,22 +98,31 @@ void inpCourses(Courses*& courseList) {
     }
 }
 
-void inpStudents(Students*& studentList) {
-    Students* cur = studentList = nullptr;
+void inpStudents(Students*& studentList, Accounts*& accountList) {
+    Students* curStudent = studentList = nullptr;
+    Accounts* curAccount = accountList = nullptr;
     int n;
     cin >> n;
     while (n--) {
         if (!studentList) {
             studentList = new Students;
-            cur = studentList;
+            curStudent = studentList;
         } else {
-            cur->next = new Students;
-            cur = cur->next;
+            curStudent->next = new Students;
+            curStudent = curStudent->next;
         }
-        cin >> cur->studentID;
-        inpAccount(cur->account);
-        cin >> cur->classID;
-        inpScoreboards(cur->scoreboards);
-        inpCourses(cur->enrolledCourse);
+        cin >> curStudent->studentID;
+        inpAccount(curStudent->account);
+
+        if (!accountList) {
+            accountList = curAccount = curStudent->account;
+        } else {
+            curAccount->next = curStudent->account;
+            curAccount = curAccount->next;
+        }
+
+        cin >> curStudent->classID;
+        inpScoreboards(curStudent->scoreBoards);
+        inpCourses(curStudent->enrolledCourse);
     }
 }
