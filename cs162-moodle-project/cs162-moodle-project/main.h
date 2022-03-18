@@ -6,6 +6,7 @@
 #include <chrono>
 #include <ctime>
 #include <string>
+#include <conio.h>
 using namespace std;
 
 struct Courses;
@@ -53,13 +54,41 @@ struct Staffs {
 struct Courses {
     string courseID = "";
     string courseName = "";
+    int credits = 0, maxStudents = 50, numStudents = 0;
     Date startDate, endDate;
-    string startTime = "", endTime = "";
     Students* studentList = nullptr;
     string day1 = "", day2 = "", session1 = "", session2 = "";
     string room = "";
     string lecturerName = "";
     Courses* next = nullptr;
+
+    Courses* findCourseByID(string courseID)
+    {
+        Courses* courseList = this;
+        while (courseList) {
+            if (courseList->courseID == courseID)
+                return courseList;
+            courseList = courseList->next;
+        }
+        return nullptr;
+    }
+
+    bool checkCourseConflict(Courses* checkCourse)
+    {
+        Courses* enrolledCourses = this;
+        while (enrolledCourses) {
+            if (enrolledCourses->day1 == checkCourse->day1 && enrolledCourses->session1 == checkCourse->session1)
+                return false;
+            if (enrolledCourses->day1 == checkCourse->day2 && enrolledCourses->session1 == checkCourse->session2)
+                return false;
+            if (enrolledCourses->day2 == checkCourse->day2 && enrolledCourses->session2 == checkCourse->session2)
+                return false;
+            if (enrolledCourses->day2 == checkCourse->day1 && enrolledCourses->session2 == checkCourse->session1)
+                return false;
+            enrolledCourses = enrolledCourses->next;
+        }
+        return true;
+    }
 };
 struct Semesters {
     int semesterNo;
