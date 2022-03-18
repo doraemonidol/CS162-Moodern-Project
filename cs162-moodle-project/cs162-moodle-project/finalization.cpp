@@ -88,6 +88,9 @@ void outCourses(Courses*& courseList) {
     while (n--) {
         cout << cur->courseID << endl
              << cur->courseName << endl
+             << cur->credits << endl
+             << cur->maxStudents << endl
+             << cur->numStudents << endl
              << cur->lecturerName << endl
              << cur->room << endl;
         outDate(cur->startDate);

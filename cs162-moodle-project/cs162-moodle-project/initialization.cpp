@@ -90,6 +90,7 @@ void inpCourses(Courses*& courseList) {
         cin >> cur->courseID;
         cin.get();
         getline(cin, cur->courseName);
+        cin >> cur->credits >> cur->maxStudents >> cur->numStudents;
         getline(cin, cur->lecturerName);
         cin >> cur->room;
         inpDate(cur->startDate);
