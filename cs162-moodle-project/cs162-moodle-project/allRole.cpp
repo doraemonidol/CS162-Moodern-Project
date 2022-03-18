@@ -73,10 +73,10 @@ void viewCourses(Courses* Course){
 		cout << "Course ID: " << Course->courseID << '\n';
 		cout << "Course name: " << Course->courseName << '\n';
         cout << "Number of credits: " << Course->credits << '\n';
-        cout << "Maximum students: " << Course->maxStudents << '\n';
-        cout << "Current enrolled students: " << Course->numStudents << '\n';
+        cout << "Current enrolled students: " << Course->numStudents << "/" << Course->maxStudents << '\n';
  		cout << "Lecturer: " << Course->lecturerName << '\n';
-		cout << "Room: " << Course->room << '\n';  
+        cout << "Room: " << Course->room << '\n';
+        cout << "Schedule: " << Course->day1 << " (" << Course->session1 << ") and " << Course->day2 << " (" << Course->session2 << ")\n";
 		Course = Course->next;
 	}
 }
