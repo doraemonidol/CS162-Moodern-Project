@@ -26,7 +26,7 @@ void studentEnrollment(Students* student, Courses* courseList, Date curDate) {
     n = 0;
     curCourse = courseList;
     while (curCourse) {
-        if (cmpDate(curCourse->startDate, curCourse->endDate, curDate) && choosenCourse->numStudents + 1 <= choosenCourse->maxStudents) {
+        if (cmpDate(curCourse->startDate, curCourse->endDate, curDate)) {
             cout << "Course ID: " << curCourse->courseID << '\n';
             cout << "Course name: " << curCourse->courseName << '\n';
             cout << "Number of credits: " << curCourse->credits << '\n';
@@ -75,7 +75,7 @@ void studentEnrollment(Students* student, Courses* courseList, Date curDate) {
             courseEnrolled->lecturerName = choosenCourse->lecturerName;
             cout << "Succesfully enroll in " << courseEnrolled->courseID << "!\n";
             cout << "Press any key to Return to Main Screen!";
-            int tmp = getch();
+            _getch();
             return;
         } else {
             if (!choosenCourse)

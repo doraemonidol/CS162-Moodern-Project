@@ -84,7 +84,7 @@ void updateCourseInfomation(Courses* courseList, Students* studentList) {
 
             cout << "Update course successfully!\n";
             cout << "Press any key to Return to Main Screen!";
-            int tmp = getch();
+            _getch();
             return;
         } else {
             cout << "Can't find course with ID " << courseID << ". Double check and try again!\n";
@@ -113,7 +113,7 @@ void deleteCourseByID(Courses* courseList) {
             curCourse = tmp;
             cout << "Delete course successfully!\n";
             cout << "Press any key to Return to Main Screen!";
-            int tmp = getch();
+            _getch();
             return;
         } else {
             cout << "Can't find course with ID " << courseID << ". Double check and try again!\n";
