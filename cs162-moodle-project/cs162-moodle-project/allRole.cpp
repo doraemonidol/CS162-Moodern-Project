@@ -119,3 +119,14 @@ void viewClassScoreboards(Classes* classes) {
 		student = student->next;
 	}
 }
+void viewCourseScoreboards(Courses* course) {
+	Students* student = course->studentList;
+	while (student) {
+		Scoreboards* scoreBoards = student->scoreBoards;
+		cout << student->account->firstname << ' ' << student->account->lastname << ": \n";
+		while (scoreBoards) {
+			cout << ">>>" << scoreBoards->courseName << ": " << scoreBoards->finalScore << '\n';
+		}
+		student = student->next;
+	}
+}
