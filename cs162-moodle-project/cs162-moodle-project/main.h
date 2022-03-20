@@ -14,6 +14,8 @@ struct Date {
     string day = "", month = "", year = "";
 };
 
+struct Courses;
+
 struct Accounts {
     string pwd = "";
     string uName = "";
