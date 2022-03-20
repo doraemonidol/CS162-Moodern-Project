@@ -89,3 +89,22 @@ void studentEnrollment(Students* student, Courses* courseList, Date curDate) {
         }
     }
 }
+
+bool deleteEnrolledCourse(Students*& student, string courseID) {
+    Courses* courses = student->enrolledCourse;
+    if (courses->courseID == courseID) {
+        student->enrolledCourse = student->enrolledCourse->next;
+        delete courses;
+        return true;
+    }
+    while (courses->next) {
+        if (courses->next->courseID == courseID) {
+            Courses* erase = courses->next;
+            courses->next = courses->next->next;
+            delete erase;
+            return true;
+        }
+        courses = courses->next;
+    }
+    return false;
+}
