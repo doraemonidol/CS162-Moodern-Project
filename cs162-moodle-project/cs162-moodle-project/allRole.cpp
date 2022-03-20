@@ -94,3 +94,28 @@ void viewScoreboards (Scoreboards* scoreb){
         scoreb = scoreb->next;
     }
 }
+void viewClassScoreboards(Classes* classes) {
+	Students* student = classes->students;
+	while (student) {
+		double sum = 0, count = 0, allsum = 0, allcount = 0;
+		Scoreboards* scoreBoards = student->scoreBoards;
+		cout << student->account->firstname << ' ' << student->account->lastname << ": \n";
+		while (scoreBoards) {
+			//check if in the semester
+			if (student->enrolledCourse->findCourseByID(scoreBoards->courseID)) {
+				cout << ">>>" << scoreBoards->courseName << ": " << scoreBoards->finalScore << '\n';
+				count++;
+				sum += scoreBoards->finalScore;
+			}
+			allcount++;
+			allsum += scoreBoards->finalScore;
+		}
+		cout.precision(2);
+		if (count!=0) cout << "   Semester's GPA: " << (double)(sum / count) << '\n';
+		else cout << "   Semester's GPA: " << "N/A" << '\n';
+		if (allcount!=0) cout << "   Overall GPA: " << (double)(allsum / allcount) << '\n';
+		else cout << "   Overall GPA: " << "N/A" << '\n';
+		cout.precision(6);
+		student = student->next;
+	}
+}
