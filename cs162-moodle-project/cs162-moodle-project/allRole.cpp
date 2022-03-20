@@ -37,8 +37,11 @@ void viewDate(Date d) {
 	cout << d.month << '/';
 	cout << d.year << '\n';
 }
-void viewClass(Classes* cl) {
-	
+void viewClasses(Classes* classes) {
+	while (classes) {
+		cout << classes->classID << '\n';
+		classes = classes->next;
+	}
 }
 void viewAccounts(Accounts* acc) {
 	cout << "Main Profile\n";
