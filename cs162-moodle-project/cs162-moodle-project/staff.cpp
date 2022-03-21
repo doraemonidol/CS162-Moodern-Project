@@ -217,3 +217,32 @@ void addschoolyear (AcademicYears* &year, Semesters* smt, Classes* class){
     cur_year->classes = class;
     cur_year->next = nullptr;
 }  
+
+void addSemester(Semesters* &smt, Courses* cou){
+    int tmp;
+    Date d1,d2;
+    cout << "Nhap hoc ki: ";
+    cin>> tmp;
+    cout << "Nhap ngay bat dau hoc ki: ";
+    inpDate(d1);
+    cout << "Nhap ngày ket thuc hoc ki: ";
+    inpDate(d2);
+    Semesters* cur_smt = nullptr;
+    if (!smt){
+        smt = new Semesters;
+        cur_smt = smt;
+    }
+    else{
+        cur_smt = smt;
+        while (cur_smt->next){
+            cur_smt = cur_smt->next;
+        }
+        cur_smt->next = new Semesters;
+        cur_smt = cur_smt->next;
+    }
+    cur_smt->courses = cou;
+    cur_smt->semesterNo = tmp;
+    cur_smt->startDate = d1;
+    cur_smt->endDate = d2;
+    cur_smt->next = nullptr;
+}
