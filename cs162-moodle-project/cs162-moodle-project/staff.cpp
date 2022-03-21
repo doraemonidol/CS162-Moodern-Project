@@ -193,14 +193,27 @@ void CSVToScoreboard(Courses* course) {
     }
     f.close();
 }
+  
 
-void addsemester (Courses* coursesList, Semesters* smt){
-    // add semester
-    Semesters* cur_smt = smt;
-    while (cur_smt){
-        cout << "Hoc ki?: " << endl;
-        cin>> smt->semesterNo;
-        inpCourses(cur_smt->courses);
-        cur_smt = cur_smt->next;
+void addschoolyear (AcademicYears* &year, Semesters* smt, Classes* class){
+    string tmp;
+    cout << "Nhap nam hoc: ";
+    cin >> tmp;
+    AcademicYears* cur_year = nullptr;
+    if (!year){
+        year = new AcademicYears;
+        cur_year = year;
     }
-    
+    else{
+        cur_year = year;
+        while (cur_year->next){
+            cur_year = cur_year->next;
+        }
+        cur_year->next = new AcademicYears;
+        cur_year = cur_year->next; 
+    }
+    cur_year->year = tmp;
+    cur_year->semesters = smt;
+    cur_year->classes = class;
+    cur_year->next = nullptr;
+}  

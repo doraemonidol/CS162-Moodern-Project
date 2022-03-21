@@ -122,6 +122,7 @@ struct Courses {
 struct Semesters {
     int semesterNo;
     Courses* courses = nullptr;
+    Date startDate, endDate;
     Semesters* next = nullptr;
 };
 
