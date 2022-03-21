@@ -120,3 +120,39 @@ void deleteCourseByID(Courses* courseList) {
         }
     }
 }
+Scoreboards* AddScoreBoard(Students* student, string courseID, Courses* coursesList) {
+    Scoreboards* scoreboard = student->scoreBoards;
+    while (scoreboard->next) {
+        scoreboard = scoreboard->next;
+    }
+    scoreboard->next = new Scoreboards;
+    scoreboard->next = nullptr;
+    if (coursesList->findCourseByID(courseID)) scoreboard->next->courseID = courseID;
+    return scoreboard->next;
+}
+
+bool UpdateStudentScoreboard(Students* allStudentList, string studentID, string courseID, Courses* coursesList) {
+    Students* student = allStudentList->findStudentByID(studentID);
+    if (!student) return false;
+    Scoreboards* scoreboard = student->findScoreboardByID(courseID);
+    if (!scoreboard) {
+        scoreboard = AddScoreBoard(student, courseID, coursesList);
+        if (!scoreboard) return false;
+    }
+    cout << ">>>" << student->account->firstname << " " << student->account->lastname << "'s Scoreboard of " << coursesList->findCourseByID(courseID) << " Update Session<<<\n";
+    double sc;
+    cout << "(Input nothing to skip editing a session)\n";
+    cout << "Midterm Score update to: ";
+    cin >> sc;
+    scoreboard->midtermScore = sc;
+    cout << "Lab Score update to: ";
+    cin >> sc;
+    scoreboard->labScore = sc;
+    cout << "Final Score update to: ";
+    cin >> sc;
+    scoreboard->finalScore = sc;
+    cout << "Bonus Score update to: ";
+    cin >> sc;
+    scoreboard->bonusScore = sc;
+    return true;
+}

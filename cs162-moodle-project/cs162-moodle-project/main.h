@@ -41,6 +41,24 @@ struct Students {
     Scoreboards* scoreBoards = nullptr;
     Courses* enrolledCourse = nullptr;
     Students* next = nullptr;
+
+    Students* findStudentByID(string studentID) {
+        Students* list = this;
+        while (list) {
+            if (list->studentID == studentID) return list;
+            list = list->next;
+        }
+        return nullptr;
+    }
+
+    Scoreboards* findScoreboardByID(string courseID) {
+        Scoreboards* list = this->scoreBoards;
+        while (list) {
+            if (list->courseID == courseID) return list;
+            list = list->next;
+        }
+        return nullptr;
+    }
 };
 
 struct Classes {
