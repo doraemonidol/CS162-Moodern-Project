@@ -82,6 +82,15 @@ struct Courses {
     string lecturerName = "";
     Courses* next = nullptr;
 
+    Students* findStudentByID(string studentID) {
+        Students* list = this->studentList;
+        while (list) {
+            if (list->studentID == studentID) return list;
+            list = list->next;
+        }
+        return nullptr;
+    }
+
     Courses* findCourseByID(string courseID)
     {
         Courses* courseList = this;

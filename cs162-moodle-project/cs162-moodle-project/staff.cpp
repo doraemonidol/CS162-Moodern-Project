@@ -120,14 +120,14 @@ void deleteCourseByID(Courses* courseList) {
         }
     }
 }
-Scoreboards* AddScoreBoard(Students* student, string courseID, Courses* coursesList) {
+Scoreboards* AddScoreBoard(Students* student, string courseID) {
     Scoreboards* scoreboard = student->scoreBoards;
     while (scoreboard->next) {
         scoreboard = scoreboard->next;
     }
     scoreboard->next = new Scoreboards;
     scoreboard->next = nullptr;
-    if (coursesList->findCourseByID(courseID)) scoreboard->next->courseID = courseID;
+    scoreboard->next->courseID = courseID;
     return scoreboard->next;
 }
 
@@ -136,8 +136,9 @@ bool UpdateStudentScoreboard(Students* allStudentList, string studentID, string 
     if (!student) return false;
     Scoreboards* scoreboard = student->findScoreboardByID(courseID);
     if (!scoreboard) {
-        scoreboard = AddScoreBoard(student, courseID, coursesList);
-        if (!scoreboard) return false;
+        if (coursesList->findCourseByID(courseID))
+            scoreboard = AddScoreBoard(student, courseID);
+        else return false;
     }
     cout << ">>>" << student->account->firstname << " " << student->account->lastname << "'s Scoreboard of " << coursesList->findCourseByID(courseID) << " Update Session<<<\n";
     double sc;
@@ -155,4 +156,40 @@ bool UpdateStudentScoreboard(Students* allStudentList, string studentID, string 
     cin >> sc;
     scoreboard->bonusScore = sc;
     return true;
+}
+
+void courseToCSV(Courses* course) {
+    FILE* f;
+    f = freopen("courseCSV.txt", "w", stdout);
+    cout << course->courseID << '\n';
+    cout << "Student ID, Name\n";
+    Students* student = course->studentList;
+    while (student) {
+        cout << student->studentID << ", " << student->account->firstname << " " << student->account->lastname << '\n';
+    }
+    fclose(f);
+}
+
+void CSVToScoreboard(Courses* course) {
+    ifstream f;
+    f.open("scoreboardCSV.txt");
+    string trash, courseID;
+    cin >> courseID;
+    getline(f, trash);
+    while (!f.eof()) {
+        string studentID = "", no = "", name = "";
+        getline(f, no, ',');
+        getline(f, studentID, ',');
+        getline(f, name, ',');
+        Scoreboards* scoreboard = course->findStudentByID(studentID)->findScoreboardByID(courseID);
+        f >> scoreboard->labScore;
+        f.get();
+        f >> scoreboard->midtermScore;
+        f.get();
+        f >> scoreboard->finalScore;
+        f.get();
+        f >> scoreboard->bonusScore;
+        f.get();
+    }
+    f.close();
 }

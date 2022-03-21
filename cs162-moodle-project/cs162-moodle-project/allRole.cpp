@@ -35,7 +35,7 @@ void viewDate(Date d) {
 	cout << d.day << '/';
 	if (d.month.size() != 2) cout << 0;
 	cout << d.month << '/';
-	cout << d.year << '\n';
+	cout << d.year << ' ';
 }
 void viewClasses(Classes* classes) {
 	while (classes) {
