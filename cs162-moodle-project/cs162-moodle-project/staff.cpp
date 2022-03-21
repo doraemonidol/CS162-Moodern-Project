@@ -193,3 +193,14 @@ void CSVToScoreboard(Courses* course) {
     }
     f.close();
 }
+
+void addsemester (Courses* coursesList, Semesters* smt){
+    // add semester
+    Semesters* cur_smt = smt;
+    while (cur_smt){
+        cout << "Hoc ki?: " << endl;
+        cin>> smt->semesterNo;
+        inpCourses(cur_smt->courses);
+        cur_smt = cur_smt->next;
+    }
+    
