@@ -6,3 +6,4 @@ void outStaffs(Staffs*& staffList);
 void outYears(AcademicYears*& yearList);
 void outCourses(Courses*& courseList);
 void outStudents(Students*& studentList);
+void outSemester(Semesters*& semesterList);

@@ -75,8 +75,8 @@ void inpYears(AcademicYears*& yearList) {
     }
 }
 
-void inpCourses(Courses*& courseList) {
-    Courses* cur = courseList = nullptr;
+void inpCourses(Courses*& courseList, Date startDate, Date endDate) {
+    Courses* cur = courseList;
     int n;
     cin >> n;
     while (n--) {
@@ -93,8 +93,13 @@ void inpCourses(Courses*& courseList) {
         cin >> cur->credits >> cur->maxStudents >> cur->numStudents;
         getline(cin, cur->lecturerName);
         cin >> cur->room;
-        inpDate(cur->startDate);
-        inpDate(cur->endDate);
+        if (startDate.day == "") {
+            inpDate(cur->startDate);
+            inpDate(cur->endDate);
+        } else {
+            cur->startDate = startDate;
+            cur->endDate = endDate;
+        }
         cin >> cur->day1 >> cur->day2 >> cur->session1 >> cur->session2;
     }
 }
@@ -124,6 +129,25 @@ void inpStudents(Students*& studentList, Accounts*& accountList) {
 
         cin >> curStudent->classID;
         inpScoreboards(curStudent->scoreBoards);
-        inpCourses(curStudent->enrolledCourse);
+        Date tmp;
+        inpCourses(curStudent->enrolledCourse, tmp, tmp);
+    }
+}
+
+void inpSemester(Semesters*& semesterList) {
+    Semesters* cur = semesterList = nullptr;
+    int n;
+    cin >> n;
+    while (n--) {
+        if (!semesterList) {
+            semesterList = new Semesters;
+            cur = semesterList;
+        } else {
+            cur->next = new Semesters;
+            cur = cur->next;
+        }
+        cin >> cur->semesterNo;
+        inpDate(cur->startDate);
+        inpDate(cur->endDate);
     }
 }

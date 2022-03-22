@@ -126,3 +126,22 @@ void outStudents(Students*& studentList) {
         cur = tmp;
     }
 }
+
+void outSemester(Semesters*& semesterList) {
+    Semesters* cur = semesterList;
+    int n = 0;
+    while (cur) {
+        n++;
+        cur = cur->next;
+    }
+    cout << n << '\n';
+    cur = semesterList;
+    while (n--) {
+        cout << semesterList->semesterNo << '\n';
+        outDate(cur->startDate);
+        outDate(cur->endDate);
+        Semesters* tmp = cur->next;
+        delete cur;
+        cur = tmp;
+    }
+}

@@ -195,54 +195,49 @@ void CSVToScoreboard(Courses* course) {
 }
   
 
-void addschoolyear (AcademicYears* &year, Semesters* smt, Classes* class){
+void addSchoolYear (AcademicYears* &year, Semesters* smt, Classes* classList){
     string tmp;
-    cout << "Nhap nam hoc: ";
+    cout << "Enter school year: ";
     cin >> tmp;
-    AcademicYears* cur_year = nullptr;
-    if (!year){
-        year = new AcademicYears;
-        cur_year = year;
-    }
-    else{
-        cur_year = year;
-        while (cur_year->next){
-            cur_year = cur_year->next;
-        }
-        cur_year->next = new AcademicYears;
-        cur_year = cur_year->next; 
-    }
+    AcademicYears* cur_year = new AcademicYears;
     cur_year->year = tmp;
     cur_year->semesters = smt;
-    cur_year->classes = class;
-    cur_year->next = nullptr;
+    cur_year->classes = classList;
+    if (!year) {
+        year = cur_year;
+    } else {
+        cur_year->next = year;
+        year = cur_year;
+    }
 }  
 
 void addSemester(Semesters* &smt, Courses* cou){
     int tmp;
     Date d1,d2;
-    cout << "Nhap hoc ki: ";
+    cout << "Enter semester: ";
     cin>> tmp;
-    cout << "Nhap ngay bat dau hoc ki: ";
+    cout << "Start date: ";
     inpDate(d1);
-    cout << "Nhap ngày ket thuc hoc ki: ";
+    cout << "End date ";
     inpDate(d2);
-    Semesters* cur_smt = nullptr;
-    if (!smt){
-        smt = new Semesters;
-        cur_smt = smt;
-    }
-    else{
-        cur_smt = smt;
-        while (cur_smt->next){
-            cur_smt = cur_smt->next;
-        }
-        cur_smt->next = new Semesters;
-        cur_smt = cur_smt->next;
-    }
-    cur_smt->courses = cou;
+    Semesters* cur_smt = new Semesters;
+
     cur_smt->semesterNo = tmp;
     cur_smt->startDate = d1;
     cur_smt->endDate = d2;
-    cur_smt->next = nullptr;
+
+    cout << "Course registration session\n";
+    cout << "Start date: ";
+    inpDate(d1);
+    cout << "End date: ";
+    inpDate(d2);
+    inpCourses(cur_smt->courses, d1, d2);
+
+    if (!smt){
+        smt = cur_smt;
+    }
+    else{
+        cur_smt->next = smt;
+        smt = cur_smt;
+    }
 }
