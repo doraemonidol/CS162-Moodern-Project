@@ -3,12 +3,15 @@
 #include <fstream>
 #include <iomanip>
 #include <stdio.h>
+#include <cstdio>
+#include <io.h>  
+#include <stdlib.h> 
 #include <chrono>
 #include <ctime>
 #include <string>
 #include <conio.h>
 using namespace std;
-
+#pragma warning(disable : 4996)
 struct Courses;
 struct Date {
     string day = "", month = "", year = "";
@@ -131,4 +134,28 @@ struct AcademicYears {
     Semesters* semesters = nullptr;
     Classes* classes = nullptr;
     AcademicYears* next = nullptr;
+};
+
+struct FileInputManager {
+    int fd;
+    fpos_t pos;
+    void store()
+    {
+        fflush(stdin);
+        fgetpos(stdin, &pos);
+        fd = dup(fileno(stdin));
+    }
+    void back()
+    {
+        fflush(stdin);
+        dup2(fd, fileno(stdin));
+        close(fd);
+        clearerr(stdin);
+        fsetpos(stdin, &pos); /* for C9X */
+        cin.clear();
+    }
+    void open(string fileName) {
+        store();
+        freopen(fileName.c_str(), "r", stdin);
+    }
 };
