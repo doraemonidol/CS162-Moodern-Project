@@ -159,3 +159,27 @@ struct FileInputManager {
         freopen(fileName.c_str(), "r", stdin);
     }
 };
+struct FileOutputManager {
+    int fd;
+    fpos_t pos;
+    void store()
+    {
+        fflush(stdout);
+        fgetpos(stdout, &pos);
+        fd = dup(fileno(stdout));
+    }
+    void back()
+    {
+        fflush(stdout);
+        dup2(fd, fileno(stdout));
+        close(fd);
+        clearerr(stdout);
+        fsetpos(stdout, &pos); /* for C9X */
+        cin.clear();
+    }
+    void open(string fileName)
+    {
+        store();
+        freopen(fileName.c_str(), "w", stdout);
+    }
+};

@@ -205,10 +205,6 @@ void addSchoolYear (AcademicYears* &year){
     if (!year) {
         year = cur_year;
     } else {
-        if (year->semesters != nullptr) {
-            deallocateCourses(year->semesters->courses);
-        }
-        deallocateSemester(year->semesters);
         cur_year->next = year;
         year = cur_year;
     }

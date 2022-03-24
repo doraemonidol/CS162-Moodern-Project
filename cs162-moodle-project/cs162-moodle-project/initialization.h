@@ -8,3 +8,5 @@ void inpCourses(Courses*& courseList, Date startDate, Date endDate);
 void inpStudents(Students*& studentList, Accounts*& accountList);
 void inpSemester(Semesters*& semesterList);
 void inpClasses(Classes*& classList);
+
+void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts*& account);

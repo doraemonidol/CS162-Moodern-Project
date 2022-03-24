@@ -4,8 +4,14 @@
 #include "initialization.h"
 #include "staff.h"
 #include "student.h"
+#pragma warning(disable : 4996)
 
 int main() {
-	cout << "This is CS162 Moodle Project";
+    AcademicYears* yearList = nullptr;
+    Students* studentList = nullptr;
+    Staffs* staffList = nullptr;
+    Accounts* accountList = nullptr;
+
+    initData(yearList, studentList, staffList, accountList);
 	return 0;
 }

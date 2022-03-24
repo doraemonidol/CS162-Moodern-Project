@@ -74,7 +74,6 @@ void inpYears(AcademicYears*& yearList) {
         }
         getline(cin, cur->year);
         yearList = cur;
-        //cout << n << endl;
     }
 }
 
@@ -94,6 +93,7 @@ void inpCourses(Courses*& courseList, Date startDate, Date endDate) {
         cin.get();
         getline(cin, cur->courseName);
         cin >> cur->credits >> cur->maxStudents >> cur->numStudents;
+        cin.get();
         getline(cin, cur->lecturerName);
         cin >> cur->room;
         if (startDate.day == "") {
@@ -122,7 +122,6 @@ void inpStudents(Students*& studentList, Accounts*& accountList) {
         }
         cin >> curStudent->studentID;
         inpAccount(curStudent->account);
-
         if (!accountList) {
             accountList = curAccount = curStudent->account;
         } else {
@@ -169,4 +168,52 @@ void inpClasses(Classes*& classList) {
         }
         cin >> cur->classID;
     }
+}
+
+void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts*& account) {
+    year = nullptr;
+    student = nullptr;
+    staff = nullptr;
+    account = nullptr;
+    FileInputManager f;
+    // INPUT ACADEMIC YEARS
+    f.open("./Database/AcademicYears.txt");
+    inpYears(year);
+    f.back();
+    cout << "*Academic Years* Loaded!\n";
+    // INPUT SEMESTERS
+    AcademicYears* curYear = year;
+    while (curYear) {
+        f.open("./Database/" + year->year + "-Semesters.txt");
+        inpSemester(year->semesters);
+        f.back();
+        curYear = curYear->next;
+    }
+
+    cout << "*Semesters* Loaded!\n";
+    // INPUT COURSES
+    curYear = year;
+    while (curYear) {
+        Semesters* curSem = curYear->semesters;
+        while (curSem) {
+            Date tmp;
+            f.open("./Database/" + year->year + "-S" + string(1, (curSem->semesterNo + '0')) + "-Courses.txt");
+            inpCourses(year->semesters->courses, tmp, tmp);
+            f.back();
+            curSem = curSem->next;
+        }
+        curYear = curYear->next;
+    }
+
+    cout << "*Students Info* Loaded!\n";
+    // INPUT STUDENTS
+    f.open("./Database/Students.txt");
+    inpStudents(student, account);
+    f.back();
+
+    cout << "*Staffs Info* Loaded*\n";
+    // INPUT STAFFS
+    f.open("./Database/Staffs.txt");
+    inpStaffs(staff, account);
+    f.back();
 }
