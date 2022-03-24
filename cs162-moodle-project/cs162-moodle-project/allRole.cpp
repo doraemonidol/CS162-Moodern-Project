@@ -141,8 +141,29 @@ bool check_match_username_password(Accounts*& accountList, string account, strin
 	}
 	return false;
 }
+//
+
+Accounts* find_Accounts(Accounts*& accountList, string account, string password) {
+	Accounts* cur = accountList;
+	while (cur) {
+		if (check_match_username_password(cur, account, password)) {
+			return cur;
+		}
+		cur = cur->next;
+	}
+	return NULL;
+}
+//
+void Staffs_functions(Accounts* current_accout) {
+
+};
+void Students_functions(Accounts* current_account) {
+
+}
+//
 void Login(Accounts*& accountList, int& status) {
 	string username, password, log_input, re_log;
+	Accounts* cur_account = NULL;
 	cout << "LOGIN [Y/N]: "; getline(cin, log_input);
 	while (true) {
 		if (log_input == "N" || log_input == "n") {
@@ -153,10 +174,13 @@ void Login(Accounts*& accountList, int& status) {
 			cout << "Password: "; getline(cin, password);
 			if (check_match_username_password(accountList, username, password)) {
 				cout << "LOGIN SUCCESSFULLY";
+				cur_account = find_Accounts(accountList, username, password);
+				status = cur_account->role;
+				break;
 			}
 			else {
 				cout << "Either password or username is wrong" << '\n';
-				cout << "Press Y to re_login or N to stop "; getline(cin, re_log);
+				cout << "Press Y to re_login or N to stop: "; getline(cin, re_log);
 				if (re_log == "Y" || re_log == "y") {
 					continue;
 				}
@@ -168,4 +192,14 @@ void Login(Accounts*& accountList, int& status) {
 			}
 		}
 	}
+	switch (status)
+	{
+	case 0: {
+		Students_functions(cur_account);
+	}
+	case 1: {
+		Staffs_functions(cur_account);
+	}
+	}
 }
+//
