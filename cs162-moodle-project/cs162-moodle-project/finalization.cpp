@@ -73,6 +73,7 @@ void outYears(AcademicYears*& yearList) {
         delete cur;
         cur = tmp;
     }
+    yearList = NULL;
 }
 
 void outCourses(Courses*& courseList) {
@@ -101,6 +102,7 @@ void outCourses(Courses*& courseList) {
         delete cur;
         cur = course;
     }
+    courseList = NULL;
 }
 
 void outStudents(Students*& studentList) {
@@ -125,6 +127,7 @@ void outStudents(Students*& studentList) {
         delete cur;
         cur = tmp;
     }
+    studentList = NULL;
 }
 
 void outSemester(Semesters*& semesterList) {
@@ -143,5 +146,21 @@ void outSemester(Semesters*& semesterList) {
         Semesters* tmp = cur->next;
         delete cur;
         cur = tmp;
+    }
+    semesterList = NULL;
+}
+
+void deallocateCourses(Courses*& courseList) {
+    while (courseList) {
+        Courses* tmp = courseList->next;
+        delete courseList;
+        courseList = tmp;
+    }
+}
+void deallocateSemester(Semesters*& semesterList) {
+    while (semesterList != NULL) {
+        Semesters* tmp = semesterList->next;
+        delete semesterList;
+        semesterList = tmp;
     }
 }

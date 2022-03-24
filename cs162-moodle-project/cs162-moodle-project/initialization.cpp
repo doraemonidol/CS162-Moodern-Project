@@ -4,6 +4,7 @@
 #include "initialization.h"
 #include "staff.h"
 #include "student.h"
+
 void inpDate(Date& d) {
 	cin >> d.day >> d.month >> d.year;
 }
@@ -62,16 +63,18 @@ void inpYears(AcademicYears*& yearList) {
     AcademicYears* cur = yearList = nullptr;
     int n;
     cin >> n;
+    cin.get();
     while (n--) {
         if (!yearList) {
             yearList = new AcademicYears;
             cur = yearList;
         } else {
-            cur->next = new AcademicYears;
-            cur = cur->next;
+            cur = new AcademicYears;
+            cur->next = yearList;
         }
-        cin.get();
         getline(cin, cur->year);
+        yearList = cur;
+        //cout << n << endl;
     }
 }
 
@@ -149,5 +152,21 @@ void inpSemester(Semesters*& semesterList) {
         cin >> cur->semesterNo;
         inpDate(cur->startDate);
         inpDate(cur->endDate);
+    }
+}
+
+void inpClasses(Classes*& classList) {
+    Classes* cur = classList = nullptr;
+    int n;
+    cin >> n;
+    while (n--) {
+        if (!classList) {
+            classList = new Classes;
+            cur = classList;
+        } else {
+            cur->next = new Classes;
+            cur = cur->next;
+        }
+        cin >> cur->classID;
     }
 }

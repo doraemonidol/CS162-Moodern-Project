@@ -4,7 +4,7 @@
 #include "initialization.h"
 #include "staff.h"
 #include "student.h"
-
+#pragma warning(disable : 4996)
 void updateCourseInfomation(Courses* courseList, Students* studentList) {
     viewCourses(courseList);
     string courseID;
@@ -195,17 +195,20 @@ void CSVToScoreboard(Courses* course) {
 }
   
 
-void addSchoolYear (AcademicYears* &year, Semesters* smt, Classes* classList){
+void addSchoolYear (AcademicYears* &year){
     string tmp;
     cout << "Enter school year: ";
     cin >> tmp;
     AcademicYears* cur_year = new AcademicYears;
     cur_year->year = tmp;
-    cur_year->semesters = smt;
-    cur_year->classes = classList;
+    inpClasses(cur_year->classes);
     if (!year) {
         year = cur_year;
     } else {
+        if (year->semesters != nullptr) {
+            deallocateCourses(year->semesters->courses);
+        }
+        deallocateSemester(year->semesters);
         cur_year->next = year;
         year = cur_year;
     }
@@ -225,7 +228,6 @@ void addSemester(Semesters* &smt, Courses* cou){
     cur_smt->semesterNo = tmp;
     cur_smt->startDate = d1;
     cur_smt->endDate = d2;
-
     cout << "Course registration session\n";
     cout << "Start date: ";
     inpDate(d1);
@@ -237,6 +239,7 @@ void addSemester(Semesters* &smt, Courses* cou){
         smt = cur_smt;
     }
     else{
+        deallocateCourses(smt->courses);
         cur_smt->next = smt;
         smt = cur_smt;
     }
