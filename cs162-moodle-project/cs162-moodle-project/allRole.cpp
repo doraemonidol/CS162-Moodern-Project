@@ -130,3 +130,14 @@ void viewCourseScoreboards(Courses* course) {
 		student = student->next;
 	}
 }
+//
+bool check_match_username_password(Accounts*& accountList, string a, string b) {
+	Accounts* cur = accountList;
+	while (cur) {
+		if ((a.compare(cur->uName) == 0) && (b.compare(cur->pwd) == 0)) {
+			return true;
+		}
+		cur = cur->next;
+	}
+	return false;
+}
