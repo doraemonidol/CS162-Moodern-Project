@@ -131,13 +131,41 @@ void viewCourseScoreboards(Courses* course) {
 	}
 }
 //
-bool check_match_username_password(Accounts*& accountList, string a, string b) {
+bool check_match_username_password(Accounts*& accountList, string account, string password) {
 	Accounts* cur = accountList;
 	while (cur) {
-		if ((a.compare(cur->uName) == 0) && (b.compare(cur->pwd) == 0)) {
+		if ((account.compare(cur->uName) == 0) && (password.compare(cur->pwd) == 0)) {
 			return true;
 		}
 		cur = cur->next;
 	}
 	return false;
+}
+void Login(Accounts*& accountList, int& status) {
+	string username, password, log_input, re_log;
+	cout << "LOGIN [Y/N]: "; getline(cin, log_input);
+	while (true) {
+		if (log_input == "N" || log_input == "n") {
+			break;
+		}
+		if (log_input == "Y" || log_input == "y") {
+			cout << "Username: "; getline(cin, username);
+			cout << "Password: "; getline(cin, password);
+			if (check_match_username_password(accountList, username, password)) {
+				cout << "LOGIN SUCCESSFULLY";
+			}
+			else {
+				cout << "Either password or username is wrong" << '\n';
+				cout << "Press Y to re_login or N to stop "; getline(cin, re_log);
+				if (re_log == "Y" || re_log == "y") {
+					continue;
+				}
+				else {
+					if (re_log == "N" || re_log == "n") {
+						break;
+					}
+				}
+			}
+		}
+	}
 }
