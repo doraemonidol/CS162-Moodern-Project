@@ -5,7 +5,7 @@
 #include "staff.h"
 #include "student.h"
 #pragma warning(disable : 4996)
-void updateCourseInfomation(Courses* courseList, Students* studentList) {
+void updateCourseInfomation(Courses* courseList) {
     viewCourses(courseList);
     string courseID;
     while (true) {
@@ -19,38 +19,38 @@ void updateCourseInfomation(Courses* courseList, Students* studentList) {
         if (curCourse) {
             cout << "Leave blank to keep the original data!\n";
             string change = "";
-            cout << "Course ID: " << curCourse->courseID << ' -> ';
+            cout << "Course ID: " << curCourse->courseID << " -> ";
             cin.get();
             getline(cin, change);
             if (change != "") {
                 curCourse->courseID = change;
                 change = "";
             }
-            cout << "Course name: " << curCourse->courseName << ' -> ';
+            cout << "Course name: " << curCourse->courseName << " -> ";
             getline(cin, change);
             if (change != "") {
                 curCourse->courseName = change;
                 change = "";
             }
-            cout << "Number of credits: " << curCourse->credits << ' -> ';
+            cout << "Number of credits: " << curCourse->credits << " -> ";
             getline(cin, change);
             if (change != "") {
                 curCourse->credits = stoi(change);
                 change = "";
             }
-            cout << "Maximum students: " << curCourse->maxStudents << ' -> ';
+            cout << "Maximum students: " << curCourse->maxStudents << " -> ";
             getline(cin, change);
             if (change != "") {
                 curCourse->maxStudents = stoi(change);
                 change = "";
             }
-            cout << "Lecturer: " << curCourse->lecturerName << ' -> ';
+            cout << "Lecturer: " << curCourse->lecturerName << " -> ";
             getline(cin, change);
             if (change != "") {
                 curCourse->lecturerName = change;
                 change = "";
             }
-            cout << "Room: " << curCourse->room << ' -> ';
+            cout << "Room: " << curCourse->room << " -> ";
             getline(cin, change);
             if (change != "") {
                 curCourse->room = change;
@@ -63,7 +63,7 @@ void updateCourseInfomation(Courses* courseList, Students* studentList) {
                 curCourse->room = change;
                 change = "";
             }
-            cout << "            -" << curCourse->session1 << " -> ";
+            cout << "           " << curCourse->session1 << " -> ";
             getline(cin, change);
             if (change != "") {
                 curCourse->room = change;
@@ -75,7 +75,7 @@ void updateCourseInfomation(Courses* courseList, Students* studentList) {
                 curCourse->room = change;
                 change = "";
             }
-            cout << "            -" << curCourse->session2 << " -> ";
+            cout << "           " << curCourse->session2 << " -> ";
             getline(cin, change);
             if (change != "") {
                 curCourse->room = change;
