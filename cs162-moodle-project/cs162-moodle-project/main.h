@@ -15,6 +15,13 @@ using namespace std;
 struct Courses;
 struct Date {
     string day = "", month = "", year = "";
+    void getCurrentDate() {
+        time_t now = time(0);
+        tm* ltm = localtime(&now);
+        year = to_string(ltm->tm_year + 1900);
+        month = to_string(ltm->tm_mon + 1);
+        day = to_string(ltm->tm_mday);
+    }
 };
 
 struct Courses;
