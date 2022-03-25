@@ -92,13 +92,14 @@ void updateCourseInfomation(Courses* courseList) {
     }
 }
 
-void deleteCourseByID(Courses* courseList) {
+void deleteCourseByID(Courses*& courseList) {
     string courseID;
     while (true) {
         cout << "Enter the course ID to delete: \n>> ";
         cin >> courseID;
-        Courses* curCourse = courseList;
+        Courses *curCourse = courseList, *father = nullptr;
         while (curCourse && curCourse->courseID != courseID) {
+            father = curCourse;
             curCourse = curCourse->next;
         }
         if (curCourse) {
@@ -107,10 +108,12 @@ void deleteCourseByID(Courses* courseList) {
                 delete curCourse->studentList;
                 curCourse->studentList = tmp;
             }
-            Courses* tmp = curCourse->next;
+            if (father)
+                father->next = curCourse->next;
+            else
+                courseList = courseList->next;
             // remove enrolled course for students here
             delete curCourse;
-            curCourse = tmp;
             cout << "Delete course successfully!\n";
             cout << "Press any key to Return to Main Screen!";
             _getch();
