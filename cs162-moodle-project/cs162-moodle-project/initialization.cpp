@@ -173,7 +173,6 @@ void inpSemester(Semesters*& semesterList) {
     Semesters* cur = semesterList = nullptr;
     int n;
     cin >> n;
-    cout << n << endl;
     while (n--) {
         if (!semesterList) {
             semesterList = new Semesters;
@@ -221,7 +220,6 @@ void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts
     AcademicYears* curYear = year;
     while (curYear) {
         f.open("./Database/" + curYear->year + "-Semesters.txt");
-        cout << "./Database/" + curYear->year + "-Semesters.txt\n";
         inpSemester(curYear->semesters);
         f.back();
         curYear = curYear->next;
@@ -235,7 +233,6 @@ void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts
         while (curSem) {
             Date tmp;
             f.open("./Database/" + year->year + "-S" + string(1, (curSem->semesterNo + '0')) + "-Courses.txt");
-            cout << "./Database/" + year->year + "-S" + string(1, (curSem->semesterNo + '0')) + "-Courses.txt\n";
             inpCourses(year->semesters->courses);
             f.back();
             curSem = curSem->next;
