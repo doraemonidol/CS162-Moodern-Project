@@ -69,6 +69,7 @@ void outYears(AcademicYears*& yearList) {
     cur = yearList;
     while (n--) {
         cout << cur->year << endl;
+
         AcademicYears* tmp = cur->next;
         delete cur;
         cur = tmp;
@@ -98,6 +99,13 @@ void outCourses(Courses*& courseList) {
         outDate(cur->endDate);
         cout << cur->day1 << " " << cur->day2 << endl;
         cout << cur->session1 << " " << cur->session2 << endl;
+
+        while (cur->studentList) {
+            Students* student = cur->studentList->next;
+            delete cur->studentList;
+            cur->studentList = student;
+        }
+
         Courses* course = cur->next;
         delete cur;
         cur = course;
@@ -140,27 +148,53 @@ void outSemester(Semesters*& semesterList) {
     cout << n << '\n';
     cur = semesterList;
     while (n--) {
-        cout << semesterList->semesterNo << '\n';
+        cout << cur->semesterNo << '\n';
         outDate(cur->startDate);
         outDate(cur->endDate);
         Semesters* tmp = cur->next;
         delete cur;
         cur = tmp;
     }
-    semesterList = NULL;
 }
 
-void deallocateCourses(Courses*& courseList) {
-    while (courseList) {
-        Courses* tmp = courseList->next;
-        delete courseList;
-        courseList = tmp;
+void unloadData(AcademicYears* year, Students*& student, Staffs*& staff) {
+    FileOutputManager f;
+    AcademicYears* curYear = year;
+    while (year) {
+        // OUTPUT COURSES FIRST!
+        Semesters* semester = year->semesters;
+        while (semester) {
+            f.open("./Database/" + year->year + "-S" + string(1, (semester->semesterNo + '0')) + "-Courses.txt");
+            outCourses(semester->courses);
+            f.back();
+            semester = semester->next;
+        }
+
+        // OUTPUT SEMESTER
+        f.open("./Database/" + year->year + "-Semesters.txt");
+        outSemester(year->semesters);
+        f.back();
+
+        year = year->next;
     }
-}
-void deallocateSemester(Semesters*& semesterList) {
-    while (semesterList != NULL) {
-        Semesters* tmp = semesterList->next;
-        delete semesterList;
-        semesterList = tmp;
-    }
+    cout << "** Courses and Semesters Unloaded Succesfully**\n";
+
+    year = curYear;
+    // OUTPUT ACADEMIC YEARS
+    f.open("./Database/AcademicYears.txt");
+    outYears(year);
+    f.back();
+    cout << "** Academic Years Unloaded Succesfully**\n";
+
+    // OUTPUT STUDENTS INFO
+    f.open("./Database/Students.txt");
+    outStudents(student);
+    f.back();
+    cout << "** Students Info Unloaded Succesfully**\n";
+
+    // OUTPUT STAFFS INFO
+    f.open("./Database/Staffs.txt");
+    outStaffs(staff);
+    f.back();
+    cout << "** Staffs Info Unloaded Succesfully**\n";
 }
