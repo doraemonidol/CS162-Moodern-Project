@@ -144,8 +144,16 @@ Accounts* find_Accounts(Accounts*& accountList, string account, string password)
 }
 //
 void Change_password(Accounts*& current_account) {
-
+	string cur_check; string new_pass; cout << "Please re-enter the password: ";
+	while (true) {
+		getline(cin, cur_check);
+		if (cur_check.compare(current_account->pwd) == 0) {
+			cout << "Please enter the new password: "; getline(cin, new_pass);
+			current_account->pwd = new_pass;
+		}
+	}
 }
+//
 void Staffs_functions(Accounts*& current_account) {
 	cout << "0. To exit the program." << '\n';
 	cout << "1. To view the current account." << '\n';
