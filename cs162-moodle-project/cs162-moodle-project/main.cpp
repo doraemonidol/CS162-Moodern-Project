@@ -15,5 +15,10 @@ int main() {
     initData(yearList, studentList, staffList, accountList);
     int status;
     Login(accountList, status);
+
+    //addSchoolYear(yearList);
+    addSemester(yearList->semesters);
+
+    unloadData(yearList, studentList, staffList);
 	return 0;
 }
