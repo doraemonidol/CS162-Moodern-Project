@@ -146,7 +146,7 @@ bool check_match_username_password(Accounts*& accountList, string account, strin
 Accounts* find_Accounts(Accounts*& accountList, string account, string password) {
 	Accounts* cur = accountList;
 	while (cur) {
-		if (check_match_username_password(cur, account, password)) {
+		if (check_match_username_password(cur, account, password) == true) {
 			return cur;
 		}
 		cur = cur->next;
@@ -154,11 +154,58 @@ Accounts* find_Accounts(Accounts*& accountList, string account, string password)
 	return NULL;
 }
 //
-void Staffs_functions(Accounts* current_accout) {
+void Change_password(Accounts*& current_account) {
 
+}
+void Staffs_functions(Accounts*& current_account) {
+	cout << "0. To exit the program." << '\n';
+	cout << "1. To view the current account." << '\n';
+	cout << "2. To change the password." << '\n';
+	int cur_key; bool flag = true;
+	while (flag == true) {
+		cin >> cur_key;
+		switch (cur_key)
+		{
+		case 0: {
+			flag = false;
+		}
+		case 1:{
+			viewAccounts(current_account);
+			break;
+		}
+		case 2: {
+			Change_password(current_account);
+			break;
+		}
+		default:
+			break;
+		}
+	}
 };
-void Students_functions(Accounts* current_account) {
-
+void Students_functions(Accounts*& current_account) {
+	cout << "0. To exit the program." << '\n';
+	cout << "1. To view the current account." << '\n';
+	cout << "2. To change the password." << '\n';
+	int cur_key; bool flag = true;
+	while (flag == true) {
+		cin >> cur_key;
+		switch (cur_key)
+		{
+		case 0: {
+			flag = false;
+		}
+		case 1: {
+			viewAccounts(current_account);
+			break;
+		}
+		case 2: {
+			Change_password(current_account);
+			break;
+		}
+		default:
+			break;
+		}
+	}
 }
 //
 void Login(Accounts*& accountList, int& status) {
@@ -173,7 +220,7 @@ void Login(Accounts*& accountList, int& status) {
 			cout << "Username: "; getline(cin, username);
 			cout << "Password: "; getline(cin, password);
 			if (check_match_username_password(accountList, username, password)) {
-				cout << "LOGIN SUCCESSFULLY";
+				cout << "LOGIN SUCCESSFULLY" <<'\n';
 				cur_account = find_Accounts(accountList, username, password);
 				status = cur_account->role;
 				break;
@@ -192,13 +239,16 @@ void Login(Accounts*& accountList, int& status) {
 			}
 		}
 	}
+	cout << status << '\n';
 	switch (status)
 	{
 	case 0: {
 		Students_functions(cur_account);
+		break;
 	}
 	case 1: {
 		Staffs_functions(cur_account);
+		break;
 	}
 	}
 }

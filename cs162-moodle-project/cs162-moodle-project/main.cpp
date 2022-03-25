@@ -12,7 +12,7 @@ int main() {
     Staffs* staffList = nullptr;
     Accounts* accountList = nullptr;
 
-    //initData(yearList, studentList, staffList, accountList);
+    initData(yearList, studentList, staffList, accountList);
     int status;
     Login(accountList, status);
 	return 0;
