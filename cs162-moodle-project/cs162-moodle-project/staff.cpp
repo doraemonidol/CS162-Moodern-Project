@@ -233,7 +233,6 @@ void addSemester(Semesters* &smt){
 
     if (!smt){
         smt = cur_smt;
-        cout << "new";
     }
     else{
         cur_smt->next = smt;

@@ -131,22 +131,11 @@ void viewCourseScoreboards(Courses* course) {
 	}
 }
 //
-bool check_match_username_password(Accounts*& accountList, string account, string password) {
-	Accounts* cur = accountList;
-	while (cur) {
-		if ((account.compare(cur->uName) == 0) && (password.compare(cur->pwd) == 0)) {
-			return true;
-		}
-		cur = cur->next;
-	}
-	return false;
-}
-//
 
 Accounts* find_Accounts(Accounts*& accountList, string account, string password) {
 	Accounts* cur = accountList;
 	while (cur) {
-		if (check_match_username_password(cur, account, password) == true) {
+        if ((account.compare(cur->uName) == 0) && (password.compare(cur->pwd) == 0)) {
 			return cur;
 		}
 		cur = cur->next;
@@ -218,10 +207,11 @@ void Login(Accounts*& accountList, int& status) {
 		}
 		if (log_input == "Y" || log_input == "y") {
 			cout << "Username: "; getline(cin, username);
-			cout << "Password: "; getline(cin, password);
-			if (check_match_username_password(accountList, username, password)) {
+            cout << "Password: ";
+            getline(cin, password);
+            cur_account = find_Accounts(accountList, username, password);
+			if (cur_account) {
 				cout << "LOGIN SUCCESSFULLY" <<'\n';
-				cur_account = find_Accounts(accountList, username, password);
 				status = cur_account->role;
 				break;
 			}
