@@ -18,7 +18,7 @@ Classes* findClass(Students* student, Classes* classes) {
 	return nullptr;
 }
 
-void viewStudents(Students* studentList, Classes* classes) {
+void viewStudents(Students* studentList) {
     cout << setw(10) << "Student ID" << setw(25) << "Full name" << setw(10) << "Class ID" << endl;
 
     while (studentList) {

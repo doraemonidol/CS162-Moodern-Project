@@ -210,11 +210,11 @@ void addSchoolYear (AcademicYears* &year){
     }
 }  
 
-void addSemester(Semesters* &smt, Courses* cou){
+void addSemester(Semesters* &smt){
     int tmp;
     Date d1,d2;
     cout << "Enter semester: ";
-    cin>> tmp;
+    cin >> tmp;
     cout << "Start date: ";
     inpDate(d1);
     cout << "End date ";
@@ -229,13 +229,13 @@ void addSemester(Semesters* &smt, Courses* cou){
     inpDate(d1);
     cout << "End date: ";
     inpDate(d2);
-    inpCourses(cur_smt->courses, d1, d2);
+    inpCoursesUser(cur_smt->courses, d1, d2);
 
     if (!smt){
         smt = cur_smt;
+        cout << "new";
     }
     else{
-        deallocateCourses(smt->courses);
         cur_smt->next = smt;
         smt = cur_smt;
     }

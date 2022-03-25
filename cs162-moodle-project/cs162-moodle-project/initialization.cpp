@@ -69,15 +69,14 @@ void inpYears(AcademicYears*& yearList) {
             yearList = new AcademicYears;
             cur = yearList;
         } else {
-            cur = new AcademicYears;
-            cur->next = yearList;
+            cur->next = new AcademicYears;
+            cur = cur->next;
         }
         getline(cin, cur->year);
-        yearList = cur;
     }
 }
 
-void inpCourses(Courses*& courseList, Date startDate, Date endDate) {
+void inpCourses(Courses*& courseList) {
     Courses* cur = courseList;
     int n;
     cin >> n;
@@ -96,17 +95,52 @@ void inpCourses(Courses*& courseList, Date startDate, Date endDate) {
         cin.get();
         getline(cin, cur->lecturerName);
         cin >> cur->room;
-        if (startDate.day == "") {
-            inpDate(cur->startDate);
-            inpDate(cur->endDate);
-        } else {
-            cur->startDate = startDate;
-            cur->endDate = endDate;
-        }
+        inpDate(cur->startDate);
+        inpDate(cur->endDate);
         cin >> cur->day1 >> cur->day2 >> cur->session1 >> cur->session2;
     }
 }
-
+void inpCoursesUser(Courses*& courseList, Date startDate, Date endDate) {
+    Courses* cur = courseList;
+    int n;
+    cout << "Number of courses: ";
+    cin >> n;
+    while (n--) {
+        if (!courseList) {
+            courseList = new Courses;
+            cur = courseList;
+        } else {
+            cur = new Courses;
+            cur->next = courseList;
+        }
+        cout << "Course ID: ";
+        cin >> cur->courseID;
+        cout << "Course name: ";
+        cin.get();
+        getline(cin, cur->courseName);
+        cout << "Number of credits: ";
+        cin >> cur->credits;
+        cout << "Maximum students (default 50): ";
+        cin >> cur->maxStudents;
+        cout << "Lecturer's name: ";
+        cin.get();
+        getline(cin, cur->lecturerName);
+        cout << "Room: ";
+        cin >> cur->room;
+        cur->startDate = startDate;
+        cur->endDate = endDate;
+        cout << "Day 1 (MON / TUE / WED / THU / FRI / SAT): ";
+        cin >> cur->day1;
+        cout << "Session (1 for 07:30, 2 for 09:30, 3 for 13:30 and 4 for 15:30): ";
+        cin >> cur->session1;
+      
+        cout << "Day 2 (MON / TUE / WED / THU / FRI / SAT): ";
+        cin >> cur->day2;
+        cout << "Session (1 for 07:30, 2 for 09:30, 3 for 13:30 and 4 for 15:30): ";
+        cin >> cur->session2;
+        courseList = cur;
+    }
+}
 void inpStudents(Students*& studentList, Accounts*& accountList) {
     Students* curStudent = studentList = nullptr;
     Accounts* curAccount = accountList = nullptr;
@@ -131,8 +165,7 @@ void inpStudents(Students*& studentList, Accounts*& accountList) {
 
         cin >> curStudent->classID;
         inpScoreboards(curStudent->scoreBoards);
-        Date tmp;
-        inpCourses(curStudent->enrolledCourse, tmp, tmp);
+        inpCourses(curStudent->enrolledCourse);
     }
 }
 
@@ -140,6 +173,7 @@ void inpSemester(Semesters*& semesterList) {
     Semesters* cur = semesterList = nullptr;
     int n;
     cin >> n;
+    cout << n << endl;
     while (n--) {
         if (!semesterList) {
             semesterList = new Semesters;
@@ -157,7 +191,9 @@ void inpSemester(Semesters*& semesterList) {
 void inpClasses(Classes*& classList) {
     Classes* cur = classList = nullptr;
     int n;
+    cout << "Number of classes: ";
     cin >> n;
+    cout << "Class ID: \n";
     while (n--) {
         if (!classList) {
             classList = new Classes;
@@ -184,8 +220,9 @@ void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts
     // INPUT SEMESTERS
     AcademicYears* curYear = year;
     while (curYear) {
-        f.open("./Database/" + year->year + "-Semesters.txt");
-        inpSemester(year->semesters);
+        f.open("./Database/" + curYear->year + "-Semesters.txt");
+        cout << "./Database/" + curYear->year + "-Semesters.txt\n";
+        inpSemester(curYear->semesters);
         f.back();
         curYear = curYear->next;
     }
@@ -198,22 +235,24 @@ void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts
         while (curSem) {
             Date tmp;
             f.open("./Database/" + year->year + "-S" + string(1, (curSem->semesterNo + '0')) + "-Courses.txt");
-            inpCourses(year->semesters->courses, tmp, tmp);
+            cout << "./Database/" + year->year + "-S" + string(1, (curSem->semesterNo + '0')) + "-Courses.txt\n";
+            inpCourses(year->semesters->courses);
             f.back();
             curSem = curSem->next;
         }
         curYear = curYear->next;
     }
+    cout << "*Courses* Loaded!\n";
 
-    cout << "*Students Info* Loaded!\n";
     // INPUT STUDENTS
     f.open("./Database/Students.txt");
     inpStudents(student, account);
     f.back();
+    cout << "*Students Info* Loaded!\n";
 
-    cout << "*Staffs Info* Loaded*\n";
     // INPUT STAFFS
     f.open("./Database/Staffs.txt");
     inpStaffs(staff, account);
     f.back();
+    cout << "*Staffs Info* Loaded*\n";
 }

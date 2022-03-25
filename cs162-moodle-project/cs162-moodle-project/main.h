@@ -175,7 +175,6 @@ struct FileOutputManager {
         close(fd);
         clearerr(stdout);
         fsetpos(stdout, &pos); /* for C9X */
-        cin.clear();
     }
     void open(string fileName)
     {
