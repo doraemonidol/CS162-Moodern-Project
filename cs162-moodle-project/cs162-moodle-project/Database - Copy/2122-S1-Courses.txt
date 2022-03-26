@@ -3,7 +3,7 @@ BAA00004
 Introduction to Laws
 3
 50
-0
+1
 Nguyen Ngoc Phuong Hong
 C.33
 10 3 2022
@@ -14,7 +14,7 @@ BAA00102
 Marxist-Leninist Political Economics
 2
 50
-0
+1
 Nguyen Tuan Phuong
 C.33
 10 1 2022
@@ -25,7 +25,7 @@ MTH251
 Calculus I
 4
 50
-0
+1
 Nguyen Le Hoang Anh
 C.22
 10 3 2022
@@ -42,7 +42,7 @@ I.41
 10 3 2022
 10 5 2022
 FRI FRI
-3 2
+3 4
 CS162
 Introduction to Computer Science II
 4
@@ -58,7 +58,7 @@ PH212
 General Physics II
 4
 50
-1
+0
 Nguyen Huu Nha
 I.42
 10 3 2022

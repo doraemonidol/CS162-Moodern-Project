@@ -129,8 +129,21 @@ void outStudents(Students*& studentList) {
         outAccount(cur->account);
         cout << cur->classID << endl;
         outScoreboards(cur->scoreBoards);
-        outCourses(cur->enrolledCourse);
-        //no endl here, same reason
+        int nCourse = 0;
+        Courses* curCourse = cur->enrolledCourse;
+        while (curCourse) {
+            nCourse++;
+            curCourse = curCourse->next;
+        }
+        cout << nCourse << '\n';
+        while (cur->enrolledCourse) {
+            cout << cur->enrolledCourse->courseID << '\n';
+            Courses* tmp = cur->enrolledCourse->next;
+            delete cur->enrolledCourse;
+            cur->enrolledCourse = tmp;
+        }
+
+
         Students* tmp = cur->next;
         delete cur;
         cur = tmp;

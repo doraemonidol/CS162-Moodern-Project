@@ -19,14 +19,8 @@ void updateCourseInfomation(Courses* courseList) {
         if (curCourse) {
             cout << "Leave blank to keep the original data!\n";
             string change = "";
-            cout << "Course ID: " << curCourse->courseID << " -> ";
-            cin.get();
-            getline(cin, change);
-            if (change != "") {
-                curCourse->courseID = change;
-                change = "";
-            }
             cout << "Course name: " << curCourse->courseName << " -> ";
+            cin.get();
             getline(cin, change);
             if (change != "") {
                 curCourse->courseName = change;

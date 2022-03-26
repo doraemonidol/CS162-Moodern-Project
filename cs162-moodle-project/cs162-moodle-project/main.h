@@ -22,6 +22,16 @@ struct Date {
         month = to_string(ltm->tm_mon + 1);
         day = to_string(ltm->tm_mday);
     }
+    string formatYYYYmmDD() {
+        string res = year;
+        if (month.length() == 1)
+            res += "0";
+        res += month;
+        if (day.length() == 1)
+            res += "0";
+        res += day;
+        return res;
+    }
 };
 
 struct Courses;

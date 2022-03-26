@@ -6,15 +6,17 @@
 #include "student.h"
 
 bool cmpDate(Date left, Date right, Date middle) {
-    if (stoi(middle.year) >= stoi(left.year) && stoi(middle.year) <= stoi(right.year) && stoi(middle.year) >= stoi(left.year) && stoi(middle.year) <= stoi(right.year) && stoi(middle.year) >= stoi(left.year) && stoi(middle.year) <= stoi(right.year))
+    if (left.formatYYYYmmDD() <= middle.formatYYYYmmDD() && middle.formatYYYYmmDD() <= right.formatYYYYmmDD())
         return true;
     return false;
 }
 
-void studentEnrollment(Students* student, Courses* courseList, Date curDate) {
+void studentEnrollment(Students* student, Courses* courseList) {
+    Date curDate;
+    curDate.getCurrentDate();
     int n = 0;
     Courses *courseEnrolled = student->enrolledCourse, *choosenCourse, *curCourse;
-    while (courseEnrolled->next) {
+    while (courseEnrolled) {
         n++;
         courseEnrolled = courseEnrolled->next;
     }
@@ -27,6 +29,7 @@ void studentEnrollment(Students* student, Courses* courseList, Date curDate) {
     curCourse = courseList;
     while (curCourse) {
         if (cmpDate(curCourse->startDate, curCourse->endDate, curDate)) {
+            cout << "---------------\n";
             cout << "Course ID: " << curCourse->courseID << '\n';
             cout << "Course name: " << curCourse->courseName << '\n';
             cout << "Number of credits: " << curCourse->credits << '\n';
@@ -48,32 +51,32 @@ void studentEnrollment(Students* student, Courses* courseList, Date curDate) {
         string courseID;
         cin >> courseID;
         choosenCourse = courseList->findCourseByID(courseID);
-        if (choosenCourse && student->enrolledCourse->checkCourseConflict(choosenCourse) && choosenCourse->numStudents + 1 <= choosenCourse->maxStudents) {
-            Students* curStudent = choosenCourse->studentList;
-            if (!curStudent)
-                curStudent = new Students;
-            else 
-                while (curStudent->next) 
-                    curStudent = curStudent->next;
+        if (choosenCourse && cmpDate(choosenCourse->startDate, choosenCourse->endDate, curDate) && student->enrolledCourse->checkCourseConflict(choosenCourse) && choosenCourse->numStudents + 1 <= choosenCourse->maxStudents) {
+            Students* tmp = choosenCourse->studentList;
+            choosenCourse->studentList = new Students;
+            choosenCourse->studentList->studentID= student->studentID;
+            choosenCourse->studentList->account= student->account;
+            choosenCourse->studentList->classID= student->classID;
+            choosenCourse->studentList->scoreBoards= student->scoreBoards;
+            choosenCourse->studentList->next = tmp;
+            choosenCourse->numStudents++;
 
-            if (courseEnrolled) {
-                courseEnrolled->next = new Courses;
-                courseEnrolled = courseEnrolled->next;
-            } else {
-                courseEnrolled = new Courses;
-            }
+            Courses* prevCourse = student->enrolledCourse;
+            student->enrolledCourse = new Courses;
             
-            courseEnrolled->courseID = choosenCourse->courseID;
-            courseEnrolled->courseName = choosenCourse->courseName;
-            courseEnrolled->startDate = choosenCourse->startDate;
-            courseEnrolled->endDate = choosenCourse->endDate;
-            courseEnrolled->day1 = choosenCourse->day1;
-            courseEnrolled->day2 = choosenCourse->day2;
-            courseEnrolled->session1 = choosenCourse->session1;
-            courseEnrolled->session2 = choosenCourse->session2;
-            courseEnrolled->room = choosenCourse->room;
-            courseEnrolled->lecturerName = choosenCourse->lecturerName;
-            cout << "Succesfully enroll in " << courseEnrolled->courseID << "!\n";
+            student->enrolledCourse->courseID = choosenCourse->courseID;
+            student->enrolledCourse->courseName = choosenCourse->courseName;
+            student->enrolledCourse->startDate = choosenCourse->startDate;
+            student->enrolledCourse->endDate = choosenCourse->endDate;
+            student->enrolledCourse->day1 = choosenCourse->day1;
+            student->enrolledCourse->day2 = choosenCourse->day2;
+            student->enrolledCourse->session1 = choosenCourse->session1;
+            student->enrolledCourse->session2 = choosenCourse->session2;
+            student->enrolledCourse->room = choosenCourse->room;
+            student->enrolledCourse->lecturerName = choosenCourse->lecturerName;
+
+            student->enrolledCourse->next = prevCourse;
+            cout << "Succesfully enroll in " << student->enrolledCourse->courseID << "!\n";
             cout << "Press any key to Return to Main Screen!";
             _getch();
             return;
@@ -83,8 +86,12 @@ void studentEnrollment(Students* student, Courses* courseList, Date curDate) {
             else {
                 if (choosenCourse->numStudents + 1 > choosenCourse->maxStudents)
                     cout << "Maximum students reached. You can't enroll in this course.\n";
-                else
-                    cout << "Schedule conflicted with some enrolled courses!\n";
+                else {
+                    if (!cmpDate(choosenCourse->startDate, choosenCourse->endDate, curDate))
+                        cout << "Course registration not available!\n";
+                    else
+                        cout << "Schedule conflicted with some enrolled courses!\n";
+                }
             }
         }
     }

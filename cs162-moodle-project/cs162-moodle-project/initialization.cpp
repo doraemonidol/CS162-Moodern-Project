@@ -141,7 +141,7 @@ void inpCoursesUser(Courses*& courseList, Date startDate, Date endDate) {
         courseList = cur;
     }
 }
-void inpStudents(Students*& studentList, Accounts*& accountList) {
+void inpStudents(Students*& studentList, Accounts*& accountList, Courses* courseList) {
     Students* curStudent = studentList = nullptr;
     Accounts* curAccount = accountList = nullptr;
     int n;
@@ -165,7 +165,41 @@ void inpStudents(Students*& studentList, Accounts*& accountList) {
 
         cin >> curStudent->classID;
         inpScoreboards(curStudent->scoreBoards);
-        inpCourses(curStudent->enrolledCourse);
+        int nCourse;
+        cin >> nCourse;
+        while (nCourse--) {
+            Courses* newCourse = new Courses;
+            cin >> newCourse->courseID;
+            Courses* course = courseList->findCourseByID(newCourse->courseID);
+
+            if (!course) {
+                delete newCourse;
+                continue;
+            }
+
+            newCourse->courseName = course->courseName;
+            newCourse->credits = course->credits;
+            newCourse->maxStudents = course->maxStudents;
+            newCourse->numStudents = course->numStudents;
+            newCourse->startDate = course->startDate;
+            newCourse->endDate = course->endDate;
+            newCourse->day1 = course->day1;
+            newCourse->day2 = course->day2;
+            newCourse->session1 = course->session1;
+            newCourse->session2 = course->session2;
+            newCourse->room = course->room;
+            newCourse->lecturerName = course->lecturerName;
+            newCourse->next = curStudent->enrolledCourse;
+            curStudent->enrolledCourse = newCourse;
+
+            Students* tmp = course->studentList;
+            course->studentList = new Students;
+            course->studentList->studentID = curStudent->studentID;
+            course->studentList->account = curStudent->account;
+            course->studentList->classID = curStudent->classID;
+            course->studentList->scoreBoards = curStudent->scoreBoards;
+            course->studentList->next = tmp;
+        }
     }
 }
 
@@ -243,7 +277,7 @@ void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts
 
     // INPUT STUDENTS
     f.open("./Database/Students.txt");
-    inpStudents(student, account);
+    inpStudents(student, account, year->semesters->courses);
     f.back();
     cout << "*Students Info* Loaded!\n";
 

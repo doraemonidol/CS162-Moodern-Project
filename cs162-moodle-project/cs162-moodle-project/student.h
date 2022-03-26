@@ -1,5 +1,5 @@
 #pragma once
-void studentEnrollment(Students* student, Courses* courseList, Date curDate);
+void studentEnrollment(Students* student, Courses* courseList);
 
 bool cmpDate(Date left, Date right, Date middle);
 
