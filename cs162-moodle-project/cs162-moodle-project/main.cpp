@@ -18,7 +18,8 @@ int main() {
     //Login(accountList, status);
     //addSchoolYear(yearList);
     //addSemester(yearList->semesters);
-    viewClassScoreboards(yearList->classes);
+    //CSVToScoreboard(yearList->semesters->courses->findCourseByID("PH212"));
+    //viewCourseScoreboards(yearList->semesters->courses->findCourseByID("PH212"));
     unloadData(yearList, studentList, staffList);
 	return 0;
 }

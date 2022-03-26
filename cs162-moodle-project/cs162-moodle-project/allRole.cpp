@@ -127,6 +127,7 @@ void viewCourseScoreboards(Courses* course) {
 		cout << student->account->firstname << ' ' << student->account->lastname << ": \n";
 		while (scoreBoards) {
 			cout << ">>>" << scoreBoards->courseName << ": " << scoreBoards->finalScore << '\n';
+			scoreBoards = scoreBoards->next;
 		}
 		student = student->next;
 	}

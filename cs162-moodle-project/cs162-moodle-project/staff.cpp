@@ -119,13 +119,25 @@ void deleteCourseByID(Courses*& courseList) {
 }
 Scoreboards* AddScoreBoard(Students* student, string courseID) {
     Scoreboards* scoreboard = student->scoreBoards;
-    while (scoreboard->next) {
+    while (scoreboard && scoreboard->next) {
         scoreboard = scoreboard->next;
     }
-    scoreboard->next = new Scoreboards;
-    scoreboard->next = nullptr;
-    scoreboard->next->courseID = courseID;
-    return scoreboard->next;
+    string courseName = student->enrolledCourse->findCourseByID(courseID)->courseName;
+    if (scoreboard) {
+        scoreboard->next = new Scoreboards;
+        scoreboard->next->next = nullptr;
+        scoreboard->next->courseID = courseID;
+        scoreboard->next->courseName = courseName;
+        return scoreboard->next;
+    }
+    else {
+        scoreboard = new Scoreboards;
+        scoreboard->next = nullptr;
+        scoreboard->courseID = courseID;
+        student->scoreBoards = scoreboard;
+        scoreboard->courseName = courseName;
+        return scoreboard;
+    }
 }
 
 bool UpdateStudentScoreboard(Students* allStudentList, string studentID, string courseID, Courses* coursesList) {
@@ -169,16 +181,23 @@ void courseToCSV(Courses* course) {
 
 void CSVToScoreboard(Courses* course) {
     ifstream f;
-    f.open("scoreboardCSV.txt");
-    string trash, courseID;
-    cin >> courseID;
+    f.open("./Database/scoreboardCSV.txt");
+    string trash="231", courseID;
+    f >> courseID;
+    f.get();
     getline(f, trash);
     while (!f.eof()) {
         string studentID = "", no = "", name = "";
         getline(f, no, ',');
+        f.get();
         getline(f, studentID, ',');
+        f.get();
         getline(f, name, ',');
+        f.get();
         Scoreboards* scoreboard = course->findStudentByID(studentID)->findScoreboardByID(courseID);
+        if (!scoreboard) {
+            scoreboard = AddScoreBoard(course->findStudentByID(studentID), courseID);
+        }
         f >> scoreboard->labScore;
         f.get();
         f >> scoreboard->midtermScore;
