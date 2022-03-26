@@ -156,15 +156,15 @@ bool UpdateStudentScoreboard(Students* allStudentList, string studentID, string 
 }
 
 void courseToCSV(Courses* course) {
-    FILE* f;
-    f = freopen("courseCSV.txt", "w", stdout);
+    FileOutputManager f;
+    f.open("./Database/courseCSV.txt");
     cout << course->courseID << '\n';
     cout << "Student ID, Name\n";
     Students* student = course->studentList;
     while (student) {
         cout << student->studentID << ", " << student->account->firstname << " " << student->account->lastname << '\n';
     }
-    fclose(f);
+    f.back();
 }
 
 void CSVToScoreboard(Courses* course) {

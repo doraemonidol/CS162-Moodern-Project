@@ -85,6 +85,15 @@ struct Classes {
     string classID = "";
     Students* students = nullptr;
     Classes* next = nullptr;
+
+    Classes* findByID(string classID) {
+        Classes* list = this;
+        while (list) {
+            if (list->classID == classID) return list;
+            list = list->next;
+        }
+        return nullptr;
+    }
 };
 
 struct Staffs {

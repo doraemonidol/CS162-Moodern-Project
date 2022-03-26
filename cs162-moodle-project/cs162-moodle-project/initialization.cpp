@@ -73,6 +73,14 @@ void inpYears(AcademicYears*& yearList) {
             cur = cur->next;
         }
         getline(cin, cur->year);
+        int nClasses;
+        cin >> nClasses;
+        while (nClasses--) {
+            Classes* tem = new Classes;
+            cin >> tem->classID;
+            tem->next = cur->classes;
+            cur->classes = tem;
+        }
     }
 }
 
@@ -141,7 +149,7 @@ void inpCoursesUser(Courses*& courseList, Date startDate, Date endDate) {
         courseList = cur;
     }
 }
-void inpStudents(Students*& studentList, Accounts*& accountList, Courses* courseList) {
+void inpStudents(Students*& studentList, Accounts*& accountList, Courses* courseList, Classes* classList) {
     Students* curStudent = studentList = nullptr;
     Accounts* curAccount = accountList = nullptr;
     int n;
@@ -164,6 +172,15 @@ void inpStudents(Students*& studentList, Accounts*& accountList, Courses* course
         }
 
         cin >> curStudent->classID;
+        Classes* tmp = classList->findByID(curStudent->classID);
+        if (tmp) {
+            Students* student = new Students;
+            student->studentID = curStudent->studentID;
+            student->account = curStudent->account;
+            student->enrolledCourse = curStudent->enrolledCourse;
+            student->next = tmp->students;
+            tmp->students = student;
+        }
         inpScoreboards(curStudent->scoreBoards);
         int nCourse;
         cin >> nCourse;
@@ -277,7 +294,7 @@ void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts
 
     // INPUT STUDENTS
     f.open("./Database/Students.txt");
-    inpStudents(student, account, year->semesters->courses);
+    inpStudents(student, account, year->semesters->courses, year->classes);
     f.back();
     cout << "*Students Info* Loaded!\n";
 

@@ -95,6 +95,7 @@ void viewScoreboards (Scoreboards* scoreb){
     }
 }
 void viewClassScoreboards(Classes* classes) {
+	if (!classes) return;
 	Students* student = classes->students;
 	while (student) {
 		double sum = 0, count = 0, allsum = 0, allcount = 0;
@@ -206,6 +207,7 @@ void Students_functions(Accounts*& current_account) {
 }
 //
 void Login(Accounts*& accountList, int& status) {
+	status = -1;
 	string username, password, log_input, re_log;
 	Accounts* cur_account = NULL;
 	cout << "LOGIN [Y/N]: "; getline(cin, log_input);
@@ -237,7 +239,6 @@ void Login(Accounts*& accountList, int& status) {
 			}
 		}
 	}
-	cout << status << '\n';
 	switch (status)
 	{
 	case 0: {
@@ -246,6 +247,9 @@ void Login(Accounts*& accountList, int& status) {
 	}
 	case 1: {
 		Staffs_functions(cur_account);
+		break;
+	}
+	default: {
 		break;
 	}
 	}
