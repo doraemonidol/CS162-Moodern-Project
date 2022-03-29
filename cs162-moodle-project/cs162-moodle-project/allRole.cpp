@@ -232,9 +232,9 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist) {
 		case 10: {
 			bool flag_10 = true;
 			while (flag_10 == true) {
-				cout << "0. To exit."; int m;
-				cout << "1. To view scoreboard of the course.";
-				cout << "2. To view scoreboard of the class.";
+				cout << "0. To exit." << '\n'; int m;
+				cout << "1. To view scoreboard of the course." << '\n';
+				cout << "2. To view scoreboard of the class." << '\n';
 				cin >> m;
 				switch (m){
 				case 0: {
