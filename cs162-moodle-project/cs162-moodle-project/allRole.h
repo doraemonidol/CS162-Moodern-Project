@@ -8,12 +8,12 @@ void viewCourses(Courses* Course);
 void viewClassScoreboards(Classes* classes);
 void viewCourseScoreboards(Courses* course);
 
-void Login(Accounts*& accountList, int& status);
+void Login(Accounts*& accountList, int& status, AcademicYears*& yearlist);
 //
 void Change_password(Accounts*& current_account);
 Accounts* find_Accounts(Accounts*& accountList, string account, string password);
 //
-void Students_functions(Accounts*& current_account);
-void Staffs_functions(Accounts*& current_account);
+void Students_functions(Accounts*& current_account,AcademicYears*& yearlist);
+void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist);
 //
 Classes* findClass(Students* student, Classes* classes);

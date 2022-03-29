@@ -173,10 +173,19 @@ void Change_password(Accounts*& current_account) {
 	}
 }
 //
-void Staffs_functions(Accounts*& current_account) {
+void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist) {
 	cout << "0. To exit the program." << '\n';
 	cout << "1. To view the current account." << '\n';
 	cout << "2. To change the password." << '\n';
+	cout << "3. " << '\n';
+	cout << "4. To add school year." << '\n';
+	cout << "5. To add semester." << '\n';
+	cout << "6. To update course information." << '\n';
+	cout << "7. To delete course by ID." << '\n';
+	cout << "8. To input course into CSV files." << '\n';
+	cout << "9. To get info of the scoreboard from CSV files." << '\n';
+	cout << "10. To view scoreboard." << '\n';
+	cout << "11. To update scoreboard info." << '\n';
 	int cur_key; bool flag = true;
 	while (flag == true) {
 		cin >> cur_key;
@@ -193,12 +202,69 @@ void Staffs_functions(Accounts*& current_account) {
 			Change_password(current_account);
 			break;
 		}
-		default:
+		case 3: {
 			break;
+		}
+		case 4: {
+			addSchoolYear(yearlist);
+			break;
+		}
+		case 5: {
+			addSemester(yearlist->semesters);
+			break;
+		}
+		case 6: {
+			updateCourseInfomation(yearlist->semesters->courses);
+			break;
+		}
+		case 7: {
+			deleteCourseByID(yearlist->semesters->courses);
+			break;
+		}
+		case 8: {
+			courseToCSV(yearlist->semesters->courses);
+			break;
+		}
+		case 9: {
+			CSVToScoreboard(yearlist->semesters->courses);
+			break;
+		}
+		case 10: {
+			bool flag_10 = true;
+			while (flag_10 == true) {
+				cout << "0. To exit."; int m;
+				cout << "1. To view scoreboard of the course.";
+				cout << "2. To view scoreboard of the class.";
+				cin >> m;
+				switch (m){
+				case 0: {
+					flag_10 = false;
+					break;
+				}
+				case 1: {
+					viewCourseScoreboards(yearlist->semesters->courses);
+					break;
+				}
+				case 2: {
+					viewClassScoreboards(yearlist->classes);
+					break;
+				}
+				}
+
+			}
+			break;
+		}
+		case 11: {
+				string check_student; string check_course;
+				cout << "Please enter the ID of the student: "; getline(cin, check_student);
+				cout << "Please enter the course of the student: "; getline(cin, check_course);
+				UpdateStudentScoreboard(yearlist->classes->students, check_student, check_course, yearlist->semesters->courses);
+				break;
+			}
 		}
 	}
 };
-void Students_functions(Accounts*& current_account) {
+void Students_functions(Accounts*& current_account, AcademicYears*& yearlist) {
 	cout << "0. To exit the program." << '\n';
 	cout << "1. To view the current account." << '\n';
 	cout << "2. To change the password." << '\n';
@@ -221,13 +287,16 @@ void Students_functions(Accounts*& current_account) {
 		case 3: {
 
 		}
+		case 4: {
+			
+		}
 		default:
 			break;
 		}
 	}
 }
 //
-void Login(Accounts*& accountList, int& status) {
+void Login(Accounts*& accountList, int& status, AcademicYears*& yearlist) {
 	status = -1;
 	string username, password, log_input, re_log;
 	Accounts* cur_account = NULL;
@@ -263,11 +332,11 @@ void Login(Accounts*& accountList, int& status) {
 	switch (status)
 	{
 	case 0: {
-		Students_functions(cur_account);
+		Students_functions(cur_account, yearlist);
 		break;
 	}
 	case 1: {
-		Staffs_functions(cur_account);
+		Staffs_functions(cur_account, yearlist);
 		break;
 	}
 	default: {
