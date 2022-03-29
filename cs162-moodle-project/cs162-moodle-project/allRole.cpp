@@ -146,12 +146,29 @@ Accounts* find_Accounts(Accounts*& accountList, string account, string password)
 }
 //
 void Change_password(Accounts*& current_account) {
-	string cur_check; string new_pass; cout << "Please re-enter the password: ";
+	string cur_check; string new_pass; cout << "Please re-enter the password: "; string check_new_pass;
 	while (true) {
 		getline(cin, cur_check);
 		if (cur_check.compare(current_account->pwd) == 0) {
 			cout << "Please enter the new password: "; getline(cin, new_pass);
-			current_account->pwd = new_pass;
+			while (true) {
+				cout << "Please re-enter the new password: "; getline(cin, check_new_pass);
+				if (new_pass.compare(check_new_pass) == 0) {
+					cout << "Your password have been changed";
+					current_account->pwd = new_pass;
+					break;
+				}
+				else {
+					cout << "To re-enter press 1 or press 0 to exit: "; int m;
+					cin >> m;
+					if (m == 0) {
+						break;
+					}
+					else {
+						continue;
+					}
+				}
+			}
 		}
 	}
 }
@@ -200,6 +217,9 @@ void Students_functions(Accounts*& current_account) {
 		case 2: {
 			Change_password(current_account);
 			break;
+		}
+		case 3: {
+
 		}
 		default:
 			break;
