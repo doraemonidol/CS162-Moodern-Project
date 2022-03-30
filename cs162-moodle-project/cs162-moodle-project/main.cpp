@@ -15,7 +15,7 @@ int main() {
     initData(yearList, studentList, staffList, accountList);
 
     int status;
-    Login(accountList, status,yearList);
+    Login(accountList, status,yearList,studentList);
     //addSchoolYear(yearList);
     //addSemester(yearList->semesters);
     //CSVToScoreboard(yearList->semesters->courses->findCourseByID("PH212"));

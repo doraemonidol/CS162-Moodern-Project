@@ -144,7 +144,18 @@ Accounts* find_Accounts(Accounts*& accountList, string account, string password)
 	}
 	return NULL;
 }
+Students* find_Students_by_accounts(Students*& studentList, Accounts*& current_account) {
+	Students* cur = studentList;
+	while (cur) {
+		if (cur->account->socialID == current_account->socialID) {
+			return cur;
+		}
+		cur = cur->next;
+	}
+	return NULL;
+}
 //
+
 void Change_password(Accounts*& current_account) {
 	string cur_check; string new_pass; cout << "Please re-enter the password: "; string check_new_pass;
 	while (true) {
@@ -264,10 +275,11 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist) {
 		}
 	}
 };
-void Students_functions(Accounts*& current_account, AcademicYears*& yearlist) {
+void Students_functions(Accounts*& current_account, AcademicYears*& yearlist, Students*& studentlist) {
 	cout << "0. To exit the program." << '\n';
 	cout << "1. To view the current account." << '\n';
 	cout << "2. To change the password." << '\n';
+	cout << "3. To enroll in a course." << '\n';
 	int cur_key; bool flag = true;
 	while (flag == true) {
 		cin >> cur_key;
@@ -285,10 +297,11 @@ void Students_functions(Accounts*& current_account, AcademicYears*& yearlist) {
 			break;
 		}
 		case 3: {
-
+			Students* cur_student = find_Students_by_accounts(studentlist, current_account);
+			studentEnrollment(cur_student, yearlist->semesters->courses);
+			break;
 		}
 		case 4: {
-			
 		}
 		default:
 			break;
@@ -296,7 +309,7 @@ void Students_functions(Accounts*& current_account, AcademicYears*& yearlist) {
 	}
 }
 //
-void Login(Accounts*& accountList, int& status, AcademicYears*& yearlist) {
+void Login(Accounts*& accountList, int& status, AcademicYears*& yearlist, Students*& studentlist) {
 	status = -1;
 	string username, password, log_input, re_log;
 	Accounts* cur_account = NULL;
@@ -332,7 +345,7 @@ void Login(Accounts*& accountList, int& status, AcademicYears*& yearlist) {
 	switch (status)
 	{
 	case 0: {
-		Students_functions(cur_account, yearlist);
+		Students_functions(cur_account, yearlist, studentlist);
 		break;
 	}
 	case 1: {
