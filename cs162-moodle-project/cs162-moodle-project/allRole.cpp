@@ -207,10 +207,12 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist) {
 		}
 		case 1:{
 			viewAccounts(current_account);
+			cout << '\n';
 			break;
 		}
 		case 2: {
 			Change_password(current_account);
+			cout << '\n';
 			break;
 		}
 		case 3: {
@@ -218,26 +220,32 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist) {
 		}
 		case 4: {
 			addSchoolYear(yearlist);
+			cout << '\n';
 			break;
 		}
 		case 5: {
 			addSemester(yearlist->semesters);
+			cout << '\n';
 			break;
 		}
 		case 6: {
 			updateCourseInfomation(yearlist->semesters->courses);
+			cout << '\n';
 			break;
 		}
 		case 7: {
 			deleteCourseByID(yearlist->semesters->courses);
+			cout << '\n';
 			break;
 		}
 		case 8: {
 			courseToCSV(yearlist->semesters->courses);
+			cout << '\n';
 			break;
 		}
 		case 9: {
 			CSVToScoreboard(yearlist->semesters->courses);
+			cout << '\n';
 			break;
 		}
 		case 10: {
@@ -261,8 +269,8 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist) {
 					break;
 				}
 				}
-
 			}
+			cout << '\n';
 			break;
 		}
 		case 11: {
@@ -270,6 +278,7 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist) {
 				cout << "Please enter the ID of the student: "; getline(cin, check_student);
 				cout << "Please enter the course of the student: "; getline(cin, check_course);
 				UpdateStudentScoreboard(yearlist->classes->students, check_student, check_course, yearlist->semesters->courses);
+				cout << '\n';
 				break;
 			}
 		}
@@ -291,15 +300,18 @@ void Students_functions(Accounts*& current_account, AcademicYears*& yearlist, St
 		}
 		case 1: {
 			viewAccounts(current_account);
+			cout << '\n';
 			break;
 		}
 		case 2: {
 			Change_password(current_account);
+			cout << '\n';
 			break;
 		}
 		case 3: {
 			Students* cur_student = find_Students_by_accounts(studentlist, current_account);
 			studentEnrollment(cur_student, yearlist->semesters->courses);
+			cout << '\n';
 			break;
 		}
 		case 4: {
@@ -308,6 +320,7 @@ void Students_functions(Accounts*& current_account, AcademicYears*& yearlist, St
 			cout << "Please enter the course ID: "; getline(cin, cur_course_ID);
 			cout << "Please enter the current day: ";  inpDate(cur_day);
 			deleteEnrolledCourse(cur_student_2, cur_course_ID, cur_day);
+			cout << '\n';
 			break;
 		}
 		}
