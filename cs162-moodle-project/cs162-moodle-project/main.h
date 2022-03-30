@@ -1,28 +1,33 @@
 #pragma once
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-#include <stdio.h>
-#include <cstdio>
-#include <io.h>  
-#include <stdlib.h> 
 #include <chrono>
-#include <ctime>
-#include <string>
 #include <conio.h>
+#include <cstdio>
+#include <ctime>
+#include <fstream>
+#include <io.h>
+#include <iomanip>
+#include <iostream>
+#include <msclr/marshal_cppstd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
 using namespace std;
+using namespace System;
+using namespace System::Windows::Forms;
 #pragma warning(disable : 4996)
 struct Courses;
 struct Date {
     string day = "", month = "", year = "";
-    void getCurrentDate() {
+    void getCurrentDate()
+    {
         time_t now = time(0);
         tm* ltm = localtime(&now);
         year = to_string(ltm->tm_year + 1900);
         month = to_string(ltm->tm_mon + 1);
         day = to_string(ltm->tm_mday);
     }
-    string formatYYYYmmDD() {
+    string formatYYYYmmDD()
+    {
         string res = year;
         if (month.length() == 1)
             res += "0";
@@ -62,19 +67,23 @@ struct Students {
     Courses* enrolledCourse = nullptr;
     Students* next = nullptr;
 
-    Students* findStudentByID(string studentID) {
+    Students* findStudentByID(string studentID)
+    {
         Students* list = this;
         while (list) {
-            if (list->studentID == studentID) return list;
+            if (list->studentID == studentID)
+                return list;
             list = list->next;
         }
         return nullptr;
     }
 
-    Scoreboards* findScoreboardByID(string courseID) {
+    Scoreboards* findScoreboardByID(string courseID)
+    {
         Scoreboards* list = this->scoreBoards;
         while (list) {
-            if (list->courseID == courseID) return list;
+            if (list->courseID == courseID)
+                return list;
             list = list->next;
         }
         return nullptr;
@@ -86,10 +95,12 @@ struct Classes {
     Students* students = nullptr;
     Classes* next = nullptr;
 
-    Classes* findByID(string classID) {
+    Classes* findByID(string classID)
+    {
         Classes* list = this;
         while (list) {
-            if (list->classID == classID) return list;
+            if (list->classID == classID)
+                return list;
             list = list->next;
         }
         return nullptr;
@@ -111,10 +122,12 @@ struct Courses {
     string lecturerName = "";
     Courses* next = nullptr;
 
-    Students* findStudentByID(string studentID) {
+    Students* findStudentByID(string studentID)
+    {
         Students* list = this->studentList;
         while (list) {
-            if (list->studentID == studentID) return list;
+            if (list->studentID == studentID)
+                return list;
             list = list->next;
         }
         return nullptr;
@@ -180,7 +193,8 @@ struct FileInputManager {
         fsetpos(stdin, &pos); /* for C9X */
         cin.clear();
     }
-    void open(string fileName) {
+    void open(string fileName)
+    {
         store();
         freopen(fileName.c_str(), "r", stdin);
     }
