@@ -280,6 +280,7 @@ void Students_functions(Accounts*& current_account, AcademicYears*& yearlist, St
 	cout << "1. To view the current account." << '\n';
 	cout << "2. To change the password." << '\n';
 	cout << "3. To enroll in a course." << '\n';
+	cout << "4. To remove enrolled course." << '\n';
 	int cur_key; bool flag = true;
 	while (flag == true) {
 		cin >> cur_key;
@@ -302,9 +303,13 @@ void Students_functions(Accounts*& current_account, AcademicYears*& yearlist, St
 			break;
 		}
 		case 4: {
-		}
-		default:
+			Students* cur_student_2 = find_Students_by_accounts(studentlist, current_account);
+			string cur_course_ID; Date cur_day;
+			cout << "Please enter the course ID: "; getline(cin, cur_course_ID);
+			cout << "Please enter the current day: ";  inpDate(cur_day);
+			deleteEnrolledCourse(cur_student_2, cur_course_ID, cur_day);
 			break;
+		}
 		}
 	}
 }
