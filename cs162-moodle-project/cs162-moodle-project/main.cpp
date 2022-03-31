@@ -13,13 +13,8 @@ int main() {
     Accounts* accountList = nullptr;
 
     initData(yearList, studentList, staffList, accountList);
-
     int status;
-    Login(accountList, status,yearList,studentList);
-    //addSchoolYear(yearList);
-    //addSemester(yearList->semesters);
-    //CSVToScoreboard(yearList->semesters->courses->findCourseByID("PH212"));
-    //viewCourseScoreboards(yearList->semesters->courses->findCourseByID("PH212"));
+    Login(accountList, status, yearList, studentList);
     unloadData(yearList, studentList, staffList);
 	return 0;
 }

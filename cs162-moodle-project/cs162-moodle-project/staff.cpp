@@ -77,8 +77,6 @@ void updateCourseInfomation(Courses* courseList) {
             }
 
             cout << "Update course successfully!\n";
-            cout << "Press any key to Return to Main Screen!";
-            _getch();
             return;
         } else {
             cout << "Can't find course with ID " << courseID << ". Double check and try again!\n";
@@ -109,8 +107,6 @@ void deleteCourseByID(Courses*& courseList) {
             // remove enrolled course for students here
             delete curCourse;
             cout << "Delete course successfully!\n";
-            cout << "Press any key to Return to Main Screen!";
-            _getch();
             return;
         } else {
             cout << "Can't find course with ID " << courseID << ". Double check and try again!\n";
@@ -149,7 +145,7 @@ bool UpdateStudentScoreboard(Students* allStudentList, string studentID, string 
             scoreboard = AddScoreBoard(student, courseID);
         else return false;
     }
-    cout << ">>>" << student->account->firstname << " " << student->account->lastname << "'s Scoreboard of " << coursesList->findCourseByID(courseID) << " Update Session<<<\n";
+    cout << ">>>" << student->account->firstname << " " << student->account->lastname << "'s Scoreboard of " << coursesList->findCourseByID(courseID)->courseName << " Update Session<<<\n";
     double sc;
     cout << "(Input nothing to skip editing a session)\n";
     cout << "Midterm Score update to: ";
@@ -168,15 +164,16 @@ bool UpdateStudentScoreboard(Students* allStudentList, string studentID, string 
 }
 
 void courseToCSV(Courses* course) {
-    FileOutputManager f;
+    ofstream f;
     f.open("./Database/courseCSV.txt");
-    cout << course->courseID << '\n';
-    cout << "Student ID, Name\n";
+    f << course->courseID << '\n';
+    f << "Student ID, Name\n";
     Students* student = course->studentList;
     while (student) {
-        cout << student->studentID << ", " << student->account->firstname << " " << student->account->lastname << '\n';
+        f << student->studentID << ", " << student->account->firstname << " " << student->account->lastname << '\n';
+        student = student->next;
     }
-    f.back();
+    f.close();
 }
 
 void CSVToScoreboard(Courses* course) {

@@ -47,7 +47,7 @@ CS162
 Introduction to Computer Science II
 4
 50
-0
+2
 Dinh Ba Tien
 I.41
 10 3 2022
