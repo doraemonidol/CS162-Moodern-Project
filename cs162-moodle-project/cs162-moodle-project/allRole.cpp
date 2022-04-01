@@ -135,12 +135,22 @@ void viewCourseScoreboards(Courses* course) {
 void viewClassstudent(Classes* classes) {
 	if (!classes) return;
 	Students* student = classes->students;
-	viewStudents(student);
+	if (!student) {
+		cout << "There is no student in the class" << '\n';
+	}
+	else {
+		viewStudents(student);
+	}
 }
 void viewCourseStudent(Courses* courses) {
 	if (!courses) return;
 	Students* student = courses->studentList;
-	viewStudents(student);
+	if (!student) {
+		cout << "There is no student in the course" << '\n';
+	}
+	else {
+		viewStudents(student);
+	}
 }
 //
 
