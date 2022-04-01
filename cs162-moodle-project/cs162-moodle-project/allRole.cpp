@@ -132,6 +132,16 @@ void viewCourseScoreboards(Courses* course) {
 		student = student->next;
 	}
 }
+void viewClassstudent(Classes* classes) {
+	if (!classes) return;
+	Students* student = classes->students;
+	viewStudents(student);
+}
+void viewCourseStudent(Courses* courses) {
+	if (!courses) return;
+	Students* student = courses->studentList;
+	viewStudents(student);
+}
 //
 
 Accounts* find_Accounts(Accounts*& accountList, string account, string password) {
@@ -199,7 +209,7 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist, Stud
 		cout << "0. To exit the program." << '\n';
 		cout << "1. To view the current account." << '\n';
 		cout << "2. To change the password." << '\n';
-		cout << "3. " << '\n';
+		cout << "3. To view student." << '\n';
 		cout << "4. To add school year." << '\n';
 		cout << "5. To add semester." << '\n';
 		cout << "6. To update course information." << '\n';
@@ -230,6 +240,50 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist, Stud
 			break;
 		}
 		case 3: {
+			system("cls");
+			bool flag_3 = true;
+			while (flag_3 == true) {
+				system("cls");
+				cout << "0. To exit." << '\n'; int m;
+				cout << "1. To view students of the course." << '\n';
+				cout << "2. To view students of the class." << '\n';
+				cin >> m;
+				switch (m) {
+				case 0: {
+					flag_3 = false;
+					break;
+				}
+				case 1: {
+					string courseID;
+					cout << "Please enter course ID: ";
+					cin >> courseID;
+					Courses* outCourse = yearlist->semesters->courses->findCourseByID(courseID);
+					if (outCourse) {
+						viewCourseStudent(outCourse);
+					}
+					else cout << "No course found!\n";
+					cout << "\nPress any key to return to continue...";
+					_getch();
+					break;
+				}
+				case 2: {
+					string classID;
+					cout << "Please enter class ID: ";
+					cin >> classID;
+					Classes* outClass = yearlist->classes->findByID(classID);
+					if (outClass) {
+						viewClassstudent(outClass);
+					}
+					else cout << "Class not found!\n";
+					cout << "\nPress any key to return to continue...";
+					_getch();
+					break;
+				}
+				default:
+					break;
+				}
+
+			}
 			break;
 		}
 		case 4: {
