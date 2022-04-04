@@ -216,7 +216,7 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist, Stud
 	int cur_key; bool flag = true;
 	while (flag == true) {
 		system("cls");
-		cout << "0. To exit the program." << '\n';
+		cout << "0. To log out." << '\n';
 		cout << "1. To view the current account." << '\n';
 		cout << "2. To change the password." << '\n';
 		cout << "3. To view student." << '\n';
@@ -421,7 +421,7 @@ void Students_functions(Accounts*& current_account, AcademicYears*& yearlist, St
 	int cur_key; bool flag = true;
 	while (flag == true) {
 		system("cls");
-		cout << "0. To exit the program." << '\n';
+		cout << "0. To log out." << '\n';
 		cout << "1. To view the current account." << '\n';
 		cout << "2. To change the password." << '\n';
 		cout << "3. To enroll in a course." << '\n';
@@ -480,22 +480,41 @@ void Login(Accounts*& accountList, int& status, AcademicYears*& yearlist, Studen
 	Accounts* cur_account = NULL;
 	cout << "LOGIN [Y/N]: "; getline(cin, log_input);
 	while (true) {
+		system("cls");
 		if (log_input == "N" || log_input == "n") {
 			break;
 		}
 		if (log_input == "Y" || log_input == "y") {
-			cout << "Username: "; getline(cin, username);
+			cout << "Username: "; 
+			cin >> username;
             cout << "Password: ";
-            getline(cin, password);
+			cin >> password;
             cur_account = find_Accounts(accountList, username, password);
 			if (cur_account) {
 				cout << "LOGIN SUCCESSFULLY" <<'\n';
 				status = cur_account->role;
-				break;
+				switch (status)
+				{
+				case 0: {
+					Students_functions(cur_account, yearlist, studentlist);
+					break;
+				}
+				case 1: {
+					Staffs_functions(cur_account, yearlist, studentlist);
+					break;
+				}
+				default: {
+					break;
+				}
+				}
+				system("cls");
+				cout << "LOGIN [Y/N]: ";
+				cin >> log_input;
 			}
 			else {
 				cout << "Either password or username is wrong" << '\n';
-				cout << "Press Y to re_login or N to stop: "; getline(cin, re_log);
+				cout << "Press Y to re_login or N to stop: "; 
+				cin >> re_log;
 				if (re_log == "Y" || re_log == "y") {
 					continue;
 				}
@@ -506,20 +525,6 @@ void Login(Accounts*& accountList, int& status, AcademicYears*& yearlist, Studen
 				}
 			}
 		}
-	}
-	switch (status)
-	{
-	case 0: {
-		Students_functions(cur_account, yearlist, studentlist);
-		break;
-	}
-	case 1: {
-		Staffs_functions(cur_account, yearlist, studentlist);
-		break;
-	}
-	default: {
-		break;
-	}
 	}
 }
 //

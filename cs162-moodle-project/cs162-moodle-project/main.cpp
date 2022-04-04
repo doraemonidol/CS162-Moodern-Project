@@ -11,7 +11,6 @@ int main() {
     Students* studentList = nullptr;
     Staffs* staffList = nullptr;
     Accounts* accountList = nullptr;
-
     initData(yearList, studentList, staffList, accountList);
     int status;
     Login(accountList, status, yearList, studentList);
