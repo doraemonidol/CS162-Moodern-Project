@@ -10,13 +10,14 @@
 [STAThreadAttribute] void main() {
     Application::EnableVisualStyles();
     Application::SetCompatibleTextRenderingDefault(false);
-    do {
-        AcademicYears* yearList = nullptr;
-        Students* studentList = nullptr;
-        Staffs* staffList = nullptr;
-        Accounts* accountList = nullptr;
+    AcademicYears* yearList = nullptr;
+    Students* studentList = nullptr;
+    Staffs* staffList = nullptr;
+    Accounts* accountList = nullptr;
 
-        initData(yearList, studentList, staffList, accountList);
+    initData(yearList, studentList, staffList, accountList);
+    
+    do {
         CS162MoodleProject::loginScreen form;
         CS162MoodleProject::functionScreen form1;
         form.getData(yearList, studentList, staffList, accountList);
@@ -26,10 +27,10 @@
             form1.setRole(form.Role);
             Application::Run(% form1);
         }
-        unloadData(yearList, studentList, staffList);
         if (form.Exit || form1.Exit1)
             break;
     } while (true);
+    unloadData(yearList, studentList, staffList);
     /* 
 
     int status;

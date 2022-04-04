@@ -9,6 +9,7 @@
 #include "staff.h"
 #include "student.h"
 #include "loginScreen.h"
+#include "inputClassCourse.h"
 
 namespace CS162MoodleProject {
 
@@ -30,7 +31,136 @@ namespace CS162MoodleProject {
                 Students* studentList2 = nullptr;
                 Staffs* staffList2 = nullptr;
                 Accounts* accountList2 = nullptr;
-        Accounts* curAccount;
+
+            private:
+                System::Windows::Forms::ListView ^ viewStudentUI;
+
+            private:
+                System::Windows::Forms::ColumnHeader ^ viewStudentNo;
+
+            private:
+                System::Windows::Forms::ColumnHeader ^ viewStudentID;
+
+            private:
+                System::Windows::Forms::ColumnHeader ^ viewStudentLName;
+
+            private:
+                System::Windows::Forms::ColumnHeader ^ viewStudentFName;
+
+            private:
+                System::Windows::Forms::ColumnHeader ^ viewStudentClassID;
+
+            private:
+                System::Windows::Forms::ListView ^ viewCoSBUI;
+
+            private:
+
+
+            private:
+
+
+            private:
+                System::Windows::Forms::ColumnHeader ^ viewCoSBNo;
+
+            private:
+                System::Windows::Forms::ColumnHeader ^ viewCoSBStudenID;
+
+            private:
+                System::Windows::Forms::ColumnHeader ^ viewCoSBStudentName;
+
+            private:
+                System::Windows::Forms::ColumnHeader ^ viewCoSBTotal;
+
+            private:
+                System::Windows::Forms::ColumnHeader ^ viewCoSBFinal;
+
+            private:
+                System::Windows::Forms::ColumnHeader ^ viewCoSBMid;
+
+            private:
+                System::Windows::Forms::ColumnHeader ^ viewCoSBOther;
+
+            private:
+                System::Windows::Forms::ColumnHeader ^ viewCOSBClass;
+
+            private:
+                System::Windows::Forms::ColumnHeader ^ viewStudentSocialID;
+
+            private:
+                System::Windows::Forms::ColumnHeader ^ viewStudentGender;
+
+            private:
+                System::Windows::Forms::ColumnHeader ^ viewStudentdob;
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            public: 
+
+            private:
+
+
+            public:
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+                Accounts* curAccount;
 	public:
 		functionScreen(void)
 		{
@@ -226,7 +356,9 @@ namespace CS162MoodleProject {
 		{
                     this->components = (gcnew System::ComponentModel::Container());
                     System::ComponentModel::ComponentResourceManager ^ resources = (gcnew System::ComponentModel::ComponentResourceManager(functionScreen::typeid));
-                    System::Windows::Forms::ListViewItem ^ listViewItem1 = (gcnew System::Windows::Forms::ListViewItem(L""));
+                    System::Windows::Forms::ListViewGroup ^ listViewGroup1 = (gcnew System::Windows::Forms::ListViewGroup(L"aaaa", System::Windows::Forms::HorizontalAlignment::Right));
+                    System::Windows::Forms::ListViewGroup ^ listViewGroup2 = (gcnew System::Windows::Forms::ListViewGroup(L"aaaa", System::Windows::Forms::HorizontalAlignment::Right));
+                    System::Windows::Forms::ListViewGroup ^ listViewGroup3 = (gcnew System::Windows::Forms::ListViewGroup(L"aaaa", System::Windows::Forms::HorizontalAlignment::Right));
                     this->greetText = (gcnew System::Windows::Forms::Label());
                     this->btMinimise = (gcnew System::Windows::Forms::Button());
                     this->btCloseApp = (gcnew System::Windows::Forms::Button());
@@ -268,6 +400,24 @@ namespace CS162MoodleProject {
                     this->enrolledCourseD2 = (gcnew System::Windows::Forms::ColumnHeader());
                     this->enrolledCourseRoom = (gcnew System::Windows::Forms::ColumnHeader());
                     this->enrolledCourseLecturer = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->viewStudentUI = (gcnew System::Windows::Forms::ListView());
+                    this->viewStudentNo = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->viewStudentID = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->viewStudentLName = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->viewStudentFName = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->viewStudentSocialID = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->viewStudentGender = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->viewStudentdob = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->viewStudentClassID = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->viewCoSBUI = (gcnew System::Windows::Forms::ListView());
+                    this->viewCoSBNo = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->viewCoSBStudenID = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->viewCoSBStudentName = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->viewCOSBClass = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->viewCoSBTotal = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->viewCoSBFinal = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->viewCoSBMid = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->viewCoSBOther = (gcnew System::Windows::Forms::ColumnHeader());
                     this->allRolePanel->SuspendLayout();
                     this->staffFunctionPanel->SuspendLayout();
                     this->studentFunctionPanel->SuspendLayout();
@@ -380,9 +530,9 @@ namespace CS162MoodleProject {
                     this->allRolePanel->Controls->Add(this->showProfile);
                     this->allRolePanel->FlowDirection = System::Windows::Forms::FlowDirection::BottomUp;
                     this->allRolePanel->ForeColor = System::Drawing::Color::Transparent;
-                    this->allRolePanel->Location = System::Drawing::Point(1180, 83);
+                    this->allRolePanel->Location = System::Drawing::Point(1179, 83);
                     this->allRolePanel->Name = L"allRolePanel";
-                    this->allRolePanel->Size = System::Drawing::Size(234, 169);
+                    this->allRolePanel->Size = System::Drawing::Size(230, 168);
                     this->allRolePanel->TabIndex = 27;
                     this->allRolePanel->Visible = false;
                     this->allRolePanel->MouseEnter += gcnew System::EventHandler(this, &functionScreen::allRolePanel_MouseEnter);
@@ -399,7 +549,7 @@ namespace CS162MoodleProject {
                     this->logoutBTN->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                         static_cast<System::Byte>(0)));
                     this->logoutBTN->ForeColor = System::Drawing::Color::Red;
-                    this->logoutBTN->Location = System::Drawing::Point(3, 121);
+                    this->logoutBTN->Location = System::Drawing::Point(3, 120);
                     this->logoutBTN->Name = L"logoutBTN";
                     this->logoutBTN->Size = System::Drawing::Size(226, 45);
                     this->logoutBTN->TabIndex = 4;
@@ -418,7 +568,7 @@ namespace CS162MoodleProject {
                     this->changePassword->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                         static_cast<System::Byte>(0)));
                     this->changePassword->ForeColor = System::Drawing::Color::DeepSkyBlue;
-                    this->changePassword->Location = System::Drawing::Point(3, 70);
+                    this->changePassword->Location = System::Drawing::Point(3, 69);
                     this->changePassword->Name = L"changePassword";
                     this->changePassword->Size = System::Drawing::Size(226, 45);
                     this->changePassword->TabIndex = 3;
@@ -436,7 +586,7 @@ namespace CS162MoodleProject {
                     this->showProfile->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                         static_cast<System::Byte>(0)));
                     this->showProfile->ForeColor = System::Drawing::Color::DeepSkyBlue;
-                    this->showProfile->Location = System::Drawing::Point(3, 19);
+                    this->showProfile->Location = System::Drawing::Point(3, 18);
                     this->showProfile->Name = L"showProfile";
                     this->showProfile->Size = System::Drawing::Size(226, 45);
                     this->showProfile->TabIndex = 2;
@@ -565,6 +715,7 @@ namespace CS162MoodleProject {
                     this->viewStudentList->Text = L"Students List";
                     this->viewStudentList->UseVisualStyleBackColor = true;
                     this->viewStudentList->Visible = false;
+                    this->viewStudentList->Click += gcnew System::EventHandler(this, &functionScreen::viewStudentList_Click);
                     //
                     // viewScoreboard
                     //
@@ -584,6 +735,7 @@ namespace CS162MoodleProject {
                     this->viewScoreboard->Text = L"Scoreboard";
                     this->viewScoreboard->UseVisualStyleBackColor = true;
                     this->viewScoreboard->Visible = false;
+                    this->viewScoreboard->Click += gcnew System::EventHandler(this, &functionScreen::viewScoreboard_Click);
                     //
                     // viewCourses
                     //
@@ -604,6 +756,7 @@ namespace CS162MoodleProject {
                     this->viewCourses->Text = L"Courses";
                     this->viewCourses->UseVisualStyleBackColor = true;
                     this->viewCourses->Visible = false;
+                    this->viewCourses->Click += gcnew System::EventHandler(this, &functionScreen::viewCourses_Click);
                     //
                     // viewClasses
                     //
@@ -824,34 +977,42 @@ namespace CS162MoodleProject {
                     //
                     // viewCourseUI
                     //
-                    this->viewCourseUI->Alignment = System::Windows::Forms::ListViewAlignment::SnapToGrid;
+                    this->viewCourseUI->Alignment = System::Windows::Forms::ListViewAlignment::Default;
+                    this->viewCourseUI->AllowColumnReorder = true;
                     this->viewCourseUI->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(5)),
                         static_cast<System::Int32>(static_cast<System::Byte>(5)));
-                    this->viewCourseUI->BorderStyle = System::Windows::Forms::BorderStyle::FixedSingle;
+                    this->viewCourseUI->BorderStyle = System::Windows::Forms::BorderStyle::None;
                     this->viewCourseUI->Columns->AddRange(gcnew cli::array<System::Windows::Forms::ColumnHeader ^>(9) { this->enrolledCourseNo,
                         this->enrolledCourseID, this->enrolledCourseName, this->enrolledCourseCre, this->enrolledCourseStudentNum, this->enrolledCourseD1,
                         this->enrolledCourseD2, this->enrolledCourseRoom, this->enrolledCourseLecturer });
                     this->viewCourseUI->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F));
                     this->viewCourseUI->ForeColor = System::Drawing::Color::White;
+                    listViewGroup1->Header = L"aaaa";
+                    listViewGroup1->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Right;
+                    listViewGroup1->Name = L"aaaaa";
+                    this->viewCourseUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup1 });
                     this->viewCourseUI->HideSelection = false;
-                    this->viewCourseUI->Items->AddRange(gcnew cli::array<System::Windows::Forms::ListViewItem ^>(1) { listViewItem1 });
                     this->viewCourseUI->Location = System::Drawing::Point(280, 107);
                     this->viewCourseUI->Name = L"viewCourseUI";
-                    this->viewCourseUI->Size = System::Drawing::Size(1129, 641);
+                    this->viewCourseUI->ShowGroups = false;
+                    this->viewCourseUI->Size = System::Drawing::Size(1129, 623);
                     this->viewCourseUI->TabIndex = 35;
                     this->viewCourseUI->UseCompatibleStateImageBehavior = false;
                     this->viewCourseUI->View = System::Windows::Forms::View::Details;
+                    this->viewCourseUI->Visible = false;
+                    this->viewCourseUI->SelectedIndexChanged += gcnew System::EventHandler(this, &functionScreen::viewCourseUI_SelectedIndexChanged);
+                    this->viewCourseUI->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &functionScreen::viewCourseUI_MouseMove);
                     //
                     // enrolledCourseNo
                     //
                     this->enrolledCourseNo->Text = L"No.";
-                    this->enrolledCourseNo->Width = 43;
+                    this->enrolledCourseNo->Width = 40;
                     //
                     // enrolledCourseID
                     //
                     this->enrolledCourseID->Text = L"Course ID";
                     this->enrolledCourseID->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-                    this->enrolledCourseID->Width = 144;
+                    this->enrolledCourseID->Width = 91;
                     //
                     // enrolledCourseName
                     //
@@ -863,7 +1024,7 @@ namespace CS162MoodleProject {
                     //
                     this->enrolledCourseCre->Text = L"Credits";
                     this->enrolledCourseCre->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-                    this->enrolledCourseCre->Width = 71;
+                    this->enrolledCourseCre->Width = 68;
                     //
                     // enrolledCourseStudentNum
                     //
@@ -875,25 +1036,170 @@ namespace CS162MoodleProject {
                     //
                     this->enrolledCourseD1->Text = L"Day 1";
                     this->enrolledCourseD1->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-                    this->enrolledCourseD1->Width = 103;
+                    this->enrolledCourseD1->Width = 135;
                     //
                     // enrolledCourseD2
                     //
                     this->enrolledCourseD2->Text = L"Day 2";
                     this->enrolledCourseD2->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-                    this->enrolledCourseD2->Width = 103;
+                    this->enrolledCourseD2->Width = 135;
                     //
                     // enrolledCourseRoom
                     //
                     this->enrolledCourseRoom->Text = L"Room";
                     this->enrolledCourseRoom->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-                    this->enrolledCourseRoom->Width = 65;
+                    this->enrolledCourseRoom->Width = 71;
                     //
                     // enrolledCourseLecturer
                     //
                     this->enrolledCourseLecturer->Text = L"Lecturer";
                     this->enrolledCourseLecturer->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
-                    this->enrolledCourseLecturer->Width = 229;
+                    this->enrolledCourseLecturer->Width = 220;
+                    //
+                    // viewStudentUI
+                    //
+                    this->viewStudentUI->Alignment = System::Windows::Forms::ListViewAlignment::Default;
+                    this->viewStudentUI->AllowColumnReorder = true;
+                    this->viewStudentUI->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(5)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(5)));
+                    this->viewStudentUI->BorderStyle = System::Windows::Forms::BorderStyle::None;
+                    this->viewStudentUI->Columns->AddRange(gcnew cli::array<System::Windows::Forms::ColumnHeader ^>(8) { this->viewStudentNo,
+                        this->viewStudentID, this->viewStudentLName, this->viewStudentFName, this->viewStudentSocialID, this->viewStudentGender, this->viewStudentdob,
+                        this->viewStudentClassID });
+                    this->viewStudentUI->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F));
+                    this->viewStudentUI->ForeColor = System::Drawing::Color::White;
+                    listViewGroup2->Header = L"aaaa";
+                    listViewGroup2->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Right;
+                    listViewGroup2->Name = L"aaaaa";
+                    this->viewStudentUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup2 });
+                    this->viewStudentUI->HideSelection = false;
+                    this->viewStudentUI->Location = System::Drawing::Point(280, 107);
+                    this->viewStudentUI->Name = L"viewStudentUI";
+                    this->viewStudentUI->ShowGroups = false;
+                    this->viewStudentUI->Size = System::Drawing::Size(1129, 623);
+                    this->viewStudentUI->TabIndex = 36;
+                    this->viewStudentUI->UseCompatibleStateImageBehavior = false;
+                    this->viewStudentUI->View = System::Windows::Forms::View::Details;
+                    this->viewStudentUI->Visible = false;
+                    //
+                    // viewStudentNo
+                    //
+                    this->viewStudentNo->Text = L"No.";
+                    this->viewStudentNo->Width = 40;
+                    //
+                    // viewStudentID
+                    //
+                    this->viewStudentID->Text = L"Student ID";
+                    this->viewStudentID->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+                    this->viewStudentID->Width = 149;
+                    //
+                    // viewStudentLName
+                    //
+                    this->viewStudentLName->Text = L"Last Name";
+                    this->viewStudentLName->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+                    this->viewStudentLName->Width = 260;
+                    //
+                    // viewStudentFName
+                    //
+                    this->viewStudentFName->Text = L"First Name";
+                    this->viewStudentFName->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+                    this->viewStudentFName->Width = 130;
+                    //
+                    // viewStudentSocialID
+                    //
+                    this->viewStudentSocialID->Text = L"Social ID";
+                    this->viewStudentSocialID->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+                    this->viewStudentSocialID->Width = 162;
+                    //
+                    // viewStudentGender
+                    //
+                    this->viewStudentGender->Text = L"Gender";
+                    this->viewStudentGender->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+                    this->viewStudentGender->Width = 100;
+                    //
+                    // viewStudentdob
+                    //
+                    this->viewStudentdob->Text = L"Date of Birth";
+                    this->viewStudentdob->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+                    this->viewStudentdob->Width = 165;
+                    //
+                    // viewStudentClassID
+                    //
+                    this->viewStudentClassID->Text = L"Class ID";
+                    this->viewStudentClassID->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+                    this->viewStudentClassID->Width = 123;
+                    //
+                    // viewCoSBUI
+                    //
+                    this->viewCoSBUI->Alignment = System::Windows::Forms::ListViewAlignment::Default;
+                    this->viewCoSBUI->AllowColumnReorder = true;
+                    this->viewCoSBUI->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(5)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(5)));
+                    this->viewCoSBUI->BorderStyle = System::Windows::Forms::BorderStyle::None;
+                    this->viewCoSBUI->Columns->AddRange(gcnew cli::array<System::Windows::Forms::ColumnHeader ^>(8) { this->viewCoSBNo, this->viewCoSBStudenID,
+                        this->viewCoSBStudentName, this->viewCOSBClass, this->viewCoSBTotal, this->viewCoSBFinal, this->viewCoSBMid, this->viewCoSBOther });
+                    this->viewCoSBUI->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F));
+                    this->viewCoSBUI->ForeColor = System::Drawing::Color::White;
+                    listViewGroup3->Header = L"aaaa";
+                    listViewGroup3->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Right;
+                    listViewGroup3->Name = L"aaaaa";
+                    this->viewCoSBUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup3 });
+                    this->viewCoSBUI->HideSelection = false;
+                    this->viewCoSBUI->Location = System::Drawing::Point(280, 107);
+                    this->viewCoSBUI->Name = L"viewCoSBUI";
+                    this->viewCoSBUI->ShowGroups = false;
+                    this->viewCoSBUI->Size = System::Drawing::Size(1129, 623);
+                    this->viewCoSBUI->TabIndex = 37;
+                    this->viewCoSBUI->UseCompatibleStateImageBehavior = false;
+                    this->viewCoSBUI->View = System::Windows::Forms::View::Details;
+                    this->viewCoSBUI->Visible = false;
+                    //
+                    // viewCoSBNo
+                    //
+                    this->viewCoSBNo->Text = L"No.";
+                    this->viewCoSBNo->Width = 40;
+                    //
+                    // viewCoSBStudenID
+                    //
+                    this->viewCoSBStudenID->Text = L"Student ID";
+                    this->viewCoSBStudenID->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+                    this->viewCoSBStudenID->Width = 149;
+                    //
+                    // viewCoSBStudentName
+                    //
+                    this->viewCoSBStudentName->Text = L"Student Name";
+                    this->viewCoSBStudentName->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+                    this->viewCoSBStudentName->Width = 290;
+                    //
+                    // viewCOSBClass
+                    //
+                    this->viewCOSBClass->Text = L"Class ID";
+                    this->viewCOSBClass->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+                    this->viewCOSBClass->Width = 129;
+                    //
+                    // viewCoSBTotal
+                    //
+                    this->viewCoSBTotal->Text = L"Total Mark";
+                    this->viewCoSBTotal->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+                    this->viewCoSBTotal->Width = 130;
+                    //
+                    // viewCoSBFinal
+                    //
+                    this->viewCoSBFinal->Text = L"Final Mark";
+                    this->viewCoSBFinal->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+                    this->viewCoSBFinal->Width = 130;
+                    //
+                    // viewCoSBMid
+                    //
+                    this->viewCoSBMid->Text = L"Midterm Mark";
+                    this->viewCoSBMid->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+                    this->viewCoSBMid->Width = 130;
+                    //
+                    // viewCoSBOther
+                    //
+                    this->viewCoSBOther->Text = L"Other Mark";
+                    this->viewCoSBOther->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
+                    this->viewCoSBOther->Width = 130;
                     //
                     // functionScreen
                     //
@@ -902,7 +1208,6 @@ namespace CS162MoodleProject {
                     this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(5)),
                         static_cast<System::Int32>(static_cast<System::Byte>(5)));
                     this->ClientSize = System::Drawing::Size(1436, 771);
-                    this->Controls->Add(this->viewCourseUI);
                     this->Controls->Add(this->greetText);
                     this->Controls->Add(this->allRolePanel);
                     this->Controls->Add(this->studentFunctionPanel);
@@ -913,13 +1218,16 @@ namespace CS162MoodleProject {
                     this->Controls->Add(this->btCloseApp);
                     this->Controls->Add(this->btMinimiseBG);
                     this->Controls->Add(this->btCloseBG);
+                    this->Controls->Add(this->viewCoSBUI);
+                    this->Controls->Add(this->viewStudentUI);
+                    this->Controls->Add(this->viewCourseUI);
                     this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16.2F));
-                    this->ForeColor = System::Drawing::Color::White;
+                    this->ForeColor = System::Drawing::Color::Black;
                     this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
                     this->Margin = System::Windows::Forms::Padding(6, 7, 6, 7);
                     this->Name = L"functionScreen";
                     this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
-                    this->Text = L"MyForm1";
+                    this->Text = L"Moodle";
                     this->Load += gcnew System::EventHandler(this, &functionScreen::MyForm1_Load);
                     this->MouseEnter += gcnew System::EventHandler(this, &functionScreen::MyForm1_MouseEnter);
                     this->MouseMove += gcnew System::Windows::Forms::MouseEventHandler(this, &functionScreen::MyForm1_MouseMove);
@@ -941,22 +1249,7 @@ namespace CS162MoodleProject {
                 System::Void MyForm1_Load(System::Object ^ sender, System::EventArgs ^ e)
                 {
                     timeController->Start();
-                    ListViewItem^ lv1 = gcnew ListViewItem("Apple", 0);
-                    string st = "13";
-                    System::String ^ tmp = gcnew System::String(st.c_str());
-                    lv1->SubItems->Add(tmp);
-                    lv1->SubItems->Add(tmp);
-                    lv1->SubItems->Add(tmp);
-
-                    ListViewItem ^ lv2 = gcnew ListViewItem("Orange", 0);
-                    lv2->SubItems->Add("10");
-
-                    ListViewItem ^ lv3 = gcnew ListViewItem("Peach", 0);
-                    lv3->SubItems->Add("15");
-
-                    viewCourseUI->Items->Add(lv1);
-                    viewCourseUI->Items->Add(lv2);
-                    viewCourseUI->Items->Add(lv3);
+                    viewCourseUI->Hide();
                 }
 
             private:
@@ -1039,7 +1332,6 @@ namespace CS162MoodleProject {
                 System::Void MyForm1_MouseEnter(System::Object ^ sender, System::EventArgs ^ e)
                 {
                     if (allRolePanel->Visible) {
-                        cout << "3";
                         timer1->Start();
                         if (count >= 5) {
                             allRolePanel->Hide();
@@ -1149,6 +1441,233 @@ namespace CS162MoodleProject {
             private:
 
             private:
+                string getSession(string s) {
+                    if (s == "1")
+                        return "07:30-09:10";
+                    if (s == "2")
+                        return "09:30-11:30";
+                    if (s == "3")
+                        return "13:30-15:30";
+                    if (s == "4")
+                        return "15:30-17:10";
+                }
+            private:
+                System::Void viewCourses_Click(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    viewCourseUI->Items->Clear();
+                    if (viewCourseUI->Visible) {
+                        viewCourseUI->Hide();
+                    } else {
+                        viewCourseUI->Show();
+                        viewCourseUI->SendToBack();
+                        AcademicYears* curYear = yearList2;
+                        int i = 0;
+                        while (curYear) {
+                            Semesters* curSem = curYear->semesters;
+                            while (curSem) {
+                                Courses* curCourse = curSem->courses;
+                                while (curCourse) {
+                                    i++;
+                                    string st = to_string(i);
+                                    ListViewItem ^ lv = gcnew ListViewItem(convertString(st), 0);
+                                    lv->SubItems->Add(convertString(curCourse->courseID));
+                                    lv->SubItems->Add(convertString(curCourse->courseName));
+                                    lv->SubItems->Add(convertString(to_string(curCourse->credits)));
+                                    lv->SubItems->Add(convertString(to_string(curCourse->numStudents) + "/" + to_string(curCourse->maxStudents)));
+                                    lv->SubItems->Add(convertString(curCourse->day1 + " | " + getSession(curCourse->session1)));
+                                    lv->SubItems->Add(convertString(curCourse->day2 + " | " + getSession(curCourse->session2)));
+                                    lv->SubItems->Add(convertString(curCourse->room));
+                                    lv->SubItems->Add(convertString(curCourse->lecturerName));
+                                    viewCourseUI->Items->Add(lv);
+                                    curCourse = curCourse->next;
+                                }
+                                curSem = curSem->next;
+                            }
+                            curYear = curYear->next;
+                        }
+                    }
+                }
 
+            private:
+                System::Void viewCourseUI_SelectedIndexChanged(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                }
+
+            private:
+                System::Void viewCourseUI_MouseMove(System::Object ^ sender, System::Windows::Forms::MouseEventArgs ^ e)
+                {
+                    if (allRolePanel->Visible) {
+                        timer1->Start();
+                        if (count >= 5) {
+                            allRolePanel->Hide();
+                            count = 0;
+                        }
+                    }
+                }
+
+            private:
+                System::Void viewStudentList_Click(System::Object ^ sender, System::EventArgs ^ e) {
+                    if (viewStudentUI->Visible) {
+                        viewStudentUI->Hide();
+                    } else {
+                        inputClassCourse ^ icc = gcnew inputClassCourse;
+                        icc->ShowDialog();
+                        String ^ Class, ^Course;
+                        icc->GetData(Class, Course);
+
+                        viewStudentUI->Items->Clear();
+
+                        viewStudentUI->Show();
+                        viewStudentUI->SendToBack();
+                        if (Class != L"") {
+                            Students* student = studentList2;
+                            int i = 0;
+                            while (student) {
+                                cout << student->classID << " " << convertToString(Class)
+                                     << "\n";
+                                if (student->classID == convertToString(Class)) {
+                                    i++;
+                                    string st = to_string(i);
+                                    ListViewItem ^ lv = gcnew ListViewItem(convertString(st), 0);
+                                    lv->SubItems->Add(convertString(student->studentID));
+                                    lv->SubItems->Add(convertString(student->account->lastname));
+                                    lv->SubItems->Add(convertString(student->account->firstname));
+                                    lv->SubItems->Add(convertString(student->account->socialID));
+                                    if (toupper(student->account->gender) == 'F')
+                                        lv->SubItems->Add(L"Female");
+                                    else {
+                                        if (toupper(student->account->gender) == 'M')
+                                            lv->SubItems->Add(L"Male");
+                                        else
+                                            lv->SubItems->Add(L"<N/A>");
+                                    }
+                                    lv->SubItems->Add(convertString(student->account->doB.day + "/" + student->account->doB.month + "/" + student->account->doB.year));
+                                    lv->SubItems->Add(convertString(student->classID));
+                                    viewStudentUI->Items->Add(lv);
+                                }
+                                student = student->next;
+                            }
+                        } else {
+                            AcademicYears* curYear = yearList2;
+                            int i = 0;
+                            while (curYear) {
+                                Semesters* curSemester = curYear->semesters;
+                                while (curSemester) {
+                                    Courses* curCourse = curSemester->courses;
+                                    while (curCourse) {
+                                        if (curCourse->courseID == convertToString(Course)) {
+                                            Students* student = curCourse->studentList;
+                                            while (student) {
+                                                i++;
+                                                string st = to_string(i);
+                                                ListViewItem ^ lv = gcnew ListViewItem(convertString(st), 0);
+                                                lv->SubItems->Add(convertString(student->studentID));
+                                                lv->SubItems->Add(convertString(student->account->lastname));
+                                                lv->SubItems->Add(convertString(student->account->firstname));
+                                                lv->SubItems->Add(convertString(student->account->socialID));
+                                                if (toupper(student->account->gender) == 'F')
+                                                    lv->SubItems->Add(L"Female");
+                                                else {
+                                                    if (toupper(student->account->gender) == 'M')
+                                                        lv->SubItems->Add(L"Male");
+                                                    else
+                                                        lv->SubItems->Add(L"<N/A>");
+                                                }
+                                                lv->SubItems->Add(convertString(student->account->doB.day + "/" + student->account->doB.month + "/" + student->account->doB.year));
+                                                lv->SubItems->Add(convertString(student->classID));
+                                                viewStudentUI->Items->Add(lv);
+                                                student = student->next;
+                                            }
+                                            return;
+                                        }
+                                        curCourse = curCourse->next;
+                                    }
+                                    curSemester = curSemester->next;
+                                }
+                                curYear = curYear->next;
+                            }
+                        }
+                    }
+                }
+
+            private:
+                System::Void viewScoreboard_Click(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    if (viewCoSBUI->Visible) {
+                        viewCoSBUI->Hide();
+                    } else {
+                        inputClassCourse ^ icc = gcnew inputClassCourse;
+                        icc->ShowDialog();
+                        String ^ Class, ^Course;
+                        icc->GetData(Class, Course);
+
+                        viewCoSBUI->Items->Clear();
+
+                        viewCoSBUI->Show();
+                        viewCoSBUI->SendToBack();
+                        if (Class != L"") {
+                            Students* student = studentList2;
+                            int i = 0;
+                            while (student) {
+                                cout << student->classID << " " << convertToString(Class)
+                                     << "\n";
+                                if (student->classID == convertToString(Class)) {
+                                    i++;
+                                    string st = to_string(i);
+                                    ListViewItem ^ lv = gcnew ListViewItem(convertString(st), 0);
+                                    lv->SubItems->Add(convertString(student->studentID));
+                                    lv->SubItems->Add(convertString(student->account->lastname));
+                                    lv->SubItems->Add(convertString(student->account->firstname));
+                                    lv->SubItems->Add(convertString(student->classID));
+                                    viewCoSBUI->Items->Add(lv);
+                                }
+                                student = student->next;
+                            }
+                        } else {
+                            AcademicYears* curYear = yearList2;
+                            int i = 0;
+                            while (curYear) {
+                                Semesters* curSemester = curYear->semesters;
+                                while (curSemester) {
+                                    Courses* curCourse = curSemester->courses;
+                                    while (curCourse) {
+                                        if (curCourse->courseID == convertToString(Course)) {
+                                            Students* student = curCourse->studentList;
+                                            while (student) {
+                                                i++;
+                                                string st = to_string(i);
+                                                ListViewItem ^ lv = gcnew ListViewItem(convertString(st), 0);
+                                                lv->SubItems->Add(convertString(student->studentID));
+                                                lv->SubItems->Add(convertString(student->account->lastname + " " + student->account->firstname));
+                                                lv->SubItems->Add(convertString(student->classID));
+                                                Scoreboards* SBstudent = student->scoreBoards;
+                                                while (SBstudent && SBstudent->courseID != convertToString(Course)) {
+                                                    SBstudent = SBstudent->next;
+                                                }
+                                                if (SBstudent) {
+                                                    lv->SubItems->Add(convertString(to_string(SBstudent->totalScore)));
+                                                    lv->SubItems->Add(convertString(to_string(SBstudent->finalScore)));
+                                                    lv->SubItems->Add(convertString(to_string(SBstudent->midtermScore)));
+                                                    lv->SubItems->Add(convertString(to_string(SBstudent->otherScore)));
+                                                } else {
+                                                    lv->SubItems->Add(L"<N/A>");
+                                                    lv->SubItems->Add(L"<N/A>");
+                                                    lv->SubItems->Add(L"<N/A>");
+                                                    lv->SubItems->Add(L"<N/A>");                                              
+                                                }
+                                                viewCoSBUI->Items->Add(lv);
+                                                student = student->next;
+                                            }
+                                            return;
+                                        }
+                                        curCourse = curCourse->next;
+                                    }
+                                    curSemester = curSemester->next;
+                                }
+                                curYear = curYear->next;
+                            }
+                        }
+                    }
+                }
             };
             }

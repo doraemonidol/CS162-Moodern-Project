@@ -31,7 +31,7 @@ void inpScoreboards(Scoreboards*& scoreBoard){
             cur->next = new Scoreboards;
             cur = cur->next;
         }
-        cin >> cur->courseName >> cur->courseID >> cur->midtermScore >> cur->finalScore >> cur->labScore >> cur->bonusScore;
+        cin >> cur->courseName >> cur->courseID >> cur->midtermScore >> cur->finalScore >> cur->totalScore >> cur->otherScore;
     }
 }
 

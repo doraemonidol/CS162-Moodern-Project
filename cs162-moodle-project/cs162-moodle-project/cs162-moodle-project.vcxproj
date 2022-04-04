@@ -23,6 +23,7 @@
     <ClCompile Include="finalization.cpp" />
     <ClCompile Include="functionScreen.cpp" />
     <ClCompile Include="initialization.cpp" />
+    <ClCompile Include="inputClassCourse.cpp" />
     <ClCompile Include="loginScreen.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="staff.cpp" />
@@ -35,6 +36,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="initialization.h" />
+    <ClInclude Include="inputClassCourse.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="loginScreen.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -52,6 +56,9 @@
   <ItemGroup>
     <EmbeddedResource Include="functionScreen.resx">
       <DependentUpon>functionScreen.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inputClassCourse.resx">
+      <DependentUpon>inputClassCourse.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="loginScreen.resx">
       <DependentUpon>loginScreen.h</DependentUpon>

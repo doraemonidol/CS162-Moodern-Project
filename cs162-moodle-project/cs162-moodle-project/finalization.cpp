@@ -33,8 +33,8 @@ void outScoreboards(Scoreboards*& scoreBoard){
              << scoreBoard->courseID << " " 
              << scoreBoard->midtermScore << " " 
              << scoreBoard->finalScore << " " 
-             << scoreBoard->labScore << " " 
-             << scoreBoard->bonusScore << "\n";
+             << scoreBoard->totalScore << " " 
+             << scoreBoard->otherScore << "\n";
         Scoreboards* del = scoreBoard;
         scoreBoard = scoreBoard->next;
 		delete del;

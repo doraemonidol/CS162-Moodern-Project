@@ -47,7 +47,7 @@ struct Accounts {
     int role = 0; //1 (true): staff / 0 (false): student
     string socialID = "";
     string lastname = "", firstname = "";
-    char gender; //Female Male, Prefer not to say -> F,M,O
+    char gender; //female male, prefer not to say -> f,m,o
     Date doB;
     Accounts* next = nullptr;
 };
@@ -55,7 +55,7 @@ struct Accounts {
 struct Scoreboards {
     string courseName = ""; //the course that this list belongs to
     string courseID = "";
-    double midtermScore = 0, finalScore = 0, labScore = 0, bonusScore = 0;
+    double midtermScore = 0, finalScore = 0, totalScore = 0, otherScore = 0;
     Scoreboards* next = nullptr;
 };
 

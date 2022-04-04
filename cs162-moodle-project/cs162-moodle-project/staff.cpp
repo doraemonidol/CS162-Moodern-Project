@@ -157,13 +157,13 @@ bool UpdateStudentScoreboard(Students* allStudentList, string studentID, string 
     scoreboard->midtermScore = sc;
     cout << "Lab Score update to: ";
     cin >> sc;
-    scoreboard->labScore = sc;
+    scoreboard->totalScore = sc;
     cout << "Final Score update to: ";
     cin >> sc;
     scoreboard->finalScore = sc;
     cout << "Bonus Score update to: ";
     cin >> sc;
-    scoreboard->bonusScore = sc;
+    scoreboard->otherScore = sc;
     return true;
 }
 
@@ -198,13 +198,13 @@ void CSVToScoreboard(Courses* course) {
         if (!scoreboard) {
             scoreboard = AddScoreBoard(course->findStudentByID(studentID), courseID);
         }
-        f >> scoreboard->labScore;
+        f >> scoreboard->totalScore;
         f.get();
         f >> scoreboard->midtermScore;
         f.get();
         f >> scoreboard->finalScore;
         f.get();
-        f >> scoreboard->bonusScore;
+        f >> scoreboard->otherScore;
         f.get();
     }
     f.close();
