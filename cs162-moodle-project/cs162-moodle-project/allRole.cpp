@@ -81,6 +81,7 @@ void viewCourses(Courses* Course){
         cout << "Room: " << Course->room << '\n';
         cout << "Schedule: " << Course->day1 << " (" << Course->session1 << ") and " << Course->day2 << " (" << Course->session2 << ")\n";
 		Course = Course->next;
+		cout << "---------------\n";
 	}
 }
 void viewScoreboards (Scoreboards* scoreb){
@@ -92,6 +93,7 @@ void viewScoreboards (Scoreboards* scoreb){
 		cout << "Lab score: " << scoreb->labScore << endl;
 		cout << "Bonus score: " << scoreb->bonusScore << endl;
         scoreb = scoreb->next;
+		cout << "---------------\n";
     }
 }
 void viewClassScoreboards(Classes* classes) {
@@ -228,6 +230,8 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist, Stud
 		cout << "9. To get info of the scoreboard from CSV files." << '\n';
 		cout << "10. To view scoreboard." << '\n';
 		cout << "11. To update scoreboard info." << '\n';
+		cout << "12. To view list of classes." << '\n';
+		cout << "13. To view list of courses." << '\n';
 		cin >> cur_key;
 		switch (cur_key)
 		{
@@ -402,18 +406,32 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist, Stud
 			break;
 		}
 		case 11: {
-				system("cls");
-				string check_student; string check_course;
-				cin.get();
-				cout << "Please enter the ID of the student: "; getline(cin, check_student);
-				cout << "Please enter the course of the student: "; getline(cin, check_course);
-				if (!UpdateStudentScoreboard(studentList, check_student, check_course, yearlist->semesters->courses)) {
-					cout << "Course or student not found!\n";
-				}
-				cout << "\nPress any key to return to menu...";
-				_getch();
-				break;
+			system("cls");
+			string check_student; string check_course;
+			cin.get();
+			cout << "Please enter the ID of the student: "; getline(cin, check_student);
+			cout << "Please enter the course of the student: "; getline(cin, check_course);
+			if (!UpdateStudentScoreboard(studentList, check_student, check_course, yearlist->semesters->courses)) {
+				cout << "Course or student not found!\n";
 			}
+			cout << "\nPress any key to return to menu...";
+			_getch();
+			break;
+		}
+		case 12: {
+			system("cls");
+			viewClasses(yearlist->classes);
+			cout << "\nPress any key to return to menu...";
+			_getch();
+			break;
+		}
+		case 13: {
+			system("cls");
+			viewCourses(yearlist->semesters->courses);
+			cout << "\nPress any key to return to menu...";
+			_getch();
+			break;
+		}
 		}
 	}
 };
@@ -426,6 +444,8 @@ void Students_functions(Accounts*& current_account, AcademicYears*& yearlist, St
 		cout << "2. To change the password." << '\n';
 		cout << "3. To enroll in a course." << '\n';
 		cout << "4. To remove enrolled course." << '\n';
+		cout << "5. To view enrolled courses." << '\n';
+		cout << "6. To view scoreboards." << '\n';
 		cin >> cur_key;
 		switch (cur_key)
 		{
@@ -466,6 +486,20 @@ void Students_functions(Accounts*& current_account, AcademicYears*& yearlist, St
 				cout << "Course deleted successfully!\n";
 			}
 			else cout << "Course not found or out of registration session!\n";
+			cout << "\nPress any key to return to menu...";
+			_getch();
+			break;
+		}
+		case 5: {
+			system("cls");
+			viewCourses(studentlist->findStudentByAccount(current_account)->enrolledCourse);
+			cout << "\nPress any key to return to menu...";
+			_getch();
+			break;
+		}
+		case 6: {
+			system("cls");
+			viewScoreboards(studentlist->findStudentByAccount(current_account)->scoreBoards);
 			cout << "\nPress any key to return to menu...";
 			_getch();
 			break;

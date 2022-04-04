@@ -71,6 +71,15 @@ struct Students {
         return nullptr;
     }
 
+    Students* findStudentByAccount(Accounts* acc) {
+        Students* list = this;
+        while (list) {
+            if (list->account == acc) return list;
+            list = list->next;
+        }
+        return nullptr;
+    }
+
     Scoreboards* findScoreboardByID(string courseID) {
         Scoreboards* list = this->scoreBoards;
         while (list) {
