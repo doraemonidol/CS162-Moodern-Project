@@ -492,14 +492,14 @@ void Students_functions(Accounts*& current_account, AcademicYears*& yearlist, St
 		}
 		case 5: {
 			system("cls");
-			viewCourses(studentlist->findStudentByAccount(current_account)->enrolledCourse);
+			//viewCourses(studentlist->findStudentByAccount(current_account)->enrolledCourse);
 			cout << "\nPress any key to return to menu...";
 			_getch();
 			break;
 		}
 		case 6: {
 			system("cls");
-			viewScoreboards(studentlist->findStudentByAccount(current_account)->scoreBoards);
+			//viewScoreboards(studentlist->findStudentByAccount(current_account)->scoreBoards);
 			cout << "\nPress any key to return to menu...";
 			_getch();
 			break;
@@ -515,7 +515,18 @@ void Login(Accounts*& accountList, int& status, AcademicYears*& yearlist, Studen
 	cout << "LOGIN [Y/N]: "; getline(cin, log_input);
 	while (true) {
 		system("cls");
+		while (true) {
+			if (log_input != "Y" && log_input != "y" && log_input != "N" && log_input != "n") {
+				cout << "Wrong input. Please re-enter correct input" << '\n';
+				cout << "LOGIN [Y/N]: ";
+				getline(cin, log_input);
+			}
+			else {
+				break;
+			}
+		}
 		if (log_input == "N" || log_input == "n") {
+			cout << "Exist." << '\n';
 			break;
 		}
 		if (log_input == "Y" || log_input == "y") {
@@ -525,15 +536,16 @@ void Login(Accounts*& accountList, int& status, AcademicYears*& yearlist, Studen
 			cin >> password;
             cur_account = find_Accounts(accountList, username, password);
 			if (cur_account) {
-				cout << "LOGIN SUCCESSFULLY" <<'\n';
 				status = cur_account->role;
 				switch (status)
 				{
 				case 0: {
+					cout << "LOGIN SUCCESSFULLY" << '\n';
 					Students_functions(cur_account, yearlist, studentlist);
 					break;
 				}
 				case 1: {
+					cout << "LOGIN SUCCESSFULLY" << '\n';
 					Staffs_functions(cur_account, yearlist, studentlist);
 					break;
 				}
