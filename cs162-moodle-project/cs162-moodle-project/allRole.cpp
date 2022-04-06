@@ -96,22 +96,23 @@ void viewScoreboards (Scoreboards* scoreb){
 		cout << "---------------\n";
     }
 }
-void viewClassScoreboards(Classes* classes) {
+void viewClassScoreboards(Classes* classes, Students* studentList) {
 	if (!classes) return;
 	Students* student = classes->students;
 	while (student) {
 		double sum = 0, count = 0, allsum = 0, allcount = 0;
-		Scoreboards* scoreBoards = student->scoreBoards;
+		Scoreboards* scoreBoards = studentList->findStudentByID(student->studentID)->scoreBoards;
 		cout << student->account->firstname << ' ' << student->account->lastname << ": \n";
 		while (scoreBoards) {
 			//check if in the semester
-			if (student->enrolledCourse->findCourseByID(scoreBoards->courseID)) {
+			if (studentList->findStudentByID(student->studentID)->enrolledCourse->findCourseByID(scoreBoards->courseID)) {
 				cout << ">>>" << scoreBoards->courseName << ": " << scoreBoards->finalScore << '\n';
 				count++;
 				sum += scoreBoards->finalScore;
 			}
 			allcount++;
 			allsum += scoreBoards->finalScore;
+			scoreBoards = scoreBoards->next;
 		}
 		cout.precision(2);
 		if (count!=0) cout << "   Semester's GPA: " << (double)(sum / count) << '\n';
@@ -390,7 +391,7 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist, Stud
 					cin >> classID;
 					Classes* outClass = yearlist->classes->findByID(classID);
 					if (outClass) {
-						viewClassScoreboards(yearlist->classes);
+						viewClassScoreboards(yearlist->classes, studentList);
 					}
 					else cout << "Class not found!\n";
 					cout << "\nPress any key to return to continue...";
@@ -492,14 +493,14 @@ void Students_functions(Accounts*& current_account, AcademicYears*& yearlist, St
 		}
 		case 5: {
 			system("cls");
-			//viewCourses(studentlist->findStudentByAccount(current_account)->enrolledCourse);
+			viewCourses(studentlist->findStudentByAccount(current_account)->enrolledCourse);
 			cout << "\nPress any key to return to menu...";
 			_getch();
 			break;
 		}
 		case 6: {
 			system("cls");
-			//viewScoreboards(studentlist->findStudentByAccount(current_account)->scoreBoards);
+			viewScoreboards(studentlist->findStudentByAccount(current_account)->scoreBoards);
 			cout << "\nPress any key to return to menu...";
 			_getch();
 			break;
