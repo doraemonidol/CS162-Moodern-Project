@@ -233,6 +233,7 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist, Stud
 		cout << "11. To update scoreboard info." << '\n';
 		cout << "12. To view list of classes." << '\n';
 		cout << "13. To view list of courses." << '\n';
+		cout << "14. To import first year students from CSV files." << '\n';
 		cin >> cur_key;
 		switch (cur_key)
 		{
@@ -429,6 +430,13 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist, Stud
 		case 13: {
 			system("cls");
 			viewCourses(yearlist->semesters->courses);
+			cout << "\nPress any key to return to menu...";
+			_getch();
+			break;
+		}
+		case 14: {
+			system("cls");
+			CSVFirstYearStudent(studentList, yearlist->classes);
 			cout << "\nPress any key to return to menu...";
 			_getch();
 			break;

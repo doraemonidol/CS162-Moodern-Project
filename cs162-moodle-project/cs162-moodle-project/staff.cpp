@@ -280,3 +280,46 @@ void addSemester(Semesters* &smt){
         smt = cur_smt;
     }
 }
+
+void CSVFirstYearStudent(Students* studentList, Classes* classes) {
+    ifstream f;
+    f.open("./Database/FirstYearStudents.txt");
+    string trash;
+    getline(f, trash);
+    while (!f.eof()) {
+        string studentID = "", no = "", firstname = "", lastname = "", gender = "", socialID = "";
+        Date dob;
+        getline(f, no, ',');
+        f.get();
+        getline(f, studentID, ',');
+        f.get();
+        getline(f, firstname, ',');
+        f.get();
+        getline(f, lastname, ',');
+        f.get();
+        getline(f, gender, ',');
+        f.get();
+        f >> dob.day >> dob.month;
+        getline(f, dob.year, ',');
+        f.get();
+        f >> socialID;
+        if (!studentList->findStudentByID(studentID)) {
+            Students* student1 = new Students;
+            Students* student2 = new Students;
+            student1->account = new Accounts;
+            student2->account = new Accounts;
+            student1->studentID = student2->studentID = studentID;
+            student1->account->firstname = student2->account->firstname = firstname;
+            student1->account->lastname = student2->account->lastname = lastname;
+            student1->account->gender = student2->account->gender = gender[0];
+            student1->account->doB = student2->account->doB = dob;
+            student1->account->socialID = student2->account->socialID = socialID;
+            student1->next = studentList;
+            studentList = student1;
+            student2->next = classes->students;
+            classes->students = student2;
+        }
+    }
+    f.close();
+    cout << "First year students imported successfully!\n";
+}

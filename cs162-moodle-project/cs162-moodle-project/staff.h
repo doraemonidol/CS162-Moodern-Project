@@ -8,3 +8,4 @@ void courseToCSV(Courses* course);
 void CSVToScoreboard(Courses* course, Students* studenList);
 void addSchoolYear(AcademicYears*& year);
 void addSemester(Semesters*& smt);
+void CSVFirstYearStudent(Students* studentList, Classes* classes);
