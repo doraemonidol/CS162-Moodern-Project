@@ -50,7 +50,7 @@ struct Accounts {
 struct Scoreboards {
     string courseName = ""; //the course that this list belongs to
     string courseID = "";
-    double midtermScore = 0, finalScore = 0, labScore = 0, bonusScore = 0;
+    double midtermScore = 0, finalScore = 0, totalScore = 0, otherScore = 0;
     Scoreboards* next = nullptr;
 };
 

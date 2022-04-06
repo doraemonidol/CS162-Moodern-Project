@@ -113,10 +113,12 @@ void deleteCourseByID(Courses*& courseList) {
         }
     }
 }
-Scoreboards* AddScoreBoard(Students* student, string courseID) {
+pair<Scoreboards*, Scoreboards*> AddScoreBoard(Students* student, string courseID, Courses* courses) {
     Scoreboards* scoreboard = student->scoreBoards;
+    Scoreboards* scoreboard2 = courses->findCourseByID(courseID)->studentList->findStudentByID(student->studentID)->scoreBoards;
     while (scoreboard && scoreboard->next) {
         scoreboard = scoreboard->next;
+        scoreboard2 = scoreboard2->next;
     }
     string courseName = student->enrolledCourse->findCourseByID(courseID)->courseName;
     if (scoreboard) {
@@ -124,7 +126,12 @@ Scoreboards* AddScoreBoard(Students* student, string courseID) {
         scoreboard->next->next = nullptr;
         scoreboard->next->courseID = courseID;
         scoreboard->next->courseName = courseName;
-        return scoreboard->next;
+
+        scoreboard2->next = new Scoreboards;
+        scoreboard2->next->next = nullptr;
+        scoreboard2->next->courseID = courseID;
+        scoreboard2->next->courseName = courseName;
+        return { scoreboard->next, scoreboard2->next };
     }
     else {
         scoreboard = new Scoreboards;
@@ -132,7 +139,13 @@ Scoreboards* AddScoreBoard(Students* student, string courseID) {
         scoreboard->courseID = courseID;
         student->scoreBoards = scoreboard;
         scoreboard->courseName = courseName;
-        return scoreboard;
+
+        scoreboard2 = new Scoreboards;
+        scoreboard2->next = nullptr;
+        scoreboard2->courseID = courseID;
+        courses->findCourseByID(courseID)->studentList->findStudentByID(student->studentID)->scoreBoards = scoreboard;
+        scoreboard2->courseName = courseName;
+        return { scoreboard, scoreboard2 };
     }
 }
 
@@ -140,9 +153,13 @@ bool UpdateStudentScoreboard(Students* allStudentList, string studentID, string 
     Students* student = allStudentList->findStudentByID(studentID);
     if (!student) return false;
     Scoreboards* scoreboard = student->findScoreboardByID(courseID);
+    Scoreboards* scoreboard2 = coursesList->findCourseByID(courseID)->studentList->findStudentByID(studentID)->findScoreboardByID(courseID);
     if (!scoreboard) {
-        if (coursesList->findCourseByID(courseID))
-            scoreboard = AddScoreBoard(student, courseID);
+        if (coursesList->findCourseByID(courseID)) {
+            auto tmp = AddScoreBoard(student, courseID, coursesList);
+            scoreboard = tmp.first;
+            scoreboard2 = tmp.second;
+        }
         else return false;
     }
     cout << ">>>" << student->account->firstname << " " << student->account->lastname << "'s Scoreboard of " << coursesList->findCourseByID(courseID)->courseName << " Update Session<<<\n";
@@ -151,15 +168,19 @@ bool UpdateStudentScoreboard(Students* allStudentList, string studentID, string 
     cout << "Midterm Score update to: ";
     cin >> sc;
     scoreboard->midtermScore = sc;
-    cout << "Lab Score update to: ";
+    scoreboard2->midtermScore = sc;
+    cout << "Total Score update to: ";
     cin >> sc;
-    scoreboard->labScore = sc;
+    scoreboard->totalScore = sc;
+    scoreboard2->totalScore = sc;
     cout << "Final Score update to: ";
     cin >> sc;
     scoreboard->finalScore = sc;
-    cout << "Bonus Score update to: ";
+    scoreboard2->finalScore = sc;
+    cout << "Other Score update to: ";
     cin >> sc;
-    scoreboard->bonusScore = sc;
+    scoreboard->otherScore = sc;
+    scoreboard2->otherScore = sc;
     return true;
 }
 
@@ -176,7 +197,7 @@ void courseToCSV(Courses* course) {
     f.close();
 }
 
-void CSVToScoreboard(Courses* course) {
+void CSVToScoreboard(Courses* course, Students* studentList) {
     ifstream f;
     f.open("./Database/scoreboardCSV.txt");
     string trash="231", courseID;
@@ -192,16 +213,23 @@ void CSVToScoreboard(Courses* course) {
         getline(f, name, ',');
         f.get();
         Scoreboards* scoreboard = course->findStudentByID(studentID)->findScoreboardByID(courseID);
+        Scoreboards* scoreboard2 = studentList->findStudentByID(studentID)->findScoreboardByID(courseID);
         if (!scoreboard) {
-            scoreboard = AddScoreBoard(course->findStudentByID(studentID), courseID);
+            auto tmp = AddScoreBoard(studentList->findStudentByID(studentID), courseID, course);
+            scoreboard = tmp.first;
+            scoreboard2 = tmp.second;
         }
-        f >> scoreboard->labScore;
+        f >> scoreboard->totalScore;
+        scoreboard2->totalScore = scoreboard->totalScore;
         f.get();
         f >> scoreboard->midtermScore;
+        scoreboard2->midtermScore = scoreboard->midtermScore;
         f.get();
         f >> scoreboard->finalScore;
+        scoreboard2->finalScore = scoreboard->finalScore;
         f.get();
-        f >> scoreboard->bonusScore;
+        f >> scoreboard->otherScore;
+        scoreboard2->otherScore = scoreboard->otherScore;
         f.get();
     }
     f.close();

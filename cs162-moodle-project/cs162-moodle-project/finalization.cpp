@@ -29,12 +29,12 @@ void outScoreboards(Scoreboards*& scoreBoard){
     }
     cout << n << '\n';
     while (scoreBoard) {
-        cout << scoreBoard->courseName << " "
+        cout << scoreBoard->courseName << "\n"
              << scoreBoard->courseID << " " 
              << scoreBoard->midtermScore << " " 
              << scoreBoard->finalScore << " " 
-             << scoreBoard->labScore << " " 
-             << scoreBoard->bonusScore << "\n";
+             << scoreBoard->totalScore << " " 
+             << scoreBoard->otherScore << "\n";
         Scoreboards* del = scoreBoard;
         scoreBoard = scoreBoard->next;
 		delete del;

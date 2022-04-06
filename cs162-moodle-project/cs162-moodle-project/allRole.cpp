@@ -90,8 +90,8 @@ void viewScoreboards (Scoreboards* scoreb){
         cout << "Course ID: " << scoreb->courseID << endl;
         cout << "Midterm score: " << scoreb->midtermScore << endl;
 		cout << "Final score: " << scoreb->finalScore << endl;
-		cout << "Lab score: " << scoreb->labScore << endl;
-		cout << "Bonus score: " << scoreb->bonusScore << endl;
+		cout << "Total score: " << scoreb->totalScore << endl;
+		cout << "Other score: " << scoreb->otherScore << endl;
         scoreb = scoreb->next;
 		cout << "---------------\n";
     }
@@ -350,7 +350,7 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist, Stud
 			cin >> courseID;
 			Courses* outCourse = yearlist->semesters->courses->findCourseByID(courseID);
 			if (outCourse) {
-				CSVToScoreboard(outCourse);
+				CSVToScoreboard(outCourse, studentList);
 				cout << "Scoreboard imported successfully!\n";
 			}
 			else cout << "No course found!\n";

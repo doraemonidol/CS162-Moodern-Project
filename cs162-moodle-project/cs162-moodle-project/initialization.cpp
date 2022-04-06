@@ -31,7 +31,9 @@ void inpScoreboards(Scoreboards*& scoreBoard){
             cur->next = new Scoreboards;
             cur = cur->next;
         }
-        cin >> cur->courseName >> cur->courseID >> cur->midtermScore >> cur->finalScore >> cur->labScore >> cur->bonusScore;
+        cin.get();
+        getline(cin, cur->courseName);
+        cin >> cur->courseID >> cur->midtermScore >> cur->finalScore >> cur->totalScore >> cur->otherScore;
     }
 }
 
@@ -173,6 +175,7 @@ void inpStudents(Students*& studentList, Accounts*& accountList, Courses* course
 
         cin >> curStudent->classID;
         Classes* tmp = classList->findByID(curStudent->classID);
+        inpScoreboards(curStudent->scoreBoards);
         if (tmp) {
             Students* student = new Students;
             student->studentID = curStudent->studentID;
@@ -181,7 +184,6 @@ void inpStudents(Students*& studentList, Accounts*& accountList, Courses* course
             student->next = tmp->students;
             tmp->students = student;
         }
-        inpScoreboards(curStudent->scoreBoards);
         int nCourse;
         cin >> nCourse;
         while (nCourse--) {
