@@ -29,7 +29,7 @@ void outScoreboards(Scoreboards*& scoreBoard){
     }
     cout << n << '\n';
     while (scoreBoard) {
-        cout << scoreBoard->courseName << " "
+        cout << scoreBoard->courseName << "\n"
              << scoreBoard->courseID << " " 
              << scoreBoard->midtermScore << " " 
              << scoreBoard->finalScore << " " 

@@ -5,6 +5,14 @@
 #include "staff.h"
 #include "student.h"
 
+string formatDouble(double var) {
+    std::string str = std::to_string(var);
+    str.erase(str.find_last_not_of('0') + 1, std::string::npos);
+    if (str[str.length() - 1] == '.')
+        str += "0";
+    return str;
+}
+
 Classes* findClass(Students* student, Classes* classes) {
     while (classes) {
         Students* cur = classes->students;

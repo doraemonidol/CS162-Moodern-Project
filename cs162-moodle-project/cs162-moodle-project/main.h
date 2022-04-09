@@ -173,6 +173,10 @@ struct AcademicYears {
     Semesters* semesters = nullptr;
     Classes* classes = nullptr;
     AcademicYears* next = nullptr;
+    string getFullYear() {
+        string tmp = "20";
+        return tmp + year[0] + year[1] + " - " + tmp + year[2] + year[3];
+    }
 };
 
 struct FileInputManager {

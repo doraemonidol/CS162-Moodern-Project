@@ -1,4 +1,5 @@
 #pragma once
+string formatDouble(double var);
 void viewDate(Date d);
 void viewClasses(Classes* cl);//view all classes
 void viewAccounts(Accounts* acc);
