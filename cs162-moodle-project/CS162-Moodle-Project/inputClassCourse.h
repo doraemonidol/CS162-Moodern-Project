@@ -256,6 +256,8 @@ namespace CS162MoodleProject {
                     this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
                     this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
                     this->Name = L"inputClassCourse";
+                    this->ShowIcon = false;
+                    this->ShowInTaskbar = false;
                     this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
                     this->ResumeLayout(false);
                     this->PerformLayout();

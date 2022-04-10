@@ -226,7 +226,7 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist) {
 			break;
 		}
 		case 7: {
-			deleteCourseByID(yearlist->semesters->courses);
+			
 			break;
 		}
 		case 8: {

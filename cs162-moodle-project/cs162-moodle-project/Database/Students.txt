@@ -9,12 +9,8 @@ Dang Hoang Nhat
 M
 17 08 2003
 21CTT2
-1
-General Physics II
-PH212 2 3 1 4
-2
-PH212
-CS162
+0
+0
 21125126
 123456
 21125126
@@ -30,9 +26,8 @@ Calculus II
 MTH252 1.5 3 0.5 3
 Introduction to Laws
 BAA00004 2 3.5 1 3.5
-2
+1
 BAA00004
-MTH252
 21125100
 123
 21125100
@@ -43,11 +38,8 @@ Nguyen Minh
 M
 23 07 2003
 21CTT2
-1
-Introduction to Computer Science II
-CS162 2 4 1 3
-1
-CS162
+0
+0
 21127370
 123456
 21127370
@@ -88,11 +80,8 @@ Yang Tuan
 0
 7 08 2003
 21CTT1
-1
-Communication Management
-CM101 1 2 1.5 4
-1
-CM101
+0
+0
 21125118
 123456
 21125118
@@ -120,8 +109,7 @@ Dinh Quang
 1
 Kinh Te Chinh Tri 
 BAA00102 1 1.5 1 4
-1
-CS162
+0
 21125158
 123456
 21125158
@@ -135,8 +123,7 @@ Le Truong
 1
 Calculus II
 MTH252 1 2 1 3
-1
-CS162
+0
 21125044
 123456
 21125044
@@ -147,9 +134,5 @@ Nguyen Minh
 2
 9 04 2003
 21CTT2
-1
-General Physics II
-PH212 2 3 1 4
-2
-PH212
-CS162
+0
+0

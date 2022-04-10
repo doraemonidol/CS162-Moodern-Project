@@ -1,4 +1,4 @@
-7
+3
 BAA00004
 Introduction to Laws
 3
@@ -23,7 +23,7 @@ WED WED
 1 2
 MTH251
 Calculus I
-4
+3
 50
 0
 Nguyen Le Hoang Anh
@@ -32,47 +32,3 @@ C.22
 10 5 2022
 THU FRI
 1 4
-MTH252
-Calculus II
-4
-50
-0
-Nguyen Thi Thu Van
-I.41
-10 3 2022
-10 5 2022
-FRI FRI
-3 2
-CS162
-Introduction to Computer Science II
-4
-50
-0
-Dinh Ba Tien
-I.41
-10 3 2022
-10 5 2022
-MON SAT
-1 3
-PH212
-General Physics II
-4
-50
-1
-Nguyen Huu Nha
-I.42
-10 3 2022
-10 5 2022
-WED THU
-4 4
-CM101
-Communication Management
-4
-50
-0
-Duong Nguyen Vu
-I.41
-10 3 2022
-10 5 2022
-SAT SAT
-3 4

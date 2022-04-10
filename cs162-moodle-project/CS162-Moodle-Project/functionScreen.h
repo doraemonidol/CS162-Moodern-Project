@@ -20,6 +20,7 @@ namespace CS162MoodleProject {
 	using namespace System::Data;
 	using namespace System::Drawing;
     using namespace std;
+using namespace System::Collections::Generic;
 
 	/// <summary>
 	/// Summary for MyForm1
@@ -31,6 +32,7 @@ namespace CS162MoodleProject {
                 Students* studentList2 = nullptr;
                 Staffs* staffList2 = nullptr;
                 Accounts* accountList2 = nullptr;
+                Courses* curCourseUpdate = nullptr;
 
             private:
                 System::Windows::Forms::ListView ^ viewStudentUI;
@@ -135,7 +137,19 @@ namespace CS162MoodleProject {
                 System::Windows::Forms::ColumnHeader ^ viewClassUIClID;
 
             private:
+                System::Windows::Forms::Panel ^ courseUpdateUI;
 
+            private:
+
+
+            private:
+                System::Windows::Forms::Panel ^ updateCoursePanel;
+
+            private:
+                System::Windows::Forms::ComboBox ^ updateCourseD2;
+
+            private:
+                System::Windows::Forms::ComboBox ^ updateCourseS2;
 
             private:
 
@@ -144,7 +158,10 @@ namespace CS162MoodleProject {
 
 
             private:
+                System::Windows::Forms::ComboBox ^ updateCourseD1;
 
+            private:
+                System::Windows::Forms::ComboBox ^ updateCourseS1;
 
             private:
 
@@ -153,52 +170,79 @@ namespace CS162MoodleProject {
 
 
             private:
+                System::Windows::Forms::Label ^ labelWorkspaceName;
 
+            private:
+                System::Windows::Forms::TextBox ^ updateCourseName;
+
+            private:
+                System::Windows::Forms::Button ^ btnSave;
+
+            private:
+                System::Windows::Forms::Button ^ btRevertChanges;
+
+            private:
+                System::Windows::Forms::Label ^ label1;
+
+            private:
+                System::Windows::Forms::TextBox ^ updateCourseCre;
+
+            private:
+                System::Windows::Forms::Label ^ label2;
+
+            private:
+                System::Windows::Forms::Label ^ label10;
+
+            private:
+                System::Windows::Forms::TextBox ^ updateCourseMaxSt;
+
+            private:
+                System::Windows::Forms::Label ^ label3;
+
+            private:
+                System::Windows::Forms::TextBox ^ updateCourseLecturer;
+
+            private:
+                System::Windows::Forms::Label ^ label4;
+
+            private:
+                System::Windows::Forms::TextBox ^ updateCourseRoom;
+
+            private:
+                System::Windows::Forms::Label ^ label5;
+
+            private:
+                System::Windows::Forms::Label ^ label6;
+
+            private:
+                System::Windows::Forms::DateTimePicker ^ updateCourseRegisStart;
+
+            private:
+                System::Windows::Forms::Label ^ label7;
+
+            private:
+                System::Windows::Forms::Label ^ label8;
+
+            private:
+                System::Windows::Forms::Label ^ label9;
+
+            private:
+                System::Windows::Forms::DateTimePicker ^ updateCourseRegisEnd;
+
+            private:
+                System::Windows::Forms::Label ^ labelCourseList;
 
             private:
 
 
             private:
-
-
-            private:
-
+                System::Windows::Forms::Button ^ btDelCourse;
 
             private:
-
-
-            private:
-
-
-            public: 
+                System::Windows::Forms::ListBox ^ listCourses;
 
             private:
-
-
-            public:
-            private:
-
-
-            private:
-
-
-            private:
-
-
-            private:
-
-
-            private:
-
-
-            private:
-
-
-            private:
-
-
-            private:
-
+                System::Windows::Forms::Panel ^ panel1;
 
             private:
 
@@ -295,7 +339,10 @@ namespace CS162MoodleProject {
                 System::Windows::Forms::Timer ^ timeController;
 
             private:
-                System::Windows::Forms::Button ^ button1;
+                System::Windows::Forms::Button ^ updateCoursebtn;
+
+            private:
+
 
             private:
                 System::Windows::Forms::Button ^ button4;
@@ -388,7 +435,15 @@ namespace CS162MoodleProject {
 		/// Required designer variable.
 		/// </summary>
 
+        private:
+            int selectedIndex = -1;
 
+        private:
+            int selectedItemIndex = -1;
+
+        private:
+            List<String^>^ coursesToUpdate;
+            
 #pragma region Windows Form Designer generated code
 		/// <summary>
 		/// Required method for Designer support - do not modify
@@ -422,7 +477,7 @@ namespace CS162MoodleProject {
                     this->viewScoreboard = (gcnew System::Windows::Forms::Button());
                     this->viewCourses = (gcnew System::Windows::Forms::Button());
                     this->viewClasses = (gcnew System::Windows::Forms::Button());
-                    this->button1 = (gcnew System::Windows::Forms::Button());
+                    this->updateCoursebtn = (gcnew System::Windows::Forms::Button());
                     this->button4 = (gcnew System::Windows::Forms::Button());
                     this->button5 = (gcnew System::Windows::Forms::Button());
                     this->button6 = (gcnew System::Windows::Forms::Button());
@@ -474,9 +529,42 @@ namespace CS162MoodleProject {
                     this->viewClassUINo = (gcnew System::Windows::Forms::ColumnHeader());
                     this->viewClassUIYear = (gcnew System::Windows::Forms::ColumnHeader());
                     this->viewClassUIClID = (gcnew System::Windows::Forms::ColumnHeader());
+                    this->courseUpdateUI = (gcnew System::Windows::Forms::Panel());
+                    this->panel1 = (gcnew System::Windows::Forms::Panel());
+                    this->listCourses = (gcnew System::Windows::Forms::ListBox());
+                    this->btDelCourse = (gcnew System::Windows::Forms::Button());
+                    this->labelCourseList = (gcnew System::Windows::Forms::Label());
+                    this->updateCoursePanel = (gcnew System::Windows::Forms::Panel());
+                    this->updateCourseD2 = (gcnew System::Windows::Forms::ComboBox());
+                    this->updateCourseS2 = (gcnew System::Windows::Forms::ComboBox());
+                    this->updateCourseD1 = (gcnew System::Windows::Forms::ComboBox());
+                    this->updateCourseS1 = (gcnew System::Windows::Forms::ComboBox());
+                    this->labelWorkspaceName = (gcnew System::Windows::Forms::Label());
+                    this->updateCourseName = (gcnew System::Windows::Forms::TextBox());
+                    this->btnSave = (gcnew System::Windows::Forms::Button());
+                    this->btRevertChanges = (gcnew System::Windows::Forms::Button());
+                    this->label1 = (gcnew System::Windows::Forms::Label());
+                    this->updateCourseCre = (gcnew System::Windows::Forms::TextBox());
+                    this->label2 = (gcnew System::Windows::Forms::Label());
+                    this->label10 = (gcnew System::Windows::Forms::Label());
+                    this->updateCourseMaxSt = (gcnew System::Windows::Forms::TextBox());
+                    this->label3 = (gcnew System::Windows::Forms::Label());
+                    this->updateCourseLecturer = (gcnew System::Windows::Forms::TextBox());
+                    this->label4 = (gcnew System::Windows::Forms::Label());
+                    this->updateCourseRoom = (gcnew System::Windows::Forms::TextBox());
+                    this->label5 = (gcnew System::Windows::Forms::Label());
+                    this->label6 = (gcnew System::Windows::Forms::Label());
+                    this->updateCourseRegisStart = (gcnew System::Windows::Forms::DateTimePicker());
+                    this->label7 = (gcnew System::Windows::Forms::Label());
+                    this->label8 = (gcnew System::Windows::Forms::Label());
+                    this->label9 = (gcnew System::Windows::Forms::Label());
+                    this->updateCourseRegisEnd = (gcnew System::Windows::Forms::DateTimePicker());
                     this->allRolePanel->SuspendLayout();
                     this->staffFunctionPanel->SuspendLayout();
                     this->studentFunctionPanel->SuspendLayout();
+                    this->courseUpdateUI->SuspendLayout();
+                    this->panel1->SuspendLayout();
+                    this->updateCoursePanel->SuspendLayout();
                     this->SuspendLayout();
                     //
                     // greetText
@@ -665,7 +753,7 @@ namespace CS162MoodleProject {
                     this->staffFunctionPanel->Controls->Add(this->viewScoreboard);
                     this->staffFunctionPanel->Controls->Add(this->viewCourses);
                     this->staffFunctionPanel->Controls->Add(this->viewClasses);
-                    this->staffFunctionPanel->Controls->Add(this->button1);
+                    this->staffFunctionPanel->Controls->Add(this->updateCoursebtn);
                     this->staffFunctionPanel->Controls->Add(this->button4);
                     this->staffFunctionPanel->Controls->Add(this->button5);
                     this->staffFunctionPanel->Controls->Add(this->button6);
@@ -834,23 +922,24 @@ namespace CS162MoodleProject {
                     this->viewClasses->Visible = false;
                     this->viewClasses->Click += gcnew System::EventHandler(this, &functionScreen::viewClasses_Click);
                     //
-                    // button1
+                    // updateCoursebtn
                     //
-                    this->button1->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
-                    this->button1->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(20)),
+                    this->updateCoursebtn->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
+                    this->updateCoursebtn->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(20)),
                         static_cast<System::Int32>(static_cast<System::Byte>(20)), static_cast<System::Int32>(static_cast<System::Byte>(20)));
-                    this->button1->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)),
+                    this->updateCoursebtn->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)),
                         static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(30)));
-                    this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-                    this->button1->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+                    this->updateCoursebtn->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+                    this->updateCoursebtn->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                         static_cast<System::Byte>(0)));
-                    this->button1->ForeColor = System::Drawing::Color::White;
-                    this->button1->Location = System::Drawing::Point(3, 381);
-                    this->button1->Name = L"button1";
-                    this->button1->Size = System::Drawing::Size(226, 45);
-                    this->button1->TabIndex = 4;
-                    this->button1->Text = L"Update Course Info";
-                    this->button1->UseVisualStyleBackColor = true;
+                    this->updateCoursebtn->ForeColor = System::Drawing::Color::White;
+                    this->updateCoursebtn->Location = System::Drawing::Point(3, 381);
+                    this->updateCoursebtn->Name = L"updateCoursebtn";
+                    this->updateCoursebtn->Size = System::Drawing::Size(226, 45);
+                    this->updateCoursebtn->TabIndex = 4;
+                    this->updateCoursebtn->Text = L"Update Course Info";
+                    this->updateCoursebtn->UseVisualStyleBackColor = true;
+                    this->updateCoursebtn->Click += gcnew System::EventHandler(this, &functionScreen::updateCoursebtn_Click);
                     //
                     // button4
                     //
@@ -1370,6 +1459,429 @@ namespace CS162MoodleProject {
                     this->viewClassUIClID->TextAlign = System::Windows::Forms::HorizontalAlignment::Center;
                     this->viewClassUIClID->Width = 162;
                     //
+                    // courseUpdateUI
+                    //
+                    this->courseUpdateUI->Anchor = static_cast<System::Windows::Forms::AnchorStyles>(((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Left)
+                        | System::Windows::Forms::AnchorStyles::Right));
+                    this->courseUpdateUI->Controls->Add(this->panel1);
+                    this->courseUpdateUI->Controls->Add(this->updateCoursePanel);
+                    this->courseUpdateUI->Location = System::Drawing::Point(279, 83);
+                    this->courseUpdateUI->Name = L"courseUpdateUI";
+                    this->courseUpdateUI->Size = System::Drawing::Size(1129, 643);
+                    this->courseUpdateUI->TabIndex = 40;
+                    this->courseUpdateUI->Visible = false;
+                    //
+                    // panel1
+                    //
+                    this->panel1->Controls->Add(this->listCourses);
+                    this->panel1->Controls->Add(this->btDelCourse);
+                    this->panel1->Controls->Add(this->labelCourseList);
+                    this->panel1->Location = System::Drawing::Point(85, 3);
+                    this->panel1->Name = L"panel1";
+                    this->panel1->Size = System::Drawing::Size(355, 637);
+                    this->panel1->TabIndex = 41;
+                    //
+                    // listCourses
+                    //
+                    this->listCourses->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->listCourses->BorderStyle = System::Windows::Forms::BorderStyle::None;
+                    this->listCourses->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12));
+                    this->listCourses->ForeColor = System::Drawing::SystemColors::GradientActiveCaption;
+                    this->listCourses->ItemHeight = 28;
+                    this->listCourses->Location = System::Drawing::Point(51, 65);
+                    this->listCourses->Name = L"listCourses";
+                    this->listCourses->Size = System::Drawing::Size(255, 476);
+                    this->listCourses->TabIndex = 65;
+                    this->listCourses->SelectedIndexChanged += gcnew System::EventHandler(this, &functionScreen::listCourses_SelectedIndexChanged);
+                    //
+                    // btDelCourse
+                    //
+                    this->btDelCourse->FlatAppearance->BorderSize = 0;
+                    this->btDelCourse->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
+                    this->btDelCourse->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(0)));
+                    this->btDelCourse->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+                    this->btDelCourse->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+                        static_cast<System::Byte>(0)));
+                    this->btDelCourse->ForeColor = System::Drawing::Color::Red;
+                    this->btDelCourse->Location = System::Drawing::Point(51, 562);
+                    this->btDelCourse->Name = L"btDelCourse";
+                    this->btDelCourse->Size = System::Drawing::Size(247, 45);
+                    this->btDelCourse->TabIndex = 64;
+                    this->btDelCourse->Text = L"Delete Course";
+                    this->btDelCourse->UseVisualStyleBackColor = true;
+                    this->btDelCourse->Visible = false;
+                    this->btDelCourse->Click += gcnew System::EventHandler(this, &functionScreen::btDelCourse_Click);
+                    //
+                    // labelCourseList
+                    //
+                    this->labelCourseList->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Top | System::Windows::Forms::AnchorStyles::Right));
+                    this->labelCourseList->BackColor = System::Drawing::Color::Transparent;
+                    this->labelCourseList->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 20, System::Drawing::FontStyle::Bold));
+                    this->labelCourseList->ForeColor = System::Drawing::Color::White;
+                    this->labelCourseList->Location = System::Drawing::Point(84, 12);
+                    this->labelCourseList->Name = L"labelCourseList";
+                    this->labelCourseList->Size = System::Drawing::Size(189, 46);
+                    this->labelCourseList->TabIndex = 63;
+                    this->labelCourseList->Text = L"Course List";
+                    this->labelCourseList->TextAlign = System::Drawing::ContentAlignment::TopCenter;
+                    //
+                    // updateCoursePanel
+                    //
+                    this->updateCoursePanel->Controls->Add(this->updateCourseD2);
+                    this->updateCoursePanel->Controls->Add(this->updateCourseS2);
+                    this->updateCoursePanel->Controls->Add(this->updateCourseD1);
+                    this->updateCoursePanel->Controls->Add(this->updateCourseS1);
+                    this->updateCoursePanel->Controls->Add(this->labelWorkspaceName);
+                    this->updateCoursePanel->Controls->Add(this->updateCourseName);
+                    this->updateCoursePanel->Controls->Add(this->btnSave);
+                    this->updateCoursePanel->Controls->Add(this->btRevertChanges);
+                    this->updateCoursePanel->Controls->Add(this->label1);
+                    this->updateCoursePanel->Controls->Add(this->updateCourseCre);
+                    this->updateCoursePanel->Controls->Add(this->label2);
+                    this->updateCoursePanel->Controls->Add(this->label10);
+                    this->updateCoursePanel->Controls->Add(this->updateCourseMaxSt);
+                    this->updateCoursePanel->Controls->Add(this->label3);
+                    this->updateCoursePanel->Controls->Add(this->updateCourseLecturer);
+                    this->updateCoursePanel->Controls->Add(this->label4);
+                    this->updateCoursePanel->Controls->Add(this->updateCourseRoom);
+                    this->updateCoursePanel->Controls->Add(this->label5);
+                    this->updateCoursePanel->Controls->Add(this->label6);
+                    this->updateCoursePanel->Controls->Add(this->updateCourseRegisStart);
+                    this->updateCoursePanel->Controls->Add(this->label7);
+                    this->updateCoursePanel->Controls->Add(this->label8);
+                    this->updateCoursePanel->Controls->Add(this->label9);
+                    this->updateCoursePanel->Controls->Add(this->updateCourseRegisEnd);
+                    this->updateCoursePanel->Location = System::Drawing::Point(470, 21);
+                    this->updateCoursePanel->Name = L"updateCoursePanel";
+                    this->updateCoursePanel->Size = System::Drawing::Size(537, 599);
+                    this->updateCoursePanel->TabIndex = 66;
+                    this->updateCoursePanel->Visible = false;
+                    //
+                    // updateCourseD2
+                    //
+                    this->updateCourseD2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->updateCourseD2->Cursor = System::Windows::Forms::Cursors::Default;
+                    this->updateCourseD2->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+                    this->updateCourseD2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+                    this->updateCourseD2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
+                    this->updateCourseD2->ForeColor = System::Drawing::Color::White;
+                    this->updateCourseD2->FormattingEnabled = true;
+                    this->updateCourseD2->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+                    this->updateCourseD2->Items->AddRange(gcnew cli::array<System::Object ^>(6) { L"Mon", L"Tue", L"Wed", L"Thu", L"Fri", L"Sat" });
+                    this->updateCourseD2->Location = System::Drawing::Point(148, 468);
+                    this->updateCourseD2->Name = L"updateCourseD2";
+                    this->updateCourseD2->Size = System::Drawing::Size(137, 33);
+                    this->updateCourseD2->TabIndex = 66;
+                    this->updateCourseD2->SelectedIndexChanged += gcnew System::EventHandler(this, &functionScreen::updateCourseD2_SelectedIndexChanged);
+                    //
+                    // updateCourseS2
+                    //
+                    this->updateCourseS2->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->updateCourseS2->Cursor = System::Windows::Forms::Cursors::Default;
+                    this->updateCourseS2->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+                    this->updateCourseS2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+                    this->updateCourseS2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
+                    this->updateCourseS2->ForeColor = System::Drawing::Color::White;
+                    this->updateCourseS2->FormattingEnabled = true;
+                    this->updateCourseS2->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+                    this->updateCourseS2->Items->AddRange(gcnew cli::array<System::Object ^>(4) { L"07:30 - 09:10", L"09:30 - 11:30", L"13:30 - 15:30",
+                        L"15:30 - 17:10" });
+                    this->updateCourseS2->Location = System::Drawing::Point(315, 468);
+                    this->updateCourseS2->Name = L"updateCourseS2";
+                    this->updateCourseS2->Size = System::Drawing::Size(179, 33);
+                    this->updateCourseS2->TabIndex = 67;
+                    this->updateCourseS2->SelectedIndexChanged += gcnew System::EventHandler(this, &functionScreen::updateCourseS2_SelectedIndexChanged);
+                    //
+                    // updateCourseD1
+                    //
+                    this->updateCourseD1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->updateCourseD1->Cursor = System::Windows::Forms::Cursors::Default;
+                    this->updateCourseD1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+                    this->updateCourseD1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+                    this->updateCourseD1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
+                    this->updateCourseD1->ForeColor = System::Drawing::Color::White;
+                    this->updateCourseD1->FormattingEnabled = true;
+                    this->updateCourseD1->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+                    this->updateCourseD1->Items->AddRange(gcnew cli::array<System::Object ^>(6) { L"Mon", L"Tue", L"Wed", L"Thu", L"Fri", L"Sat" });
+                    this->updateCourseD1->Location = System::Drawing::Point(148, 425);
+                    this->updateCourseD1->Name = L"updateCourseD1";
+                    this->updateCourseD1->Size = System::Drawing::Size(137, 33);
+                    this->updateCourseD1->TabIndex = 62;
+                    this->updateCourseD1->SelectedIndexChanged += gcnew System::EventHandler(this, &functionScreen::updateCourseD1_SelectedIndexChanged);
+                    //
+                    // updateCourseS1
+                    //
+                    this->updateCourseS1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->updateCourseS1->Cursor = System::Windows::Forms::Cursors::Default;
+                    this->updateCourseS1->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+                    this->updateCourseS1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+                    this->updateCourseS1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
+                    this->updateCourseS1->ForeColor = System::Drawing::Color::White;
+                    this->updateCourseS1->FormattingEnabled = true;
+                    this->updateCourseS1->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+                    this->updateCourseS1->Items->AddRange(gcnew cli::array<System::Object ^>(4) { L"07:30 - 09:10", L"09:30 - 11:30", L"13:30 - 15:30",
+                        L"15:30 - 17:10" });
+                    this->updateCourseS1->Location = System::Drawing::Point(315, 425);
+                    this->updateCourseS1->Name = L"updateCourseS1";
+                    this->updateCourseS1->Size = System::Drawing::Size(179, 33);
+                    this->updateCourseS1->TabIndex = 63;
+                    this->updateCourseS1->SelectedIndexChanged += gcnew System::EventHandler(this, &functionScreen::updateCourseS1_SelectedIndexChanged);
+                    //
+                    // labelWorkspaceName
+                    //
+                    this->labelWorkspaceName->AutoSize = true;
+                    this->labelWorkspaceName->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+                    this->labelWorkspaceName->ForeColor = System::Drawing::Color::White;
+                    this->labelWorkspaceName->Location = System::Drawing::Point(3, 16);
+                    this->labelWorkspaceName->Name = L"labelWorkspaceName";
+                    this->labelWorkspaceName->Size = System::Drawing::Size(123, 25);
+                    this->labelWorkspaceName->TabIndex = 21;
+                    this->labelWorkspaceName->Text = L"Course name";
+                    //
+                    // updateCourseName
+                    //
+                    this->updateCourseName->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->updateCourseName->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
+                    this->updateCourseName->ForeColor = System::Drawing::SystemColors::Control;
+                    this->updateCourseName->Location = System::Drawing::Point(6, 53);
+                    this->updateCourseName->Margin = System::Windows::Forms::Padding(5);
+                    this->updateCourseName->Name = L"updateCourseName";
+                    this->updateCourseName->Size = System::Drawing::Size(525, 31);
+                    this->updateCourseName->TabIndex = 22;
+                    this->updateCourseName->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(this, &functionScreen::updateCourseName_KeyUp);
+                    //
+                    // btnSave
+                    //
+                    this->btnSave->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+                    this->btnSave->BackColor = System::Drawing::Color::DodgerBlue;
+                    this->btnSave->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+                    this->btnSave->FlatAppearance->BorderColor = System::Drawing::Color::White;
+                    this->btnSave->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
+                    this->btnSave->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
+                    this->btnSave->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+                    this->btnSave->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold));
+                    this->btnSave->ForeColor = System::Drawing::Color::White;
+                    this->btnSave->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
+                    this->btnSave->Location = System::Drawing::Point(399, 544);
+                    this->btnSave->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
+                    this->btnSave->Name = L"btnSave";
+                    this->btnSave->Size = System::Drawing::Size(112, 39);
+                    this->btnSave->TabIndex = 27;
+                    this->btnSave->Text = L"Save";
+                    this->btnSave->UseMnemonic = false;
+                    this->btnSave->UseVisualStyleBackColor = false;
+                    this->btnSave->Click += gcnew System::EventHandler(this, &functionScreen::btnSave_Click);
+                    //
+                    // btRevertChanges
+                    //
+                    this->btRevertChanges->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+                    this->btRevertChanges->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+                    this->btRevertChanges->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold));
+                    this->btRevertChanges->ForeColor = System::Drawing::SystemColors::ButtonFace;
+                    this->btRevertChanges->Location = System::Drawing::Point(241, 544);
+                    this->btRevertChanges->Name = L"btRevertChanges";
+                    this->btRevertChanges->Size = System::Drawing::Size(152, 39);
+                    this->btRevertChanges->TabIndex = 28;
+                    this->btRevertChanges->Text = L"Revert Changes";
+                    this->btRevertChanges->UseVisualStyleBackColor = true;
+                    this->btRevertChanges->Click += gcnew System::EventHandler(this, &functionScreen::btRevertChanges_Click);
+                    //
+                    // label1
+                    //
+                    this->label1->AutoSize = true;
+                    this->label1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+                    this->label1->ForeColor = System::Drawing::Color::White;
+                    this->label1->Location = System::Drawing::Point(3, 112);
+                    this->label1->Name = L"label1";
+                    this->label1->Size = System::Drawing::Size(164, 25);
+                    this->label1->TabIndex = 29;
+                    this->label1->Text = L"Number of credits";
+                    //
+                    // updateCourseCre
+                    //
+                    this->updateCourseCre->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->updateCourseCre->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
+                    this->updateCourseCre->ForeColor = System::Drawing::SystemColors::Control;
+                    this->updateCourseCre->Location = System::Drawing::Point(6, 149);
+                    this->updateCourseCre->Margin = System::Windows::Forms::Padding(5);
+                    this->updateCourseCre->Name = L"updateCourseCre";
+                    this->updateCourseCre->Size = System::Drawing::Size(144, 31);
+                    this->updateCourseCre->TabIndex = 30;
+                    this->updateCourseCre->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(this, &functionScreen::updateCourseCre_KeyUp);
+                    //
+                    // label2
+                    //
+                    this->label2->AutoSize = true;
+                    this->label2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+                    this->label2->ForeColor = System::Drawing::Color::White;
+                    this->label2->Location = System::Drawing::Point(213, 112);
+                    this->label2->Name = L"label2";
+                    this->label2->Size = System::Drawing::Size(172, 25);
+                    this->label2->TabIndex = 31;
+                    this->label2->Text = L"Maximum students";
+                    //
+                    // label10
+                    //
+                    this->label10->AutoSize = true;
+                    this->label10->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
+                    this->label10->ForeColor = System::Drawing::Color::White;
+                    this->label10->Location = System::Drawing::Point(44, 473);
+                    this->label10->Name = L"label10";
+                    this->label10->Size = System::Drawing::Size(80, 23);
+                    this->label10->TabIndex = 57;
+                    this->label10->Text = L"Session 2";
+                    //
+                    // updateCourseMaxSt
+                    //
+                    this->updateCourseMaxSt->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->updateCourseMaxSt->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
+                    this->updateCourseMaxSt->ForeColor = System::Drawing::SystemColors::Control;
+                    this->updateCourseMaxSt->Location = System::Drawing::Point(218, 149);
+                    this->updateCourseMaxSt->Margin = System::Windows::Forms::Padding(5);
+                    this->updateCourseMaxSt->Name = L"updateCourseMaxSt";
+                    this->updateCourseMaxSt->Size = System::Drawing::Size(159, 31);
+                    this->updateCourseMaxSt->TabIndex = 32;
+                    this->updateCourseMaxSt->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(this, &functionScreen::updateCourseMaxSt_KeyUp);
+                    //
+                    // label3
+                    //
+                    this->label3->AutoSize = true;
+                    this->label3->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+                    this->label3->ForeColor = System::Drawing::Color::White;
+                    this->label3->Location = System::Drawing::Point(1, 208);
+                    this->label3->Name = L"label3";
+                    this->label3->Size = System::Drawing::Size(133, 25);
+                    this->label3->TabIndex = 33;
+                    this->label3->Text = L"Lecturer name";
+                    //
+                    // updateCourseLecturer
+                    //
+                    this->updateCourseLecturer->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->updateCourseLecturer->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
+                    this->updateCourseLecturer->ForeColor = System::Drawing::SystemColors::Control;
+                    this->updateCourseLecturer->Location = System::Drawing::Point(6, 245);
+                    this->updateCourseLecturer->Margin = System::Windows::Forms::Padding(5);
+                    this->updateCourseLecturer->Name = L"updateCourseLecturer";
+                    this->updateCourseLecturer->Size = System::Drawing::Size(526, 31);
+                    this->updateCourseLecturer->TabIndex = 36;
+                    this->updateCourseLecturer->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(this, &functionScreen::updateCourseLecturer_KeyUp);
+                    //
+                    // label4
+                    //
+                    this->label4->AutoSize = true;
+                    this->label4->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+                    this->label4->ForeColor = System::Drawing::Color::White;
+                    this->label4->Location = System::Drawing::Point(431, 112);
+                    this->label4->Name = L"label4";
+                    this->label4->Size = System::Drawing::Size(60, 25);
+                    this->label4->TabIndex = 35;
+                    this->label4->Text = L"Room";
+                    //
+                    // updateCourseRoom
+                    //
+                    this->updateCourseRoom->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->updateCourseRoom->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
+                    this->updateCourseRoom->ForeColor = System::Drawing::SystemColors::Control;
+                    this->updateCourseRoom->Location = System::Drawing::Point(432, 149);
+                    this->updateCourseRoom->Margin = System::Windows::Forms::Padding(5);
+                    this->updateCourseRoom->Name = L"updateCourseRoom";
+                    this->updateCourseRoom->Size = System::Drawing::Size(100, 31);
+                    this->updateCourseRoom->TabIndex = 34;
+                    this->updateCourseRoom->KeyUp += gcnew System::Windows::Forms::KeyEventHandler(this, &functionScreen::updateCourseRoom_KeyUp);
+                    //
+                    // label5
+                    //
+                    this->label5->AutoSize = true;
+                    this->label5->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+                    this->label5->ForeColor = System::Drawing::Color::White;
+                    this->label5->Location = System::Drawing::Point(3, 392);
+                    this->label5->Name = L"label5";
+                    this->label5->Size = System::Drawing::Size(89, 25);
+                    this->label5->TabIndex = 37;
+                    this->label5->Text = L"Schedule";
+                    //
+                    // label6
+                    //
+                    this->label6->AutoSize = true;
+                    this->label6->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
+                    this->label6->ForeColor = System::Drawing::Color::White;
+                    this->label6->Location = System::Drawing::Point(44, 430);
+                    this->label6->Name = L"label6";
+                    this->label6->Size = System::Drawing::Size(80, 23);
+                    this->label6->TabIndex = 39;
+                    this->label6->Text = L"Session 1";
+                    //
+                    // updateCourseRegisStart
+                    //
+                    this->updateCourseRegisStart->CalendarFont = (gcnew System::Drawing::Font(L"Segoe UI", 8.75F));
+                    this->updateCourseRegisStart->CalendarTitleBackColor = System::Drawing::SystemColors::ControlText;
+                    this->updateCourseRegisStart->CalendarTitleForeColor = System::Drawing::SystemColors::ButtonHighlight;
+                    this->updateCourseRegisStart->CustomFormat = L"dd/MM/yyyy";
+                    this->updateCourseRegisStart->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
+                    this->updateCourseRegisStart->Format = System::Windows::Forms::DateTimePickerFormat::Custom;
+                    this->updateCourseRegisStart->Location = System::Drawing::Point(113, 337);
+                    this->updateCourseRegisStart->Name = L"updateCourseRegisStart";
+                    this->updateCourseRegisStart->Size = System::Drawing::Size(153, 31);
+                    this->updateCourseRegisStart->TabIndex = 41;
+                    this->updateCourseRegisStart->CloseUp += gcnew System::EventHandler(this, &functionScreen::updateCourseRegisStart_CloseUp);
+                    //
+                    // label7
+                    //
+                    this->label7->AutoSize = true;
+                    this->label7->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+                    this->label7->ForeColor = System::Drawing::Color::White;
+                    this->label7->Location = System::Drawing::Point(3, 304);
+                    this->label7->Name = L"label7";
+                    this->label7->Size = System::Drawing::Size(154, 25);
+                    this->label7->TabIndex = 42;
+                    this->label7->Text = L"Registration date";
+                    //
+                    // label8
+                    //
+                    this->label8->AutoSize = true;
+                    this->label8->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
+                    this->label8->ForeColor = System::Drawing::Color::White;
+                    this->label8->Location = System::Drawing::Point(44, 341);
+                    this->label8->Name = L"label8";
+                    this->label8->Size = System::Drawing::Size(53, 23);
+                    this->label8->TabIndex = 44;
+                    this->label8->Text = L"From:";
+                    //
+                    // label9
+                    //
+                    this->label9->AutoSize = true;
+                    this->label9->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10));
+                    this->label9->ForeColor = System::Drawing::Color::White;
+                    this->label9->Location = System::Drawing::Point(294, 341);
+                    this->label9->Name = L"label9";
+                    this->label9->Size = System::Drawing::Size(31, 23);
+                    this->label9->TabIndex = 45;
+                    this->label9->Text = L"To:";
+                    //
+                    // updateCourseRegisEnd
+                    //
+                    this->updateCourseRegisEnd->CalendarFont = (gcnew System::Drawing::Font(L"Segoe UI", 8.75F));
+                    this->updateCourseRegisEnd->CustomFormat = L"dd/MM/yyyy";
+                    this->updateCourseRegisEnd->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
+                    this->updateCourseRegisEnd->Format = System::Windows::Forms::DateTimePickerFormat::Custom;
+                    this->updateCourseRegisEnd->Location = System::Drawing::Point(341, 337);
+                    this->updateCourseRegisEnd->Name = L"updateCourseRegisEnd";
+                    this->updateCourseRegisEnd->Size = System::Drawing::Size(153, 31);
+                    this->updateCourseRegisEnd->TabIndex = 46;
+                    this->updateCourseRegisEnd->CloseUp += gcnew System::EventHandler(this, &functionScreen::updateCourseRegisEnd_CloseUp);
+                    //
                     // functionScreen
                     //
                     this->AutoScaleDimensions = System::Drawing::SizeF(15, 37);
@@ -1377,6 +1889,7 @@ namespace CS162MoodleProject {
                     this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(5)),
                         static_cast<System::Int32>(static_cast<System::Byte>(5)));
                     this->ClientSize = System::Drawing::Size(1436, 771);
+                    this->Controls->Add(this->courseUpdateUI);
                     this->Controls->Add(this->viewClassUI);
                     this->Controls->Add(this->viewClSBUI);
                     this->Controls->Add(this->greetText);
@@ -1405,6 +1918,10 @@ namespace CS162MoodleProject {
                     this->allRolePanel->ResumeLayout(false);
                     this->staffFunctionPanel->ResumeLayout(false);
                     this->studentFunctionPanel->ResumeLayout(false);
+                    this->courseUpdateUI->ResumeLayout(false);
+                    this->panel1->ResumeLayout(false);
+                    this->updateCoursePanel->ResumeLayout(false);
+                    this->updateCoursePanel->PerformLayout();
                     this->ResumeLayout(false);
                 }
 #pragma endregion
@@ -1989,6 +2506,308 @@ namespace CS162MoodleProject {
                             curYear = curYear->next;
                         }
                     }
+                }
+
+
+            private:
+                System::Void updateCoursebtn_Click(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    if (courseUpdateUI->Visible) {
+                        cout << "hide";
+                        if (curCourseUpdate)
+                            if ((updateCourseName->Text != convertString(curCourseUpdate->courseName)) || (updateCourseCre->Text != convertString(to_string(curCourseUpdate->credits))) || (updateCourseMaxSt->Text != convertString(to_string(curCourseUpdate->maxStudents))) || (updateCourseRoom->Text != convertString(curCourseUpdate->room)) || (updateCourseRegisStart->Value != DateTime(stoi(curCourseUpdate->startDate.year), stoi(curCourseUpdate->startDate.month), stoi(curCourseUpdate->startDate.day))) || (updateCourseRegisEnd->Value != DateTime(stoi(curCourseUpdate->endDate.year), stoi(curCourseUpdate->endDate.month), stoi(curCourseUpdate->endDate.day)) ||
+
+                                    updateCourseD1->SelectedIndex != getWeekdayIndex(curCourseUpdate->day1))
+                                || (updateCourseD2->SelectedIndex != getWeekdayIndex(curCourseUpdate->day2)) || (updateCourseS1->SelectedIndex != curCourseUpdate->session1[0] - '1') || (updateCourseS2->SelectedIndex != curCourseUpdate->session2[0] - '1')) {
+
+                                System::Windows::Forms::DialogResult dialogResult = MessageBox::Show("Are you sure you want to discard the changes you made?", "Warning", MessageBoxButtons::YesNo, MessageBoxIcon::Exclamation);
+                                if (dialogResult == System::Windows::Forms::DialogResult::No) {
+                                    return;
+                                }
+                            }
+                        cout << "hide2";
+                        btDelCourse->Hide();
+                        updateCoursePanel->Hide();
+                        courseUpdateUI->Hide();
+                    } else {
+                        courseUpdateUI->Show();
+                        courseUpdateUI->SendToBack();
+                        Courses* curCourse = yearList2->semesters->courses;
+                        listCourses->Items->Clear();
+                        if (coursesToUpdate) coursesToUpdate->Clear();
+                        coursesToUpdate = gcnew List<String ^>();
+                        while (curCourse) {
+                            coursesToUpdate->Add(convertString(curCourse->courseID));
+                            listCourses->Items->Add(convertString(curCourse->courseID));
+                            curCourse = curCourse->next;
+                        }
+                    }
+                    //ListBox
+                }
+
+                private:
+                    int getWeekdayIndex(string weekday) {
+                        for (auto& c : weekday)
+                            c = (char)toupper(c);
+                        if (weekday == "MON")
+                            return 0;
+                        if (weekday == "TUE")
+                            return 1;
+                        if (weekday == "WED")
+                            return 2;
+                        if (weekday == "THU")
+                            return 3;
+                        if (weekday == "FRI")
+                            return 4;
+                        if (weekday == "SAT")
+                            return 5;
+                }
+
+                private:
+                    string indexToWeekday(int index)
+                    {
+                        switch (index) {
+                        case 0:
+                            return "MON";
+                        case 1:
+                            return "TUE";
+                        case 2:
+                            return "WED";
+                        case 3:
+                            return "THU";
+                        case 4:
+                            return "FRI";
+                        case 5:
+                            return "SAT";
+                        }
+                    }
+            private:
+                void writeDataToCourseUpdateUI(Courses* course) {
+                    updateCourseName->Text = convertString(course->courseName);
+                    updateCourseCre->Text = convertString(to_string(course->credits));
+                    updateCourseMaxSt->Text = convertString(to_string(course->maxStudents));
+                    updateCourseRoom->Text = convertString(course->room);
+                    updateCourseRegisStart->Value = DateTime(stoi(course->startDate.year), stoi(course->startDate.month), stoi(course->startDate.day));
+                    updateCourseRegisEnd->Value = DateTime(stoi(course->endDate.year), stoi(course->endDate.month), stoi(course->endDate.day));
+
+                    updateCourseLecturer->Text = convertString(course->lecturerName);
+                    updateCourseD1->Text = convertString(course->day1);
+                    updateCourseD2->Text = convertString(course->day2);
+                    updateCourseS1->Text = convertString(getSession(course->session1));
+                    updateCourseS2->Text = convertString(getSession(course->session2));
+                    updateCourseD1->SelectedIndex = getWeekdayIndex(course->day1);
+                    updateCourseD2->SelectedIndex = getWeekdayIndex(course->day2);
+                    updateCourseS1->SelectedIndex = course->session1[0] - '1';
+                    updateCourseS2->SelectedIndex = course->session2[0] - '1';
+                    
+                    updateCourseName->Font = gcnew System::Drawing::Font(updateCourseName->Font, FontStyle::Regular);
+                    updateCourseCre->Font = gcnew System::Drawing::Font(updateCourseCre->Font, FontStyle::Regular);
+                    updateCourseMaxSt->Font = gcnew System::Drawing::Font(updateCourseMaxSt->Font, FontStyle::Regular);
+                    updateCourseRoom->Font = gcnew System::Drawing::Font(updateCourseRoom->Font, FontStyle::Regular);
+                    updateCourseRegisStart->Font = gcnew System::Drawing::Font(updateCourseRegisStart->Font, FontStyle::Regular);
+                    updateCourseRegisEnd->Font = gcnew System::Drawing::Font(updateCourseRegisEnd->Font, FontStyle::Regular);
+                    updateCourseLecturer->Font = gcnew System::Drawing::Font(updateCourseLecturer->Font, FontStyle::Regular);
+                    updateCourseD1->Font = gcnew System::Drawing::Font(updateCourseD1->Font, FontStyle::Regular);
+                    updateCourseD2->Font = gcnew System::Drawing::Font(updateCourseD2->Font, FontStyle::Regular);
+                    updateCourseS1->Font = gcnew System::Drawing::Font(updateCourseS1->Font, FontStyle::Regular);
+                    updateCourseS2->Font = gcnew System::Drawing::Font(updateCourseS2->Font, FontStyle::Regular);
+                }
+
+            private:
+                System::Void listCourses_SelectedIndexChanged(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    if (listCourses->SelectedItems->Count > 0) {
+                        selectedIndex = listCourses->SelectedIndex;
+                        curCourseUpdate = yearList2->semesters->courses->findCourseByID(convertToString(coursesToUpdate[selectedIndex]));
+                        if (!curCourseUpdate) {
+                            MessageBox::Show("Can't find course with ID: " + coursesToUpdate[selectedIndex], "Course Update Session", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);  
+                            return;
+                        }
+
+                        writeDataToCourseUpdateUI(curCourseUpdate);
+                        updateCoursePanel->Show();
+                        btDelCourse->Show();
+                    } else {
+                        selectedIndex = -1;
+                        btDelCourse->Hide();
+                        updateCoursePanel->Hide();
+                    }
+                }
+
+            private:
+                System::Void updateCourseName_KeyUp(System::Object ^ sender, System::Windows::Forms::KeyEventArgs ^ e)
+                {
+                    if (updateCourseName->Text != convertString(curCourseUpdate->courseName)) {
+                        updateCourseName->Font = gcnew System::Drawing::Font(updateCourseName->Font, FontStyle::Bold);
+                    } else {
+                        updateCourseName->Font = gcnew System::Drawing::Font(updateCourseName->Font, FontStyle::Regular);
+                    }
+                }
+
+            private:
+                System::Void updateCourseCre_KeyUp(System::Object ^ sender, System::Windows::Forms::KeyEventArgs ^ e)
+                {
+                    if (updateCourseCre->Text != convertString(to_string(curCourseUpdate->credits))) {
+                        updateCourseCre->Font = gcnew System::Drawing::Font(updateCourseCre->Font, FontStyle::Bold);
+                    } else {
+                        updateCourseCre->Font = gcnew System::Drawing::Font(updateCourseCre->Font, FontStyle::Regular);
+                    }
+                }
+
+            private:
+                System::Void updateCourseMaxSt_KeyUp(System::Object ^ sender, System::Windows::Forms::KeyEventArgs ^ e)
+                {
+                    if (updateCourseMaxSt->Text != convertString(to_string(curCourseUpdate->maxStudents))) {
+                        updateCourseMaxSt->Font = gcnew System::Drawing::Font(updateCourseMaxSt->Font, FontStyle::Bold);
+                    } else {
+                        updateCourseMaxSt->Font = gcnew System::Drawing::Font(updateCourseMaxSt->Font, FontStyle::Regular);
+                    }
+                }
+
+            private:
+                System::Void updateCourseRoom_KeyUp(System::Object ^ sender, System::Windows::Forms::KeyEventArgs ^ e)
+                {
+                    if (updateCourseRoom->Text != convertString(curCourseUpdate->room)) {
+                        updateCourseRoom->Font = gcnew System::Drawing::Font(updateCourseRoom->Font, FontStyle::Bold);
+                    } else {
+                        updateCourseRoom->Font = gcnew System::Drawing::Font(updateCourseRoom->Font, FontStyle::Regular);
+                    }
+                }
+
+            private:
+                System::Void updateCourseLecturer_KeyUp(System::Object ^ sender, System::Windows::Forms::KeyEventArgs ^ e)
+                {
+                    if (updateCourseLecturer->Text != convertString(curCourseUpdate->lecturerName)) {
+                        updateCourseLecturer->Font = gcnew System::Drawing::Font(updateCourseLecturer->Font, FontStyle::Bold);
+                    } else {
+                        updateCourseLecturer->Font = gcnew System::Drawing::Font(updateCourseLecturer->Font, FontStyle::Regular);
+                    }
+                }
+
+            private:
+                System::Void updateCourseD1_SelectedIndexChanged(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    if (updateCourseD1->SelectedIndex != getWeekdayIndex(curCourseUpdate->day1)) {
+                        updateCourseD1->Font = gcnew System::Drawing::Font(updateCourseD1->Font, FontStyle::Bold);
+                    } else {
+                        updateCourseD1->Font = gcnew System::Drawing::Font(updateCourseD1->Font, FontStyle::Regular);
+                    }
+                }
+
+            private:
+                System::Void updateCourseS1_SelectedIndexChanged(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    if (updateCourseS1->SelectedIndex != curCourseUpdate->session1[0] - '1') {
+                        updateCourseS1->Font = gcnew System::Drawing::Font(updateCourseS1->Font, FontStyle::Bold);
+                    } else {
+                        updateCourseS1->Font = gcnew System::Drawing::Font(updateCourseS1->Font, FontStyle::Regular);
+                    }
+                }
+
+            private:
+                System::Void updateCourseD2_SelectedIndexChanged(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    if (updateCourseD2->SelectedIndex != getWeekdayIndex(curCourseUpdate->day2)) {
+                        updateCourseD2->Font = gcnew System::Drawing::Font(updateCourseD2->Font, FontStyle::Bold);
+                    } else {
+                        updateCourseD2->Font = gcnew System::Drawing::Font(updateCourseD2->Font, FontStyle::Regular);
+                    }
+                }
+
+            private:
+                System::Void updateCourseS2_SelectedIndexChanged(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    if (updateCourseS2->SelectedIndex != curCourseUpdate->session2[0] - '1') {
+                        updateCourseS2->Font = gcnew System::Drawing::Font(updateCourseS2->Font, FontStyle::Bold);
+                    } else {
+                        updateCourseS2->Font = gcnew System::Drawing::Font(updateCourseS2->Font, FontStyle::Regular);
+                    }
+                }
+
+            private:
+                System::Void updateCourseRegisEnd_CloseUp(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    if (updateCourseRegisEnd->Value != DateTime(stoi(curCourseUpdate->endDate.year), stoi(curCourseUpdate->endDate.month), stoi(curCourseUpdate->endDate.day))) {
+                        updateCourseRegisEnd->Font = gcnew System::Drawing::Font(updateCourseRegisEnd->Font, FontStyle::Bold);
+                    } else {
+                        updateCourseRegisEnd->Font = gcnew System::Drawing::Font(updateCourseRegisEnd->Font, FontStyle::Regular);
+                    }
+                }
+
+            private:
+                System::Void updateCourseRegisStart_CloseUp(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    if (updateCourseRegisStart->Value != DateTime(stoi(curCourseUpdate->startDate.year), stoi(curCourseUpdate->startDate.month), stoi(curCourseUpdate->startDate.day))) {
+                        updateCourseRegisStart->Font = gcnew System::Drawing::Font(updateCourseRegisStart->Font, FontStyle::Bold);
+                    } else {
+                        updateCourseRegisStart->Font = gcnew System::Drawing::Font(updateCourseRegisStart->Font, FontStyle::Regular);
+                    }
+                }
+
+            private:
+                System::Void btRevertChanges_Click(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    if ((updateCourseName->Text != convertString(curCourseUpdate->courseName)) || (updateCourseCre->Text != convertString(to_string(curCourseUpdate->credits))) || (updateCourseMaxSt->Text != convertString(to_string(curCourseUpdate->maxStudents))) || (updateCourseRoom->Text != convertString(curCourseUpdate->room)) || (updateCourseRegisStart->Value != DateTime(stoi(curCourseUpdate->startDate.year), stoi(curCourseUpdate->startDate.month), stoi(curCourseUpdate->startDate.day))) || (updateCourseRegisEnd->Value != DateTime(stoi(curCourseUpdate->endDate.year), stoi(curCourseUpdate->endDate.month), stoi(curCourseUpdate->endDate.day)) ||
+
+                        updateCourseD1->SelectedIndex != getWeekdayIndex(curCourseUpdate->day1)) || (updateCourseD2->SelectedIndex != getWeekdayIndex(curCourseUpdate->day2)) || (updateCourseS1->SelectedIndex != curCourseUpdate->session1[0] - '1') || (updateCourseS2->SelectedIndex != curCourseUpdate->session2[0] - '1')) {
+
+                        System::Windows::Forms::DialogResult dialogResult = MessageBox::Show("Are you sure you want to discard the changes you made?", "Warning", MessageBoxButtons::YesNo, MessageBoxIcon::Exclamation);
+                        if (dialogResult == System::Windows::Forms::DialogResult::Yes) {
+                            writeDataToCourseUpdateUI(curCourseUpdate);
+                        }
+                    } else {
+                        MessageBox::Show("No changes made!", "Warning", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+                    }
+                }
+
+            private:
+                System::Void btnSave_Click(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    if ((updateCourseName->Text != convertString(curCourseUpdate->courseName)) || (updateCourseCre->Text != convertString(to_string(curCourseUpdate->credits))) || (updateCourseMaxSt->Text != convertString(to_string(curCourseUpdate->maxStudents))) || (updateCourseRoom->Text != convertString(curCourseUpdate->room)) || (updateCourseRegisStart->Value != DateTime(stoi(curCourseUpdate->startDate.year), stoi(curCourseUpdate->startDate.month), stoi(curCourseUpdate->startDate.day))) || (updateCourseRegisEnd->Value != DateTime(stoi(curCourseUpdate->endDate.year), stoi(curCourseUpdate->endDate.month), stoi(curCourseUpdate->endDate.day)) ||
+
+                            updateCourseD1->SelectedIndex != getWeekdayIndex(curCourseUpdate->day1))
+                        || (updateCourseD2->SelectedIndex != getWeekdayIndex(curCourseUpdate->day2)) || (updateCourseS1->SelectedIndex != curCourseUpdate->session1[0] - '1') || (updateCourseS2->SelectedIndex != curCourseUpdate->session2[0] - '1')) {
+
+                        curCourseUpdate->courseName = convertToString(updateCourseName->Text);
+                        curCourseUpdate->credits = stoi(convertToString(updateCourseCre->Text));
+                        curCourseUpdate->maxStudents = stoi(convertToString(updateCourseMaxSt->Text));
+                        curCourseUpdate->room = convertToString(updateCourseRoom->Text);
+
+                        curCourseUpdate->startDate.year = to_string(updateCourseRegisStart->Value.Year);
+                        curCourseUpdate->startDate.month = to_string(updateCourseRegisStart->Value.Month);
+                        curCourseUpdate->startDate.day = to_string(updateCourseRegisStart->Value.Day);
+                        curCourseUpdate->endDate.year = to_string(updateCourseRegisEnd->Value.Year);
+                        curCourseUpdate->endDate.month = to_string(updateCourseRegisEnd->Value.Month);
+                        curCourseUpdate->endDate.day = to_string(updateCourseRegisEnd->Value.Day);
+
+                        curCourseUpdate->lecturerName = convertToString(updateCourseLecturer->Text);
+                        curCourseUpdate->day1 = indexToWeekday(updateCourseD1->SelectedIndex);
+                        curCourseUpdate->day2 = indexToWeekday(updateCourseD2->SelectedIndex);
+                        curCourseUpdate->session1 = updateCourseS1->SelectedIndex + '1';
+                        curCourseUpdate->session2 = updateCourseS2->SelectedIndex + '1';
+
+                        MessageBox::Show("Course Updated Successfully!", "Status", MessageBoxButtons::OK, MessageBoxIcon::Asterisk);
+
+                        writeDataToCourseUpdateUI(curCourseUpdate);
+                    } else {
+                        MessageBox::Show("No changes made!", "Warning", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+                    }
+                }
+
+            private:
+                System::Void btDelCourse_Click(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    string courseID = yearList2->semesters->courses->findCourseByID(convertToString(coursesToUpdate[selectedIndex]))->courseID;
+                    System::Windows::Forms::DialogResult dialogResult = MessageBox::Show("Are you sure you want to delete course " + convertString(courseID) +  "?", "Warning", MessageBoxButtons::YesNo, MessageBoxIcon::Exclamation);
+                    if (dialogResult == System::Windows::Forms::DialogResult::Yes) {
+                        deleteCourseByID(yearList2->semesters->courses, courseID, studentList2);
+                        MessageBox::Show("Course Deleted Successfully!", "Status", MessageBoxButtons::OK, MessageBoxIcon::Asterisk);
+                        curCourseUpdate = nullptr;
+                        courseUpdateUI->Hide();
+                        updateCoursePanel->Hide();
+                        updateCoursebtn->PerformClick();
+                    }
+                    
                 }
             };
             }

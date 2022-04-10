@@ -86,35 +86,59 @@ void updateCourseInfomation(Courses* courseList) {
     }
 }
 
-void deleteCourseByID(Courses*& courseList) {
-    string courseID;
-    while (true) {
-        cout << "Enter the course ID to delete: \n>> ";
-        cin >> courseID;
-        Courses *curCourse = courseList, *father = nullptr;
-        while (curCourse && curCourse->courseID != courseID) {
-            father = curCourse;
-            curCourse = curCourse->next;
+void deleteCourseByID(Courses*& courseList, string courseID, Students *student) {
+    
+    Courses *curCourse = courseList, *father = nullptr;
+    while (curCourse->courseID != courseID) {
+        father = curCourse;
+        curCourse = curCourse->next;
+    }
+
+    if (curCourse) {
+        while (curCourse->studentList) {
+            Students* tmp = curCourse->studentList->next;
+            delete curCourse->studentList;
+            curCourse->studentList = tmp;
         }
-        if (curCourse) {
-            while (curCourse->studentList) {
-                Students* tmp = curCourse->studentList->next;
-                delete curCourse->studentList;
-                curCourse->studentList = tmp;
+        if (father)
+            father->next = curCourse->next;
+        else
+            courseList = courseList->next;
+        // remove enrolled course for students here
+
+        while (student) {
+            Courses *pre = nullptr, *enroll = student->enrolledCourse;
+            Scoreboards *preSB = nullptr, *sb = student->scoreBoards;
+            while (enroll) {
+                if (enroll->courseID == courseID) {
+                    if (pre)
+                        pre->next = enroll->next;
+                    else
+                        student->enrolledCourse = student->enrolledCourse->next;
+                    delete enroll;
+                    break;
+                }
+                pre = enroll;
+                enroll = enroll->next;
             }
-            if (father)
-                father->next = curCourse->next;
-            else
-                courseList = courseList->next;
-            // remove enrolled course for students here
-            delete curCourse;
-            cout << "Delete course successfully!\n";
-            cout << "Press any key to Return to Main Screen!";
-            _getch();
-            return;
-        } else {
-            cout << "Can't find course with ID " << courseID << ". Double check and try again!\n";
+
+            while (sb) {
+                if (sb->courseID == courseID) {
+                    if (preSB)
+                        preSB->next = sb->next;
+                    else
+                        student->scoreBoards = student->scoreBoards->next;
+                    delete sb;
+                    break;
+                }
+                preSB = sb;
+                sb = sb->next;
+            }
+
+            student = student->next;
         }
+
+        delete curCourse;
     }
 }
 Scoreboards* AddScoreBoard(Students* student, string courseID) {
