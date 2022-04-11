@@ -7,7 +7,6 @@ Tien
 Dinh Ba
 M
 12 03 1990
-
 123456
 hotuanthanh
 1
@@ -16,7 +15,6 @@ Thanh
 Ho Tuan
 M 
 27 06 1989
-
 123456
 nguyenlehoangdung
 1
@@ -25,7 +23,6 @@ Dung
 Nguyen Le Hoang
 M
 18 06 1991
-
 123456
 hoangthanhtu
 1
@@ -34,7 +31,6 @@ Tu
 Hoang Tu
 F
 14 07 1990
-
 123456
 dotrongle
 1
