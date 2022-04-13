@@ -11,11 +11,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string>
+#include <list>
 using namespace std;
 using namespace System;
 using namespace System::Windows::Forms;
 #pragma warning(disable : 4996)
 
+struct Scoreboards;
 namespace CS162MoodleProject {
     public ref class studentClass : public System::Object {
     public:
@@ -39,6 +41,7 @@ namespace CS162MoodleProject {
             DateTime regisE;
             int d1, s1, d2, s2;
         };
+    
         }
 
 struct Courses;

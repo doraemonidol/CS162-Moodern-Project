@@ -21,18 +21,34 @@ namespace CS162MoodleProject {
 	using namespace System::Drawing;
     using namespace std;
     using namespace System::Collections::Generic;
-
 	/// <summary>
 	/// Summary for MyForm1
 	/// </summary>
 	public ref class functionScreen : public System::Windows::Forms::Form {
-    public:
+            public:
                 bool Exit1 = false;
                 AcademicYears* yearList2 = nullptr;
                 Students* studentList2 = nullptr;
                 Staffs* staffList2 = nullptr;
                 Accounts* accountList2 = nullptr;
                 Courses* curCourseUpdate = nullptr;
+
+            private:
+                ref class courseMark : public System::Object {
+                public:
+                    Scoreboards* mark;
+                };
+            private:
+                ref class scoreBoardU : public System::Object {
+                public:
+                    String ^ classID;
+
+                public:
+                    String ^ stdID;
+
+                public:
+                    List<courseMark ^> ^ course;
+                };
 
             private:
                 System::Windows::Forms::ListView ^ viewStudentUI;
@@ -653,6 +669,111 @@ namespace CS162MoodleProject {
                 System::Windows::Forms::DateTimePicker ^ nsRegisEnd;
 
             private:
+                System::Windows::Forms::Panel ^ updateStdRes;
+
+            private:
+                System::Windows::Forms::TreeView ^ treeViewsbU;
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+                System::Windows::Forms::Panel ^ panel6;
+
+            private:
+                System::Windows::Forms::TextBox ^ sbUStdID;
+
+            private:
+
+
+            private:
+
+
+            private:
+                System::Windows::Forms::Label ^ label26;
+
+            private:
+                System::Windows::Forms::Button ^ sbUSearch;
+
+            private:
+
+
+            private:
+                System::Windows::Forms::Panel ^ sbUCoursePan;
+
+            private:
+
+
+            private:
+
+
+            private:
+                System::Windows::Forms::Label ^ label27;
+
+            private:
+                System::Windows::Forms::TextBox ^ midMark;
+
+            private:
+                System::Windows::Forms::Button ^ sbUbtnSave;
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+
+
+            private:
+                System::Windows::Forms::Label ^ label28;
+
+            private:
+                System::Windows::Forms::TextBox ^ finMark;
+
+            private:
+
+
+            private:
+                System::Windows::Forms::Label ^ label40;
+
+            private:
+                System::Windows::Forms::TextBox ^ oMark;
+
+            private:
+
+
+            private:
+                System::Windows::Forms::Label ^ label42;
+
+            private:
+                System::Windows::Forms::TextBox ^ totMark;
+
+            private:
+                System::Windows::Forms::Label ^ label24;
+
+            private:
+                System::Windows::Forms::ComboBox ^ sbUCourse;
+
+            private:
+
+
+            private:
 
 
             private:
@@ -836,7 +957,10 @@ namespace CS162MoodleProject {
                 System::Windows::Forms::Button ^ button5;
 
             private:
-                System::Windows::Forms::Button ^ button6;
+                System::Windows::Forms::Button ^ btnUpdateRes;
+
+            private:
+
 
             private:
                 System::Windows::Forms::Button ^ newSchoolYear;
@@ -933,8 +1057,11 @@ namespace CS162MoodleProject {
             List<String ^> ^ classIDList;
 
         private:
-            List<List<studentClass^> ^> ^ stdClassList;
+            List<List<studentClass ^> ^> ^ stdClassList;
 
+        private:
+            List<List<scoreBoardU ^> ^> ^ scoreBoardUList;
+            
         private:
             List<courseClass ^>^ inputedCourse;
         private:
@@ -977,7 +1104,7 @@ namespace CS162MoodleProject {
                     this->updateCoursebtn = (gcnew System::Windows::Forms::Button());
                     this->button4 = (gcnew System::Windows::Forms::Button());
                     this->button5 = (gcnew System::Windows::Forms::Button());
-                    this->button6 = (gcnew System::Windows::Forms::Button());
+                    this->btnUpdateRes = (gcnew System::Windows::Forms::Button());
                     this->time = (gcnew System::Windows::Forms::Label());
                     this->date = (gcnew System::Windows::Forms::Label());
                     this->timeController = (gcnew System::Windows::Forms::Timer(this->components));
@@ -1124,6 +1251,24 @@ namespace CS162MoodleProject {
                     this->label20 = (gcnew System::Windows::Forms::Label());
                     this->newSem = (gcnew System::Windows::Forms::TextBox());
                     this->label21 = (gcnew System::Windows::Forms::Label());
+                    this->updateStdRes = (gcnew System::Windows::Forms::Panel());
+                    this->treeViewsbU = (gcnew System::Windows::Forms::TreeView());
+                    this->panel6 = (gcnew System::Windows::Forms::Panel());
+                    this->sbUStdID = (gcnew System::Windows::Forms::TextBox());
+                    this->label26 = (gcnew System::Windows::Forms::Label());
+                    this->sbUSearch = (gcnew System::Windows::Forms::Button());
+                    this->sbUCoursePan = (gcnew System::Windows::Forms::Panel());
+                    this->label24 = (gcnew System::Windows::Forms::Label());
+                    this->sbUCourse = (gcnew System::Windows::Forms::ComboBox());
+                    this->label27 = (gcnew System::Windows::Forms::Label());
+                    this->midMark = (gcnew System::Windows::Forms::TextBox());
+                    this->sbUbtnSave = (gcnew System::Windows::Forms::Button());
+                    this->label28 = (gcnew System::Windows::Forms::Label());
+                    this->finMark = (gcnew System::Windows::Forms::TextBox());
+                    this->label40 = (gcnew System::Windows::Forms::Label());
+                    this->oMark = (gcnew System::Windows::Forms::TextBox());
+                    this->label42 = (gcnew System::Windows::Forms::Label());
+                    this->totMark = (gcnew System::Windows::Forms::TextBox());
                     this->allRolePanel->SuspendLayout();
                     this->staffFunctionPanel->SuspendLayout();
                     this->studentFunctionPanel->SuspendLayout();
@@ -1134,6 +1279,8 @@ namespace CS162MoodleProject {
                     this->panelAddStudent->SuspendLayout();
                     this->newSemesterUI->SuspendLayout();
                     this->panel8->SuspendLayout();
+                    this->updateStdRes->SuspendLayout();
+                    this->sbUCoursePan->SuspendLayout();
                     this->SuspendLayout();
                     //
                     // greetText
@@ -1325,7 +1472,7 @@ namespace CS162MoodleProject {
                     this->staffFunctionPanel->Controls->Add(this->updateCoursebtn);
                     this->staffFunctionPanel->Controls->Add(this->button4);
                     this->staffFunctionPanel->Controls->Add(this->button5);
-                    this->staffFunctionPanel->Controls->Add(this->button6);
+                    this->staffFunctionPanel->Controls->Add(this->btnUpdateRes);
                     this->staffFunctionPanel->FlowDirection = System::Windows::Forms::FlowDirection::TopDown;
                     this->staffFunctionPanel->ForeColor = System::Drawing::Color::Transparent;
                     this->staffFunctionPanel->Location = System::Drawing::Point(29, 104);
@@ -1527,7 +1674,7 @@ namespace CS162MoodleProject {
                     this->button4->Name = L"button4";
                     this->button4->Size = System::Drawing::Size(226, 45);
                     this->button4->TabIndex = 5;
-                    this->button4->Text = L"Delete Course";
+                    this->button4->Text = L"Export Course\'s Students";
                     this->button4->UseVisualStyleBackColor = true;
                     //
                     // button5
@@ -1548,23 +1695,24 @@ namespace CS162MoodleProject {
                     this->button5->Text = L"Import Scoreboard";
                     this->button5->UseVisualStyleBackColor = true;
                     //
-                    // button6
+                    // btnUpdateRes
                     //
-                    this->button6->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
-                    this->button6->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(20)),
+                    this->btnUpdateRes->Anchor = System::Windows::Forms::AnchorStyles::Bottom;
+                    this->btnUpdateRes->FlatAppearance->MouseDownBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(20)),
                         static_cast<System::Int32>(static_cast<System::Byte>(20)), static_cast<System::Int32>(static_cast<System::Byte>(20)));
-                    this->button6->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)),
+                    this->btnUpdateRes->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)),
                         static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(30)));
-                    this->button6->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-                    this->button6->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
+                    this->btnUpdateRes->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+                    this->btnUpdateRes->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                         static_cast<System::Byte>(0)));
-                    this->button6->ForeColor = System::Drawing::Color::White;
-                    this->button6->Location = System::Drawing::Point(3, 534);
-                    this->button6->Name = L"button6";
-                    this->button6->Size = System::Drawing::Size(226, 45);
-                    this->button6->TabIndex = 7;
-                    this->button6->Text = L"Update Student Result";
-                    this->button6->UseVisualStyleBackColor = true;
+                    this->btnUpdateRes->ForeColor = System::Drawing::Color::White;
+                    this->btnUpdateRes->Location = System::Drawing::Point(3, 534);
+                    this->btnUpdateRes->Name = L"btnUpdateRes";
+                    this->btnUpdateRes->Size = System::Drawing::Size(226, 45);
+                    this->btnUpdateRes->TabIndex = 7;
+                    this->btnUpdateRes->Text = L"Update Student Result";
+                    this->btnUpdateRes->UseVisualStyleBackColor = true;
+                    this->btnUpdateRes->Click += gcnew System::EventHandler(this, &functionScreen::btnUpdateRes_Click);
                     //
                     // time
                     //
@@ -3414,6 +3562,246 @@ namespace CS162MoodleProject {
                     this->label21->TabIndex = 31;
                     this->label21->Text = L"Start date";
                     //
+                    // updateStdRes
+                    //
+                    this->updateStdRes->Controls->Add(this->treeViewsbU);
+                    this->updateStdRes->Controls->Add(this->panel6);
+                    this->updateStdRes->Controls->Add(this->sbUStdID);
+                    this->updateStdRes->Controls->Add(this->label26);
+                    this->updateStdRes->Controls->Add(this->sbUSearch);
+                    this->updateStdRes->Controls->Add(this->sbUCoursePan);
+                    this->updateStdRes->Location = System::Drawing::Point(294, 62);
+                    this->updateStdRes->Name = L"updateStdRes";
+                    this->updateStdRes->Size = System::Drawing::Size(1130, 643);
+                    this->updateStdRes->TabIndex = 155;
+                    this->updateStdRes->Visible = false;
+                    //
+                    // treeViewsbU
+                    //
+                    this->treeViewsbU->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(5)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(5)));
+                    this->treeViewsbU->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12));
+                    this->treeViewsbU->ForeColor = System::Drawing::SystemColors::Info;
+                    this->treeViewsbU->Location = System::Drawing::Point(59, 134);
+                    this->treeViewsbU->Name = L"treeViewsbU";
+                    this->treeViewsbU->Size = System::Drawing::Size(334, 489);
+                    this->treeViewsbU->TabIndex = 68;
+                    this->treeViewsbU->NodeMouseClick += gcnew System::Windows::Forms::TreeNodeMouseClickEventHandler(this, &functionScreen::treeViewsbU_NodeMouseClick);
+                    //
+                    // panel6
+                    //
+                    this->panel6->BackColor = System::Drawing::Color::White;
+                    this->panel6->ForeColor = System::Drawing::Color::White;
+                    this->panel6->Location = System::Drawing::Point(59, 113);
+                    this->panel6->Name = L"panel6";
+                    this->panel6->Size = System::Drawing::Size(166, 2);
+                    this->panel6->TabIndex = 43;
+                    //
+                    // sbUStdID
+                    //
+                    this->sbUStdID->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(5)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(5)));
+                    this->sbUStdID->BorderStyle = System::Windows::Forms::BorderStyle::None;
+                    this->sbUStdID->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12));
+                    this->sbUStdID->ForeColor = System::Drawing::SystemColors::Info;
+                    this->sbUStdID->HideSelection = false;
+                    this->sbUStdID->Location = System::Drawing::Point(59, 88);
+                    this->sbUStdID->Margin = System::Windows::Forms::Padding(6, 7, 6, 7);
+                    this->sbUStdID->Name = L"sbUStdID";
+                    this->sbUStdID->Size = System::Drawing::Size(166, 27);
+                    this->sbUStdID->TabIndex = 140;
+                    this->sbUStdID->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &functionScreen::sbUStdID_KeyDown);
+                    //
+                    // label26
+                    //
+                    this->label26->AutoSize = true;
+                    this->label26->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+                    this->label26->ForeColor = System::Drawing::Color::White;
+                    this->label26->Location = System::Drawing::Point(53, 49);
+                    this->label26->Name = L"label26";
+                    this->label26->Size = System::Drawing::Size(99, 25);
+                    this->label26->TabIndex = 31;
+                    this->label26->Text = L"Student ID";
+                    //
+                    // sbUSearch
+                    //
+                    this->sbUSearch->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+                    this->sbUSearch->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Gray;
+                    this->sbUSearch->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)));
+                    this->sbUSearch->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+                    this->sbUSearch->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold));
+                    this->sbUSearch->ForeColor = System::Drawing::SystemColors::ButtonFace;
+                    this->sbUSearch->Location = System::Drawing::Point(253, 81);
+                    this->sbUSearch->Name = L"sbUSearch";
+                    this->sbUSearch->Size = System::Drawing::Size(140, 34);
+                    this->sbUSearch->TabIndex = 143;
+                    this->sbUSearch->Text = L"Search";
+                    this->sbUSearch->UseVisualStyleBackColor = true;
+                    this->sbUSearch->Click += gcnew System::EventHandler(this, &functionScreen::sbUSearch_Click);
+                    //
+                    // sbUCoursePan
+                    //
+                    this->sbUCoursePan->Controls->Add(this->label24);
+                    this->sbUCoursePan->Controls->Add(this->sbUCourse);
+                    this->sbUCoursePan->Controls->Add(this->label27);
+                    this->sbUCoursePan->Controls->Add(this->midMark);
+                    this->sbUCoursePan->Controls->Add(this->sbUbtnSave);
+                    this->sbUCoursePan->Controls->Add(this->label28);
+                    this->sbUCoursePan->Controls->Add(this->finMark);
+                    this->sbUCoursePan->Controls->Add(this->label40);
+                    this->sbUCoursePan->Controls->Add(this->oMark);
+                    this->sbUCoursePan->Controls->Add(this->label42);
+                    this->sbUCoursePan->Controls->Add(this->totMark);
+                    this->sbUCoursePan->Location = System::Drawing::Point(537, 24);
+                    this->sbUCoursePan->Name = L"sbUCoursePan";
+                    this->sbUCoursePan->Size = System::Drawing::Size(537, 599);
+                    this->sbUCoursePan->TabIndex = 67;
+                    this->sbUCoursePan->Visible = false;
+                    //
+                    // label24
+                    //
+                    this->label24->AutoSize = true;
+                    this->label24->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+                    this->label24->ForeColor = System::Drawing::Color::White;
+                    this->label24->Location = System::Drawing::Point(55, 105);
+                    this->label24->Name = L"label24";
+                    this->label24->Size = System::Drawing::Size(71, 25);
+                    this->label24->TabIndex = 154;
+                    this->label24->Text = L"Course";
+                    //
+                    // sbUCourse
+                    //
+                    this->sbUCourse->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->sbUCourse->Cursor = System::Windows::Forms::Cursors::Default;
+                    this->sbUCourse->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
+                    this->sbUCourse->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+                    this->sbUCourse->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
+                    this->sbUCourse->ForeColor = System::Drawing::Color::White;
+                    this->sbUCourse->FormattingEnabled = true;
+                    this->sbUCourse->ImeMode = System::Windows::Forms::ImeMode::NoControl;
+                    this->sbUCourse->Items->AddRange(gcnew cli::array<System::Object ^>(3) { L"Female", L"Male", L"Don\'t want to answer" });
+                    this->sbUCourse->Location = System::Drawing::Point(60, 136);
+                    this->sbUCourse->Name = L"sbUCourse";
+                    this->sbUCourse->Size = System::Drawing::Size(227, 33);
+                    this->sbUCourse->TabIndex = 153;
+                    this->sbUCourse->SelectedIndexChanged += gcnew System::EventHandler(this, &functionScreen::sbUCourse_SelectedIndexChanged);
+                    //
+                    // label27
+                    //
+                    this->label27->AutoSize = true;
+                    this->label27->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+                    this->label27->ForeColor = System::Drawing::Color::White;
+                    this->label27->Location = System::Drawing::Point(55, 190);
+                    this->label27->Name = L"label27";
+                    this->label27->Size = System::Drawing::Size(132, 25);
+                    this->label27->TabIndex = 21;
+                    this->label27->Text = L"Midterm Mark";
+                    //
+                    // midMark
+                    //
+                    this->midMark->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->midMark->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
+                    this->midMark->ForeColor = System::Drawing::SystemColors::Control;
+                    this->midMark->Location = System::Drawing::Point(60, 222);
+                    this->midMark->Margin = System::Windows::Forms::Padding(5);
+                    this->midMark->Name = L"midMark";
+                    this->midMark->Size = System::Drawing::Size(127, 31);
+                    this->midMark->TabIndex = 144;
+                    //
+                    // sbUbtnSave
+                    //
+                    this->sbUbtnSave->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
+                    this->sbUbtnSave->BackColor = System::Drawing::Color::DodgerBlue;
+                    this->sbUbtnSave->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
+                    this->sbUbtnSave->FlatAppearance->BorderColor = System::Drawing::Color::White;
+                    this->sbUbtnSave->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
+                    this->sbUbtnSave->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
+                    this->sbUbtnSave->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
+                    this->sbUbtnSave->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold));
+                    this->sbUbtnSave->ForeColor = System::Drawing::Color::White;
+                    this->sbUbtnSave->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
+                    this->sbUbtnSave->Location = System::Drawing::Point(163, 372);
+                    this->sbUbtnSave->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
+                    this->sbUbtnSave->Name = L"sbUbtnSave";
+                    this->sbUbtnSave->Size = System::Drawing::Size(148, 39);
+                    this->sbUbtnSave->TabIndex = 150;
+                    this->sbUbtnSave->Text = L"Save";
+                    this->sbUbtnSave->UseMnemonic = false;
+                    this->sbUbtnSave->UseVisualStyleBackColor = false;
+                    this->sbUbtnSave->Click += gcnew System::EventHandler(this, &functionScreen::sbUbtnSave_Click);
+                    //
+                    // label28
+                    //
+                    this->label28->AutoSize = true;
+                    this->label28->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+                    this->label28->ForeColor = System::Drawing::Color::White;
+                    this->label28->Location = System::Drawing::Point(264, 190);
+                    this->label28->Name = L"label28";
+                    this->label28->Size = System::Drawing::Size(100, 25);
+                    this->label28->TabIndex = 29;
+                    this->label28->Text = L"Final Mark";
+                    //
+                    // finMark
+                    //
+                    this->finMark->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->finMark->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
+                    this->finMark->ForeColor = System::Drawing::SystemColors::Control;
+                    this->finMark->Location = System::Drawing::Point(269, 222);
+                    this->finMark->Margin = System::Windows::Forms::Padding(5);
+                    this->finMark->Name = L"finMark";
+                    this->finMark->Size = System::Drawing::Size(127, 31);
+                    this->finMark->TabIndex = 145;
+                    //
+                    // label40
+                    //
+                    this->label40->AutoSize = true;
+                    this->label40->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+                    this->label40->ForeColor = System::Drawing::Color::White;
+                    this->label40->Location = System::Drawing::Point(55, 279);
+                    this->label40->Name = L"label40";
+                    this->label40->Size = System::Drawing::Size(108, 25);
+                    this->label40->TabIndex = 31;
+                    this->label40->Text = L"Other Mark";
+                    //
+                    // oMark
+                    //
+                    this->oMark->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->oMark->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
+                    this->oMark->ForeColor = System::Drawing::SystemColors::Control;
+                    this->oMark->Location = System::Drawing::Point(60, 311);
+                    this->oMark->Margin = System::Windows::Forms::Padding(5);
+                    this->oMark->Name = L"oMark";
+                    this->oMark->Size = System::Drawing::Size(127, 31);
+                    this->oMark->TabIndex = 146;
+                    //
+                    // label42
+                    //
+                    this->label42->AutoSize = true;
+                    this->label42->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+                    this->label42->ForeColor = System::Drawing::Color::White;
+                    this->label42->Location = System::Drawing::Point(264, 279);
+                    this->label42->Name = L"label42";
+                    this->label42->Size = System::Drawing::Size(100, 25);
+                    this->label42->TabIndex = 35;
+                    this->label42->Text = L"Total Mark";
+                    //
+                    // totMark
+                    //
+                    this->totMark->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->totMark->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
+                    this->totMark->ForeColor = System::Drawing::SystemColors::Control;
+                    this->totMark->Location = System::Drawing::Point(269, 311);
+                    this->totMark->Margin = System::Windows::Forms::Padding(5);
+                    this->totMark->Name = L"totMark";
+                    this->totMark->Size = System::Drawing::Size(127, 31);
+                    this->totMark->TabIndex = 147;
+                    //
                     // functionScreen
                     //
                     this->AutoScaleDimensions = System::Drawing::SizeF(15, 37);
@@ -3421,6 +3809,7 @@ namespace CS162MoodleProject {
                     this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(5)), static_cast<System::Int32>(static_cast<System::Byte>(5)),
                         static_cast<System::Int32>(static_cast<System::Byte>(5)));
                     this->ClientSize = System::Drawing::Size(1436, 771);
+                    this->Controls->Add(this->updateStdRes);
                     this->Controls->Add(this->greetText);
                     this->Controls->Add(this->allRolePanel);
                     this->Controls->Add(this->studentFunctionPanel);
@@ -3431,7 +3820,6 @@ namespace CS162MoodleProject {
                     this->Controls->Add(this->btCloseApp);
                     this->Controls->Add(this->btMinimiseBG);
                     this->Controls->Add(this->btCloseBG);
-                    this->Controls->Add(this->newSemesterUI);
                     this->Controls->Add(this->panelSchoolYear);
                     this->Controls->Add(this->courseUpdateUI);
                     this->Controls->Add(this->viewClassUI);
@@ -3439,6 +3827,7 @@ namespace CS162MoodleProject {
                     this->Controls->Add(this->viewCourseUI);
                     this->Controls->Add(this->viewCoSBUI);
                     this->Controls->Add(this->viewStudentUI);
+                    this->Controls->Add(this->newSemesterUI);
                     this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16.2F));
                     this->ForeColor = System::Drawing::Color::Black;
                     this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
@@ -3464,6 +3853,10 @@ namespace CS162MoodleProject {
                     this->newSemesterUI->PerformLayout();
                     this->panel8->ResumeLayout(false);
                     this->panel8->PerformLayout();
+                    this->updateStdRes->ResumeLayout(false);
+                    this->updateStdRes->PerformLayout();
+                    this->sbUCoursePan->ResumeLayout(false);
+                    this->sbUCoursePan->PerformLayout();
                     this->ResumeLayout(false);
                 }
 #pragma endregion
@@ -5003,7 +5396,179 @@ namespace CS162MoodleProject {
                 {
                     newSemester->PerformClick();
                 }
-            };
 
-    
-}
+            private:
+                System::Void btnUpdateRes_Click(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    if (updateStdRes->Visible) {
+                        List<scoreBoardU ^> ^ cl = scoreBoardUList[classIDIndex];
+                        scoreBoardU ^ std = cl[studentIndex];
+                        if (midMark->Text == convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->midtermScore)) && finMark->Text == convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->finalScore)) && totMark->Text == convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->totalScore)) && oMark->Text == convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->otherScore))) {   
+                        } else {
+                            System::Windows::Forms::DialogResult dialogResult = MessageBox::Show("Are you sure you want to discard the changes you made?", "Warning", MessageBoxButtons::YesNo, MessageBoxIcon::Exclamation);
+                            if (dialogResult == System::Windows::Forms::DialogResult::No) {
+                                return;
+                            }
+                        }
+                        updateStdRes->Hide();
+                        return;
+                    } 
+                    if (scoreBoardUList)
+                        scoreBoardUList->Clear();
+
+                    treeViewsbU->Nodes->Clear();
+                    scoreBoardUList = gcnew List<List<scoreBoardU ^> ^>();
+                    List<scoreBoardU ^> ^ sbList = nullptr;
+
+                    AcademicYears* curYear = yearList2;
+                    int classIndex = -1;
+                    while (curYear) {
+                        Classes* curClass = curYear->classes;
+                        while (curClass) {
+                            Students* std = curClass->students;
+                            sbList = gcnew List<scoreBoardU ^>();
+                            treeViewsbU->Nodes->Add(gcnew TreeNode(convertString(curClass->classID)));
+                            classIndex++;
+
+                            while (std) {
+                                scoreBoardU ^ sbU = gcnew scoreBoardU;
+                                sbU->classID = convertString(curClass->classID);
+                                sbU->stdID = convertString(std->studentID);
+
+                                treeViewsbU->Nodes[classIndex]->Nodes->Add(gcnew TreeNode(sbU->stdID));
+
+                                Scoreboards* sb = std->scoreBoards;
+                                sbU->course = gcnew List<courseMark ^>();
+                                while (sb) {
+                                    courseMark ^ mark = gcnew courseMark();
+                                    mark->mark = sb;
+
+                                    sbU->course->Add(mark);
+                                    sb = sb->next;
+                                }
+                                sbList->Add(sbU);
+
+                                std = std->next;
+                            }
+                            curClass = curClass->next;
+                            scoreBoardUList->Add(sbList);
+                        }
+                        curYear = curYear->next;
+                    }
+
+
+                    updateStdRes->Show();
+                    updateStdRes->SendToBack();
+                }
+
+            private:
+                System::Void sbUSearch_Click(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    studentIndex = 0;
+                    classIDIndex = 0;
+                    for each (List<scoreBoardU^> ^ cl in scoreBoardUList) {
+                        for each (scoreBoardU ^ std in cl) {
+                            if (std->stdID == sbUStdID->Text) {
+                                sbUCourse->Items->Clear();
+
+                                for each (courseMark ^ m in std->course)
+                                    sbUCourse->Items->Add(convertString(m->mark->courseID));
+
+                                if (sbUCourse->Items->Count > 0) {
+                                    sbUCourse->SelectedIndex = 0;
+                                    midMark->Text = convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->midtermScore));
+                                    finMark->Text = convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->finalScore));
+                                    totMark->Text = convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->totalScore));
+                                    oMark->Text = convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->otherScore));
+                                } else {
+                                    midMark->Text = "";
+                                    finMark->Text = "";
+                                    totMark->Text = "";
+                                    oMark->Text = "";
+                                }
+                                sbUCoursePan->Show();
+                                sbUCourse->Focus();
+                                return;
+                            }
+                            studentIndex++;
+                        }
+                        classIDIndex++;
+                    }
+
+                    MessageBox::Show("Can't find student with ID " + sbUStdID->Text, "Warning", MessageBoxButtons::OK, MessageBoxIcon::Error);
+                    sbUStdID->Focus();
+                }
+
+            private:
+                System::Void treeViewsbU_NodeMouseClick(System::Object ^ sender, System::Windows::Forms::TreeNodeMouseClickEventArgs ^ e)
+                {
+                    if (e->Node->Parent != nullptr) {
+                        studentIndex = e->Node->Index;
+                        classIDIndex = e->Node->Parent->Index;
+
+                        List<scoreBoardU ^> ^ cla = scoreBoardUList[classIDIndex];
+
+                        scoreBoardU ^ std = cla[studentIndex];
+                        sbUCourse->Items->Clear();
+
+                        for each (courseMark ^ m in std->course)
+                            sbUCourse->Items->Add(convertString(m->mark->courseID));
+
+                        if (sbUCourse->Items->Count > 0) {
+                            sbUCourse->SelectedIndex = 0;
+                            midMark->Text = convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->midtermScore));
+                            finMark->Text = convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->finalScore));
+                            totMark->Text = convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->totalScore));
+                            oMark->Text = convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->otherScore));
+                        } else {
+                            midMark->Text = "";
+                            finMark->Text = "";
+                            totMark->Text = "";
+                            oMark->Text = "";
+                        }
+                        sbUCoursePan->Show();
+                        sbUCourse->Focus();
+                    }
+                }
+
+            private:
+                System::Void sbUCourse_SelectedIndexChanged(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    List<scoreBoardU ^> ^ cl = scoreBoardUList[classIDIndex];
+                    scoreBoardU ^ std = cl[studentIndex];
+                    midMark->Text = convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->midtermScore));
+                    finMark->Text = convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->finalScore));
+                    totMark->Text = convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->totalScore));
+                    oMark->Text = convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->otherScore));
+                }
+
+            private:
+                System::Void sbUbtnSave_Click(System::Object ^ sender, System::EventArgs ^ e)
+                {
+                    List<scoreBoardU ^> ^ cl = scoreBoardUList[classIDIndex];
+                    scoreBoardU ^ std = cl[studentIndex];
+
+                    if (midMark->Text == convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->midtermScore)) &&
+                        finMark->Text == convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->finalScore)) &&
+                        totMark->Text == convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->totalScore)) && oMark->Text == convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->otherScore))) {
+
+                        MessageBox::Show("No changes made!", "Warning", MessageBoxButtons::OK, MessageBoxIcon::Exclamation);
+                        return;
+                    }
+
+                    std->course[sbUCourse->SelectedIndex]->mark->midtermScore = stoi(convertToString(midMark->Text));
+                    std->course[sbUCourse->SelectedIndex]->mark->finalScore = stoi(convertToString(finMark->Text));
+                    std->course[sbUCourse->SelectedIndex]->mark->totalScore = stoi(convertToString(totMark->Text));
+                    std->course[sbUCourse->SelectedIndex]->mark->otherScore = stoi(convertToString(oMark->Text));
+                    MessageBox::Show("Scoreboard Updated Successfully!", "Status", MessageBoxButtons::OK, MessageBoxIcon::Asterisk);
+                }
+
+            private:
+                System::Void sbUStdID_KeyDown(System::Object ^ sender, System::Windows::Forms::KeyEventArgs ^ e)
+                {
+                    if (e->KeyValue == (int)Keys::Enter) {
+                        sbUSearch->PerformClick();
+                    }
+                }
+            };
+            }

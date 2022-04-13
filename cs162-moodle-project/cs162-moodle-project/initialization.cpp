@@ -181,6 +181,7 @@ void inpStudents(Students*& studentList, Accounts*& accountList, AcademicYears* 
             student->studentID = curStudent->studentID;
             student->account = curStudent->account;
             student->enrolledCourse = curStudent->enrolledCourse;
+            student->scoreBoards = curStudent->scoreBoards;
             student->next = tmp->students;
             tmp->students = student;
         }
