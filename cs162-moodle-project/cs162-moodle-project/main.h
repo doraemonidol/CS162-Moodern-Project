@@ -15,6 +15,32 @@ using namespace std;
 using namespace System;
 using namespace System::Windows::Forms;
 #pragma warning(disable : 4996)
+
+namespace CS162MoodleProject {
+    public ref class studentClass : public System::Object {
+    public:
+        String ^ studentID;
+        String ^ lName;
+        String ^ fName;
+        String ^ socialID;
+        DateTime date;
+        int gender;
+    };
+    public
+        ref class courseClass : public System::Object {
+        public:
+            String ^ courseName;
+            String ^ courseID;
+            String ^ credits;
+            String ^ maxStd;
+            String ^ room;
+            String ^ lecturer;
+            DateTime regisS;
+            DateTime regisE;
+            int d1, s1, d2, s2;
+        };
+        }
+
 struct Courses;
 struct Date {
     string day = "", month = "", year = "";
@@ -175,7 +201,7 @@ struct AcademicYears {
     AcademicYears* next = nullptr;
     string getFullYear() {
         string tmp = "20";
-        return tmp + year[0] + year[1] + " - " + tmp + year[2] + year[3];
+        return tmp + year.substr(0, 2) + " - " + tmp + year.substr(2, 2);
     }
 };
 
@@ -197,10 +223,14 @@ struct FileInputManager {
         fsetpos(stdin, &pos); /* for C9X */
         cin.clear();
     }
-    void open(string fileName)
+    bool open(string fileName)
     {
+        ifstream fin(fileName);
+        if (!fin.is_open())
+            return false;
         store();
-        freopen(fileName.c_str(), "r", stdin);
+        freopen(fileName.c_str(), "r", stdin); 
+        return true;
     }
 };
 struct FileOutputManager {

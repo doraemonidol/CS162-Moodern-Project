@@ -26,6 +26,7 @@
             form1.getData(yearList, studentList, staffList, accountList, form.cur_account);
             form1.setRole(form.Role);
             Application::Run(% form1);
+            form1.returnData(yearList, studentList, staffList, accountList);
         }
         if (form.Exit || form1.Exit1)
             break;

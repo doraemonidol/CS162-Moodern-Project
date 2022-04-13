@@ -77,7 +77,7 @@ void outYears(AcademicYears*& yearList) {
         }
         cout << nClasses << '\n';
         while (nClasses--) {
-            cout << cur->classes->classID;
+            cout << cur->classes->classID << '\n';
             Classes* erase = cur->classes;
             cur->classes=cur->classes->next;
             delete cur->classes;
