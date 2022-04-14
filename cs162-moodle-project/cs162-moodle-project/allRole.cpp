@@ -230,11 +230,11 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist) {
 			break;
 		}
 		case 8: {
-			courseToCSV(yearlist->semesters->courses);
+			//courseToCSV(yearlist->semesters->courses);
 			break;
 		}
 		case 9: {
-			CSVToScoreboard(yearlist->semesters->courses);
+			//CSVToScoreboard(yearlist->semesters->courses);
 			break;
 		}
 		case 10: {

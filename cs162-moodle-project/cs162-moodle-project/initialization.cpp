@@ -192,10 +192,8 @@ void inpStudents(Students*& studentList, Accounts*& accountList, AcademicYears* 
             cin >> newCourse->courseID;
             bool kt = true;
             AcademicYears* year = yearList;
-            cout << endl;
             while (year && kt) {
                 Semesters* sem = year->semesters;
-                cout << "Year: " << year->year << endl;
                 if (sem) {
                     Courses* course = sem->courses->findCourseByID(newCourse->courseID);
 

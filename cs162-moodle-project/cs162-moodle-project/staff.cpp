@@ -191,21 +191,22 @@ bool UpdateStudentScoreboard(Students* allStudentList, string studentID, string 
     return true;
 }
 
-void courseToCSV(Courses* course) {
-    FileOutputManager f;
-    f.open("./Database/courseCSV.txt");
-    cout << course->courseID << '\n';
-    cout << "Student ID, Name\n";
+void courseToCSV(Courses* course, string filename) {
+    ofstream f;
+    f.open(filename);
+    f << course->courseID << " student list" << '\n';
+    f << "Student ID, Name\n";
     Students* student = course->studentList;
     while (student) {
-        cout << student->studentID << ", " << student->account->firstname << " " << student->account->lastname << '\n';
+        f << student->studentID << ", " << student->account->lastname << " " << student->account->firstname << '\n';
+        student = student->next;
     }
-    f.back();
+    f.close();
 }
 
-void CSVToScoreboard(Courses* course) {
+void CSVToScoreboard(Courses* course, Students* student, string filename) {
     ifstream f;
-    f.open("./Database/scoreboardCSV.txt");
+    f.open(filename);
     string trash="231", courseID;
     f >> courseID;
     f.get();
@@ -218,17 +219,31 @@ void CSVToScoreboard(Courses* course) {
         f.get();
         getline(f, name, ',');
         f.get();
-        Scoreboards* scoreboard = course->findStudentByID(studentID)->findScoreboardByID(courseID);
+        Scoreboards* scoreboard = course->findStudentByID(studentID)->findScoreboardByID(courseID),
+                   * scoreboard2 = student->findStudentByID(studentID)->findScoreboardByID(courseID);
+
         if (!scoreboard) {
             scoreboard = AddScoreBoard(course->findStudentByID(studentID), courseID);
         }
+        if (!scoreboard2) {
+            scoreboard2 = AddScoreBoard(student->findStudentByID(studentID), courseID);
+        }
+        scoreboard->courseID = course->courseID;
+        scoreboard->courseName = course->courseName;
+        scoreboard2->courseID = course->courseID;
+        scoreboard2->courseName = course->courseName;
+
         f >> scoreboard->totalScore;
+        scoreboard2->totalScore = scoreboard->totalScore;
         f.get();
         f >> scoreboard->midtermScore;
+        scoreboard2->midtermScore = scoreboard->midtermScore;
         f.get();
         f >> scoreboard->finalScore;
+        scoreboard2->finalScore = scoreboard->finalScore;
         f.get();
         f >> scoreboard->otherScore;
+        scoreboard2->otherScore = scoreboard->otherScore;
         f.get();
     }
     f.close();
