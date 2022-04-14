@@ -39,7 +39,6 @@ void inpScoreboards(Scoreboards*& scoreBoard){
 
 void inpStaffs(Staffs*& staffList, Accounts*& accountList){
     Staffs* curStaff = nullptr;
-    Accounts* curAccount = accountList; // Khong gan nullptr vi luc nay accountList da chua du lieu cua studen
     int n;
     cin >> n;
     while (n--){
@@ -53,10 +52,10 @@ void inpStaffs(Staffs*& staffList, Accounts*& accountList){
         }
         inpAccount(curStaff->account);
         if (!accountList) {
-            accountList = curAccount = curStaff->account;
+            accountList = curStaff->account;
         } else {
-            curAccount->next = curStaff->account;
-            curAccount = curAccount->next;
+            curStaff->account->next = accountList;
+            accountList = curStaff->account;
         }
     }
 }
@@ -153,7 +152,6 @@ void inpCoursesUser(Courses*& courseList, Date startDate, Date endDate) {
 }
 void inpStudents(Students*& studentList, Accounts*& accountList, AcademicYears* yearList, Classes* classList) {
     Students* curStudent = studentList = nullptr;
-    Accounts* curAccount = accountList = nullptr;
     int n;
     cin >> n;
     while (n--) {
@@ -167,12 +165,11 @@ void inpStudents(Students*& studentList, Accounts*& accountList, AcademicYears* 
         cin >> curStudent->studentID;
         inpAccount(curStudent->account);
         if (!accountList) {
-            accountList = curAccount = curStudent->account;
+            accountList = curStudent->account;
         } else {
-            curAccount->next = curStudent->account;
-            curAccount = curAccount->next;
+            curStudent->account->next = accountList;
+            accountList = curStudent->account;
         }
-
         cin >> curStudent->classID;
         Classes* tmp = classList->findByID(curStudent->classID);
         inpScoreboards(curStudent->scoreBoards);
