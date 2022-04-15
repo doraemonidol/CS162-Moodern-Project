@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <string>
 #include <list>
+#include <direct.h>
 using namespace std;
 using namespace System;
 using namespace System::Windows::Forms;

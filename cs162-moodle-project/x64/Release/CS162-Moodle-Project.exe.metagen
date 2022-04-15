@@ -1,0 +1,77 @@
+  CS162MoodleProject.functionScreen.resources - Embedded, ContainedInManifestFile, 
+  CS162MoodleProject.inputClassCourse.resources - Embedded, ContainedInManifestFile, 
+  CS162MoodleProject.loginScreen.resources - Embedded, ContainedInManifestFile, 
+ImageRuntimeVersion: v4.0.30319
+Assembly CS162-Moodle-Project, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
+	hash=SHA1, flags=PublicKey
+Assembly mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a: 
+	hash=None, flags=None
+Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
+	hash=None, flags=None
+Class CS162MoodleProject.studentClass: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String studentID : Public
+    System.String lName : Public
+    System.String fName : Public
+    System.String socialID : Public
+    System.DateTime date : Public
+    Int32 gender : Public
+Class CS162MoodleProject.courseClass: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    System.String courseName : Public
+    System.String courseID : Public
+    System.String credits : Public
+    System.String maxStd : Public
+    System.String room : Public
+    System.String lecturer : Public
+    System.DateTime regisS : Public
+    System.DateTime regisE : Public
+    Int32 d1 : Public
+    Int32 s1 : Public
+    Int32 d2 : Public
+    Int32 s2 : Public
+Class CS162MoodleProject.loginScreen: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Boolean Exit : Public
+    Int32 Role : Public
+    AcademicYears* yearList1 : Public
+    Students* studentList1 : Public
+    Staffs* staffList1 : Public
+    Accounts* accountList1 : Public
+    Accounts* cur_account : Public
+  Methods:
+    getData(AcademicYears*, Students*, Staffs*, Accounts*): PrivateScope, Public, HideBySig
+Class CS162MoodleProject.inputClassCourse: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Methods:
+    GetData(String* IsImplicitlyDereferenced, String* IsImplicitlyDereferenced): PrivateScope, Public, HideBySig
+Class CS162MoodleProject.functionScreen: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Boolean Exit1 : Public
+    AcademicYears* yearList2 : Public
+    Students* studentList2 : Public
+    Staffs* staffList2 : Public
+    Accounts* accountList2 : Public
+    Courses* curCourseUpdate : Public
+    Students* currentStudent : Public
+    Int32 courseRegisCount : Public
+  Methods:
+    setRole(Int32): PrivateScope, Public, HideBySig
+    getData(AcademicYears*, Students*, Staffs*, Accounts*, Accounts*): PrivateScope, Public, HideBySig
+    returnData(AcademicYears** IsImplicitlyDereferenced, Students** IsImplicitlyDereferenced, Staffs** IsImplicitlyDereferenced, Accounts** IsImplicitlyDereferenced): PrivateScope, Public, HideBySig
+    getMonthLetter(basic_string<char\,std::char_traits<char>\,std::allocator<char> >*, Int32): PrivateScope, Public, HideBySig

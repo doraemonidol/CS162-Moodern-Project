@@ -15,11 +15,11 @@
     Staffs* staffList = nullptr;
     Accounts* accountList = nullptr;
 
-    initData(yearList, studentList, staffList, accountList);
     
     do {
         CS162MoodleProject::loginScreen form;
         CS162MoodleProject::functionScreen form1;
+        initData(yearList, studentList, staffList, accountList);
         form.getData(yearList, studentList, staffList, accountList);
         Application::Run(% form);
         if (!form.Exit) {
@@ -27,11 +27,11 @@
             form1.setRole(form.Role);
             Application::Run(% form1);
             form1.returnData(yearList, studentList, staffList, accountList);
+            unloadData(yearList, studentList, staffList);
         }
         if (form.Exit || form1.Exit1)
             break;
     } while (true);
-    unloadData(yearList, studentList, staffList);
     /* 
 
     int status;

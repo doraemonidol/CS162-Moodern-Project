@@ -1,14 +1,14 @@
 2
 123456
-dinhbatien
+admin
 1
-987654321
-Tien
-Dinh Ba
+0
+Admin
+System
 M
-12 03 1990
-1
-1
+17 08 2003
+123456
+dinhbatien
 1
 987654321
 Tien

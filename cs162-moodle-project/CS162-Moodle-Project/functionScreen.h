@@ -323,10 +323,10 @@ namespace CS162MoodleProject {
                 System::Windows::Forms::Panel ^ newSemesterUI;
 
             private:
-                System::Windows::Forms::Button ^ button1;
+
 
             private:
-                System::Windows::Forms::Button ^ button2;
+
 
             private:
                 System::Windows::Forms::Label ^ label17;
@@ -737,10 +737,10 @@ namespace CS162MoodleProject {
                 System::Windows::Forms::TextBox ^ courseRegisD2;
 
             private:
-                System::Windows::Forms::Button ^ button7;
+
 
             private:
-                System::Windows::Forms::Button ^ button8;
+
 
             private:
                 System::Windows::Forms::Button ^ courseUnRegisPanelBtn;
@@ -1104,6 +1104,10 @@ namespace CS162MoodleProject {
                     this->semEndDate = (gcnew System::Windows::Forms::DateTimePicker());
                     this->newSemYear = (gcnew System::Windows::Forms::ComboBox());
                     this->inputedCourseList = (gcnew System::Windows::Forms::ListBox());
+                    this->label17 = (gcnew System::Windows::Forms::Label());
+                    this->label20 = (gcnew System::Windows::Forms::Label());
+                    this->newSem = (gcnew System::Windows::Forms::TextBox());
+                    this->label21 = (gcnew System::Windows::Forms::Label());
                     this->panel8 = (gcnew System::Windows::Forms::Panel());
                     this->label23 = (gcnew System::Windows::Forms::Label());
                     this->nsCourseID = (gcnew System::Windows::Forms::TextBox());
@@ -1132,12 +1136,6 @@ namespace CS162MoodleProject {
                     this->label38 = (gcnew System::Windows::Forms::Label());
                     this->label39 = (gcnew System::Windows::Forms::Label());
                     this->nsRegisEnd = (gcnew System::Windows::Forms::DateTimePicker());
-                    this->button1 = (gcnew System::Windows::Forms::Button());
-                    this->button2 = (gcnew System::Windows::Forms::Button());
-                    this->label17 = (gcnew System::Windows::Forms::Label());
-                    this->label20 = (gcnew System::Windows::Forms::Label());
-                    this->newSem = (gcnew System::Windows::Forms::TextBox());
-                    this->label21 = (gcnew System::Windows::Forms::Label());
                     this->updateStdRes = (gcnew System::Windows::Forms::Panel());
                     this->treeViewsbU = (gcnew System::Windows::Forms::TreeView());
                     this->panel6 = (gcnew System::Windows::Forms::Panel());
@@ -1238,8 +1236,6 @@ namespace CS162MoodleProject {
                     this->courseRegisD1 = (gcnew System::Windows::Forms::TextBox());
                     this->courseRegisS2 = (gcnew System::Windows::Forms::TextBox());
                     this->courseRegisD2 = (gcnew System::Windows::Forms::TextBox());
-                    this->button7 = (gcnew System::Windows::Forms::Button());
-                    this->button8 = (gcnew System::Windows::Forms::Button());
                     this->allRolePanel->SuspendLayout();
                     this->staffFunctionPanel->SuspendLayout();
                     this->studentFunctionPanel->SuspendLayout();
@@ -2624,7 +2620,7 @@ namespace CS162MoodleProject {
                     this->btnFinish->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold));
                     this->btnFinish->ForeColor = System::Drawing::Color::White;
                     this->btnFinish->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-                    this->btnFinish->Location = System::Drawing::Point(747, 577);
+                    this->btnFinish->Location = System::Drawing::Point(739, 599);
                     this->btnFinish->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
                     this->btnFinish->Name = L"btnFinish";
                     this->btnFinish->Size = System::Drawing::Size(148, 39);
@@ -2643,7 +2639,7 @@ namespace CS162MoodleProject {
                     this->btnCancelAll->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
                     this->btnCancelAll->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold));
                     this->btnCancelAll->ForeColor = System::Drawing::SystemColors::ButtonFace;
-                    this->btnCancelAll->Location = System::Drawing::Point(918, 577);
+                    this->btnCancelAll->Location = System::Drawing::Point(906, 599);
                     this->btnCancelAll->Name = L"btnCancelAll";
                     this->btnCancelAll->Size = System::Drawing::Size(148, 39);
                     this->btnCancelAll->TabIndex = 154;
@@ -3010,13 +3006,11 @@ namespace CS162MoodleProject {
                     this->newSemesterUI->Controls->Add(this->semEndDate);
                     this->newSemesterUI->Controls->Add(this->newSemYear);
                     this->newSemesterUI->Controls->Add(this->inputedCourseList);
-                    this->newSemesterUI->Controls->Add(this->panel8);
-                    this->newSemesterUI->Controls->Add(this->button1);
-                    this->newSemesterUI->Controls->Add(this->button2);
                     this->newSemesterUI->Controls->Add(this->label17);
                     this->newSemesterUI->Controls->Add(this->label20);
                     this->newSemesterUI->Controls->Add(this->newSem);
                     this->newSemesterUI->Controls->Add(this->label21);
+                    this->newSemesterUI->Controls->Add(this->panel8);
                     this->newSemesterUI->Location = System::Drawing::Point(278, 86);
                     this->newSemesterUI->Name = L"newSemesterUI";
                     this->newSemesterUI->Size = System::Drawing::Size(1130, 643);
@@ -3078,6 +3072,51 @@ namespace CS162MoodleProject {
                     this->inputedCourseList->Size = System::Drawing::Size(326, 392);
                     this->inputedCourseList->TabIndex = 71;
                     this->inputedCourseList->SelectedIndexChanged += gcnew System::EventHandler(this, &functionScreen::inputedCourseList_SelectedIndexChanged);
+                    //
+                    // label17
+                    //
+                    this->label17->AutoSize = true;
+                    this->label17->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+                    this->label17->ForeColor = System::Drawing::Color::White;
+                    this->label17->Location = System::Drawing::Point(240, 139);
+                    this->label17->Name = L"label17";
+                    this->label17->Size = System::Drawing::Size(86, 25);
+                    this->label17->TabIndex = 44;
+                    this->label17->Text = L"End date";
+                    //
+                    // label20
+                    //
+                    this->label20->AutoSize = true;
+                    this->label20->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+                    this->label20->ForeColor = System::Drawing::Color::White;
+                    this->label20->Location = System::Drawing::Point(53, 48);
+                    this->label20->Name = L"label20";
+                    this->label20->Size = System::Drawing::Size(89, 25);
+                    this->label20->TabIndex = 37;
+                    this->label20->Text = L"Semester";
+                    //
+                    // newSem
+                    //
+                    this->newSem->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
+                        static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->newSem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12));
+                    this->newSem->ForeColor = System::Drawing::SystemColors::Control;
+                    this->newSem->Location = System::Drawing::Point(59, 82);
+                    this->newSem->Margin = System::Windows::Forms::Padding(5);
+                    this->newSem->Name = L"newSem";
+                    this->newSem->Size = System::Drawing::Size(102, 34);
+                    this->newSem->TabIndex = 120;
+                    //
+                    // label21
+                    //
+                    this->label21->AutoSize = true;
+                    this->label21->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
+                    this->label21->ForeColor = System::Drawing::Color::White;
+                    this->label21->Location = System::Drawing::Point(53, 139);
+                    this->label21->Name = L"label21";
+                    this->label21->Size = System::Drawing::Size(92, 25);
+                    this->label21->TabIndex = 31;
+                    this->label21->Text = L"Start date";
                     //
                     // panel8
                     //
@@ -3472,88 +3511,6 @@ namespace CS162MoodleProject {
                     this->nsRegisEnd->Name = L"nsRegisEnd";
                     this->nsRegisEnd->Size = System::Drawing::Size(153, 31);
                     this->nsRegisEnd->TabIndex = 131;
-                    //
-                    // button1
-                    //
-                    this->button1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-                    this->button1->BackColor = System::Drawing::Color::DodgerBlue;
-                    this->button1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-                    this->button1->FlatAppearance->BorderColor = System::Drawing::Color::White;
-                    this->button1->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
-                    this->button1->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
-                    this->button1->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-                    this->button1->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold));
-                    this->button1->ForeColor = System::Drawing::Color::White;
-                    this->button1->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-                    this->button1->Location = System::Drawing::Point(747, 577);
-                    this->button1->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
-                    this->button1->Name = L"button1";
-                    this->button1->Size = System::Drawing::Size(148, 39);
-                    this->button1->TabIndex = 69;
-                    this->button1->Text = L"Finish";
-                    this->button1->UseMnemonic = false;
-                    this->button1->UseVisualStyleBackColor = false;
-                    //
-                    // button2
-                    //
-                    this->button2->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-                    this->button2->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Gray;
-                    this->button2->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)),
-                        static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)));
-                    this->button2->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-                    this->button2->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold));
-                    this->button2->ForeColor = System::Drawing::SystemColors::ButtonFace;
-                    this->button2->Location = System::Drawing::Point(918, 577);
-                    this->button2->Name = L"button2";
-                    this->button2->Size = System::Drawing::Size(148, 39);
-                    this->button2->TabIndex = 70;
-                    this->button2->Text = L"Cancel";
-                    this->button2->UseVisualStyleBackColor = true;
-                    //
-                    // label17
-                    //
-                    this->label17->AutoSize = true;
-                    this->label17->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
-                    this->label17->ForeColor = System::Drawing::Color::White;
-                    this->label17->Location = System::Drawing::Point(240, 139);
-                    this->label17->Name = L"label17";
-                    this->label17->Size = System::Drawing::Size(86, 25);
-                    this->label17->TabIndex = 44;
-                    this->label17->Text = L"End date";
-                    //
-                    // label20
-                    //
-                    this->label20->AutoSize = true;
-                    this->label20->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
-                    this->label20->ForeColor = System::Drawing::Color::White;
-                    this->label20->Location = System::Drawing::Point(53, 48);
-                    this->label20->Name = L"label20";
-                    this->label20->Size = System::Drawing::Size(89, 25);
-                    this->label20->TabIndex = 37;
-                    this->label20->Text = L"Semester";
-                    //
-                    // newSem
-                    //
-                    this->newSem->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
-                        static_cast<System::Int32>(static_cast<System::Byte>(26)));
-                    this->newSem->Font = (gcnew System::Drawing::Font(L"Segoe UI", 12));
-                    this->newSem->ForeColor = System::Drawing::SystemColors::Control;
-                    this->newSem->Location = System::Drawing::Point(59, 82);
-                    this->newSem->Margin = System::Windows::Forms::Padding(5);
-                    this->newSem->Name = L"newSem";
-                    this->newSem->Size = System::Drawing::Size(102, 34);
-                    this->newSem->TabIndex = 120;
-                    //
-                    // label21
-                    //
-                    this->label21->AutoSize = true;
-                    this->label21->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11));
-                    this->label21->ForeColor = System::Drawing::Color::White;
-                    this->label21->Location = System::Drawing::Point(53, 139);
-                    this->label21->Name = L"label21";
-                    this->label21->Size = System::Drawing::Size(92, 25);
-                    this->label21->TabIndex = 31;
-                    this->label21->Text = L"Start date";
                     //
                     // updateStdRes
                     //
@@ -4448,8 +4405,6 @@ namespace CS162MoodleProject {
                     //
                     this->courseRegisPanel->Controls->Add(this->listCourseRegis);
                     this->courseRegisPanel->Controls->Add(this->courseRegisInfo);
-                    this->courseRegisPanel->Controls->Add(this->button7);
-                    this->courseRegisPanel->Controls->Add(this->button8);
                     this->courseRegisPanel->Location = System::Drawing::Point(278, 86);
                     this->courseRegisPanel->Name = L"courseRegisPanel";
                     this->courseRegisPanel->Size = System::Drawing::Size(1130, 643);
@@ -4517,7 +4472,7 @@ namespace CS162MoodleProject {
                     this->courseUnRegisPanelBtn->Font = (gcnew System::Drawing::Font(L"Segoe UI Semibold", 10.2F, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
                         static_cast<System::Byte>(0)));
                     this->courseUnRegisPanelBtn->ForeColor = System::Drawing::Color::Red;
-                    this->courseUnRegisPanelBtn->Location = System::Drawing::Point(40, 534);
+                    this->courseUnRegisPanelBtn->Location = System::Drawing::Point(198, 534);
                     this->courseUnRegisPanelBtn->Name = L"courseUnRegisPanelBtn";
                     this->courseUnRegisPanelBtn->Size = System::Drawing::Size(148, 39);
                     this->courseUnRegisPanelBtn->TabIndex = 145;
@@ -4852,43 +4807,6 @@ namespace CS162MoodleProject {
                     this->courseRegisD2->Size = System::Drawing::Size(137, 31);
                     this->courseRegisD2->TabIndex = 143;
                     //
-                    // button7
-                    //
-                    this->button7->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-                    this->button7->BackColor = System::Drawing::Color::DodgerBlue;
-                    this->button7->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-                    this->button7->FlatAppearance->BorderColor = System::Drawing::Color::White;
-                    this->button7->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Transparent;
-                    this->button7->FlatAppearance->MouseOverBackColor = System::Drawing::Color::Transparent;
-                    this->button7->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-                    this->button7->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold));
-                    this->button7->ForeColor = System::Drawing::Color::White;
-                    this->button7->ImageAlign = System::Drawing::ContentAlignment::MiddleLeft;
-                    this->button7->Location = System::Drawing::Point(747, 577);
-                    this->button7->Margin = System::Windows::Forms::Padding(3, 10, 10, 3);
-                    this->button7->Name = L"button7";
-                    this->button7->Size = System::Drawing::Size(148, 39);
-                    this->button7->TabIndex = 69;
-                    this->button7->Text = L"Finish";
-                    this->button7->UseMnemonic = false;
-                    this->button7->UseVisualStyleBackColor = false;
-                    //
-                    // button8
-                    //
-                    this->button8->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Bottom | System::Windows::Forms::AnchorStyles::Right));
-                    this->button8->FlatAppearance->MouseDownBackColor = System::Drawing::Color::Gray;
-                    this->button8->FlatAppearance->MouseOverBackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(64)),
-                        static_cast<System::Int32>(static_cast<System::Byte>(64)), static_cast<System::Int32>(static_cast<System::Byte>(64)));
-                    this->button8->FlatStyle = System::Windows::Forms::FlatStyle::Flat;
-                    this->button8->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F, System::Drawing::FontStyle::Bold));
-                    this->button8->ForeColor = System::Drawing::SystemColors::ButtonFace;
-                    this->button8->Location = System::Drawing::Point(918, 577);
-                    this->button8->Name = L"button8";
-                    this->button8->Size = System::Drawing::Size(148, 39);
-                    this->button8->TabIndex = 70;
-                    this->button8->Text = L"Cancel";
-                    this->button8->UseVisualStyleBackColor = true;
-                    //
                     // functionScreen
                     //
                     this->AutoScaleDimensions = System::Drawing::SizeF(15, 37);
@@ -4906,11 +4824,6 @@ namespace CS162MoodleProject {
                     this->Controls->Add(this->btCloseApp);
                     this->Controls->Add(this->btMinimiseBG);
                     this->Controls->Add(this->btCloseBG);
-                    this->Controls->Add(this->stdViewSBUI);
-                    this->Controls->Add(this->courseRegisPanel);
-                    this->Controls->Add(this->newSemesterUI);
-                    this->Controls->Add(this->updateStdRes);
-                    this->Controls->Add(this->profilePanel);
                     this->Controls->Add(this->panelSchoolYear);
                     this->Controls->Add(this->courseUpdateUI);
                     this->Controls->Add(this->stdViewCourseUI);
@@ -4922,6 +4835,11 @@ namespace CS162MoodleProject {
                     this->Controls->Add(this->imSBpanel);
                     this->Controls->Add(this->courseExStd);
                     this->Controls->Add(this->changePassPanel);
+                    this->Controls->Add(this->stdViewSBUI);
+                    this->Controls->Add(this->courseRegisPanel);
+                    this->Controls->Add(this->newSemesterUI);
+                    this->Controls->Add(this->updateStdRes);
+                    this->Controls->Add(this->profilePanel);
                     this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16.2F));
                     this->ForeColor = System::Drawing::Color::Black;
                     this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
@@ -6352,7 +6270,7 @@ namespace CS162MoodleProject {
                         nsRegisEnd->Value = DateTime::Now;
                         nsRegisStart->Value = DateTime::Now;
 
-                        nsCourseID->Focus();
+                        nsCourseName->Focus();
                     } else {
                         inputedCourse[selectedIndex]->courseID = nsCourseID->Text;
                         inputedCourse[selectedIndex]->courseName = nsCourseName->Text;
@@ -6428,7 +6346,7 @@ namespace CS162MoodleProject {
                         return;
                     }
                     if (newSemYear->Text == "") {
-                        System::Windows::Forms::DialogResult dialogResult = MessageBox::Show("Academic year that the semester belong to missing!", "Warning", MessageBoxButtons::OK, MessageBoxIcon::Error);
+                        System::Windows::Forms::DialogResult dialogResult = MessageBox::Show("Missing academic year that the semester belong to!", "Warning", MessageBoxButtons::OK, MessageBoxIcon::Error);
                         return;
                     }
                     AcademicYears* curYear = yearList2;
@@ -7105,6 +7023,24 @@ namespace CS162MoodleProject {
                 }
 
             private:
+                string getFullDayFormat(string day) {
+                    if (day == "MON")
+                        return "Monday";
+                    if (day == "TUE")
+                        return "Tuesday";
+                    if (day == "WED")
+                        return "Wednesday";
+                    if (day == "THU")
+                        return "Thursday";
+                    if (day == "FRI")
+                        return "Friday";
+                    if (day == "SAT")
+                        return "Saturday";
+                    if (day == "SUN")
+                        return "Sunday";
+                }
+
+            private:
                 void writeDataToCourseRegistration(Courses* course)
                 {
                     courseRegisID->Text = convertString(course->courseID);
@@ -7116,8 +7052,8 @@ namespace CS162MoodleProject {
                     courseRegisEnd->Text = convertString(course->endDate.day + "/" + course->endDate.month + "/" + course->endDate.year);
 
                     courseRegisLecturer->Text = convertString(course->lecturerName);
-                    courseRegisD1->Text = convertString(course->day1 + "DAY");
-                    courseRegisD2->Text = convertString(course->day2 + "DAY");
+                    courseRegisD1->Text = convertString(getFullDayFormat(course->day1));
+                    courseRegisD2->Text = convertString(getFullDayFormat(course->day2));
                     courseRegisS1->Text = convertString(getSession(course->session1));
                     courseRegisS2->Text = convertString(getSession(course->session2));
                 }

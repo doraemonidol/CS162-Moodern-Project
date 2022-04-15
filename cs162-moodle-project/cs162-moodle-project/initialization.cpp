@@ -22,6 +22,8 @@ void inpScoreboards(Scoreboards*& scoreBoard){
     Scoreboards* cur = nullptr;
     int n;
     cin >> n;
+    if (n == 0)
+        return;
     while (n--){
         if (!scoreBoard) {
             scoreBoard = new Scoreboards;
@@ -41,6 +43,8 @@ void inpStaffs(Staffs*& staffList, Accounts*& accountList){
     Staffs* curStaff = nullptr;
     int n;
     cin >> n;
+    if (n == 0)
+        return;
     while (n--){
         if (!staffList) {
             staffList = new Staffs;
@@ -64,6 +68,9 @@ void inpYears(AcademicYears*& yearList) {
     AcademicYears* cur = yearList = nullptr;
     int n;
     cin >> n;
+    if (n == 0)
+        return;
+
     while (n--) {
         if (!yearList) {
             yearList = new AcademicYears;
@@ -79,8 +86,8 @@ void inpYears(AcademicYears*& yearList) {
         while (nClasses--) {
             Classes* tem = new Classes;
             cin >> tem->classID;
-            tem->next = cur->classes;
-            cur->classes = tem;
+            tem->next = yearList->classes;
+            yearList->classes = tem;
         }
     }
 }
@@ -89,6 +96,8 @@ void inpCourses(Courses*& courseList) {
     Courses* cur = courseList;
     int n;
     cin >> n;
+    if (n == 0)
+        return;
     while (n--) {
         if (!courseList) {
             courseList = new Courses;
@@ -103,7 +112,7 @@ void inpCourses(Courses*& courseList) {
         cin >> cur->credits >> cur->maxStudents >> cur->numStudents;
         cin.get();
         getline(cin, cur->lecturerName);
-        cin >> cur->room;
+        getline(cin, cur->room);
         inpDate(cur->startDate);
         inpDate(cur->endDate);
         cin >> cur->day1 >> cur->day2 >> cur->session1 >> cur->session2;
@@ -114,6 +123,8 @@ void inpCoursesUser(Courses*& courseList, Date startDate, Date endDate) {
     int n;
     cout << "Number of courses: ";
     cin >> n;
+    if (n == 0)
+        return;
     while (n--) {
         if (!courseList) {
             courseList = new Courses;
@@ -154,6 +165,8 @@ void inpStudents(Students*& studentList, Accounts*& accountList, AcademicYears* 
     Students* curStudent = studentList = nullptr;
     int n;
     cin >> n;
+    if (n == 0)
+        return;
     while (n--) {
         if (!studentList) {
             studentList = new Students;
@@ -234,6 +247,8 @@ void inpSemester(Semesters*& semesterList) {
     Semesters* cur = semesterList = nullptr;
     int n;
     cin >> n;
+    if (n == 0)
+        return;
     while (n--) {
         if (!semesterList) {
             semesterList = new Semesters;
@@ -277,10 +292,10 @@ void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts
     if (f.open("./Database/AcademicYears.txt")) {
         inpYears(year);
         f.back();
-    } else {
+    } /*else {
         ofstream fout("./Database/AcademicYears.txt");
         fout.close();
-    }
+    }*/
     cout << "*Academic Years* Loaded!\n";
     // INPUT SEMESTERS
     AcademicYears* curYear = year;
@@ -309,13 +324,13 @@ void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts
     cout << "*Courses* Loaded!\n";
 
     // INPUT STUDENTS
-    if (f.open("./Database/Students.txt")) {
+    if (f.open("./Database/Students.txt") && year) {
         inpStudents(student, account, year, year->classes);
         f.back();
-    } else {
+    } /* else {
         ofstream fout("./Database/Students.txt");
         fout.close();
-    }
+    }*/
     cout << "*Students Info* Loaded!\n";
 
     // INPUT STAFFS
@@ -323,8 +338,21 @@ void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts
         inpStaffs(staff, account);
         f.back();
     } else {
+        mkdir("./Database");
         ofstream fout("./Database/Staffs.txt");
+        fout << 1 << endl
+             << 123456 << endl
+             << "admin" << endl
+             << 1 << endl
+             << 0 << endl
+             << "Admin" << endl
+             << "System" << endl
+             << 'M' << endl
+             << "17 08 2003" << endl; 
         fout.close();
+        f.open("./Database/Staffs.txt");
+        inpStaffs(staff, account);
+        f.back();
     }
     cout << "*Staffs Info* Loaded*\n";
 }

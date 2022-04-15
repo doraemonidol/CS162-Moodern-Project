@@ -1,0 +1,5 @@
+C:\Users\NH\source\repos\CS162-Moodle-Project\cs162-moodle-project\CS162-Moodle-Project\x64\Release\CS162-Moodle-Project.vcxproj.AssemblyReference.cache
+C:\Users\NH\source\repos\CS162-Moodle-Project\cs162-moodle-project\CS162-Moodle-Project\x64\Release\CS162MoodleProject.functionScreen.resources
+C:\Users\NH\source\repos\CS162-Moodle-Project\cs162-moodle-project\CS162-Moodle-Project\x64\Release\CS162MoodleProject.inputClassCourse.resources
+C:\Users\NH\source\repos\CS162-Moodle-Project\cs162-moodle-project\CS162-Moodle-Project\x64\Release\CS162MoodleProject.loginScreen.resources
+C:\Users\NH\source\repos\CS162-Moodle-Project\cs162-moodle-project\CS162-Moodle-Project\x64\Release\CS162-Moodle-Project.vcxproj.GenerateResource.cache
