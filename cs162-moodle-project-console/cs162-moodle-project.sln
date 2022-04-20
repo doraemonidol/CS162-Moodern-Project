@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32126.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cs162-moodle-project", "cs162-moodle-project\cs162-moodle-project.vcxproj", "{7654C37D-C706-4F45-A082-C20AFBD8344A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7654C37D-C706-4F45-A082-C20AFBD8344A}.Debug|x64.ActiveCfg = Debug|x64
+		{7654C37D-C706-4F45-A082-C20AFBD8344A}.Debug|x64.Build.0 = Debug|x64
+		{7654C37D-C706-4F45-A082-C20AFBD8344A}.Debug|x86.ActiveCfg = Debug|Win32
+		{7654C37D-C706-4F45-A082-C20AFBD8344A}.Debug|x86.Build.0 = Debug|Win32
+		{7654C37D-C706-4F45-A082-C20AFBD8344A}.Release|x64.ActiveCfg = Release|x64
+		{7654C37D-C706-4F45-A082-C20AFBD8344A}.Release|x64.Build.0 = Release|x64
+		{7654C37D-C706-4F45-A082-C20AFBD8344A}.Release|x86.ActiveCfg = Release|Win32
+		{7654C37D-C706-4F45-A082-C20AFBD8344A}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C6F0D90A-4E4C-4998-8512-F96216E45E47}
+	EndGlobalSection
+EndGlobal

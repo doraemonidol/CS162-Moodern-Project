@@ -1,0 +1,127 @@
+#include "main.h"
+#include "allRole.h"
+#include "finalization.h"
+#include "initialization.h"
+#include "staff.h"
+#include "student.h"
+
+bool cmpDate(Date left, Date right, Date middle) {
+    if (left.formatYYYYmmDD() <= middle.formatYYYYmmDD() && middle.formatYYYYmmDD() <= right.formatYYYYmmDD())
+        return true;
+    return false;
+}
+
+void studentEnrollment(Students* student, Courses* courseList) {
+    Date curDate;
+    curDate.getCurrentDate();
+    int n = 0;
+    Courses *courseEnrolled = student->enrolledCourse, *choosenCourse, *curCourse;
+    while (courseEnrolled) {
+        n++;
+        courseEnrolled = courseEnrolled->next;
+    }
+
+    if (n >= 5) {
+        cout << "You have reached course registration limit (5/5).\n";
+        return;
+    }
+    n = 0;
+    curCourse = courseList;
+    while (curCourse) {
+        if (cmpDate(curCourse->startDate, curCourse->endDate, curDate)) {
+            cout << "---------------\n";
+            cout << "Course ID: " << curCourse->courseID << '\n';
+            cout << "Course name: " << curCourse->courseName << '\n';
+            cout << "Number of credits: " << curCourse->credits << '\n';
+            cout << "Current enrolled students: " << curCourse->numStudents << "/" << curCourse->maxStudents << '\n';
+            cout << "Lecturer: " << curCourse->lecturerName << '\n';
+            cout << "Room: " << curCourse->room << '\n';
+            cout << "Schedule: " << curCourse->day1 << " (" << curCourse->session1 << ") and " << curCourse->day2 << " (" << curCourse->session2 << ")\n";
+            n++;
+        }
+        curCourse = curCourse->next;
+    }
+    if (n == 0) {
+        cout << "There are no registration sessions of any course at the moment. Please come back later!\n";
+        return;
+    }
+    while (true) {
+        cout << "-------------------";
+        cout << "Type in Course ID you want to register: \n>> ";
+        string courseID;
+        cin >> courseID;
+        choosenCourse = courseList->findCourseByID(courseID);
+        if (choosenCourse && cmpDate(choosenCourse->startDate, choosenCourse->endDate, curDate) && student->enrolledCourse->checkCourseConflict(choosenCourse) && choosenCourse->numStudents + 1 <= choosenCourse->maxStudents) {
+            Students* tmp = choosenCourse->studentList;
+            choosenCourse->studentList = new Students;
+            choosenCourse->studentList->studentID= student->studentID;
+            choosenCourse->studentList->account= student->account;
+            choosenCourse->studentList->classID= student->classID;
+            choosenCourse->studentList->scoreBoards= student->scoreBoards;
+            choosenCourse->studentList->next = tmp;
+            choosenCourse->numStudents++;
+
+            Courses* prevCourse = student->enrolledCourse;
+            student->enrolledCourse = new Courses;
+            
+            student->enrolledCourse->courseID = choosenCourse->courseID;
+            student->enrolledCourse->courseName = choosenCourse->courseName;
+            student->enrolledCourse->startDate = choosenCourse->startDate;
+            student->enrolledCourse->endDate = choosenCourse->endDate;
+            student->enrolledCourse->day1 = choosenCourse->day1;
+            student->enrolledCourse->day2 = choosenCourse->day2;
+            student->enrolledCourse->session1 = choosenCourse->session1;
+            student->enrolledCourse->session2 = choosenCourse->session2;
+            student->enrolledCourse->room = choosenCourse->room;
+            student->enrolledCourse->lecturerName = choosenCourse->lecturerName;
+
+            student->enrolledCourse->next = prevCourse;
+            cout << "Succesfully enroll in " << student->enrolledCourse->courseID << "!\n";
+            return;
+        } else {
+            if (!choosenCourse)
+                cout << "Why did you type in an unavailable courses! Try again!\n";
+            else {
+                if (choosenCourse->numStudents + 1 > choosenCourse->maxStudents)
+                    cout << "Maximum students reached. You can't enroll in this course.\n";
+                else {
+                    if (!cmpDate(choosenCourse->startDate, choosenCourse->endDate, curDate))
+                        cout << "Course registration not available!\n";
+                    else
+                        cout << "Schedule conflicted with some enrolled courses!\n";
+                }
+            }
+        }
+    }
+}
+
+bool deleteEnrolledCourse(Students*& student, string courseID, Date curday) {
+    Courses* courses = student->enrolledCourse;
+    if (courses->courseID == courseID) {
+        student->enrolledCourse = student->enrolledCourse->next;
+        //check
+        Date left, right;
+        left = courses->startDate;
+        right = courses->endDate;
+        if (!cmpDate(left, right, curday)) return false;
+        //check
+        delete courses;
+        return true;
+    }
+    while (courses->next) {
+        if (courses->next->courseID == courseID) {
+            Courses* erase = courses->next;
+            courses->next = courses->next->next;
+            //check
+            Date left, right;
+            left = courses->startDate;
+            right = courses->endDate;
+            if (!cmpDate(left, right, curday)) return false;
+            //check
+            delete erase;
+            return true;
+        }
+        courses = courses->next;
+    }
+    return false;
+}
