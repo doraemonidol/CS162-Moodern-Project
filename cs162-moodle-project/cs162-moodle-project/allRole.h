@@ -15,6 +15,6 @@ Accounts* find_Accounts(Accounts*& accountList, string account, string password)
 Students* find_Students_by_accounts(Students*& studentList, Accounts*& current_account);
 //
 void Students_functions(Accounts*& current_account, AcademicYears*& yearlist, Students*& studentlist);
-void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist, Students*& studentList);
+void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist, Students*& studentList, Accounts*& accountList);
 //
 Classes* findClass(Students* student, Classes* classes);

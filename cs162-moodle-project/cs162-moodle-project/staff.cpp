@@ -281,13 +281,13 @@ void addSemester(Semesters* &smt){
     }
 }
 
-void CSVFirstYearStudent(Students* studentList, Classes* classes) {
+void CSVFirstYearStudent(Students*& studentList, Classes* classes, Accounts*& accountList) {
     ifstream f;
     f.open("./Database/FirstYearStudents.txt");
     string trash;
     getline(f, trash);
     while (!f.eof()) {
-        string studentID = "", no = "", firstname = "", lastname = "", gender = "", socialID = "";
+        string studentID = "", no = "", firstname = "", lastname = "", gender = "", socialID = "", classID = "";
         Date dob;
         getline(f, no, ',');
         f.get();
@@ -302,22 +302,36 @@ void CSVFirstYearStudent(Students* studentList, Classes* classes) {
         f >> dob.day >> dob.month;
         getline(f, dob.year, ',');
         f.get();
-        f >> socialID;
+        getline(f, socialID, ',');
+        f.get();
+        f >> classID;
+        if (classID != classes->classID) continue;
         if (!studentList->findStudentByID(studentID)) {
             Students* student1 = new Students;
             Students* student2 = new Students;
             student1->account = new Accounts;
             student2->account = new Accounts;
+            Accounts* tmp = new Accounts;
             student1->studentID = student2->studentID = studentID;
-            student1->account->firstname = student2->account->firstname = firstname;
-            student1->account->lastname = student2->account->lastname = lastname;
-            student1->account->gender = student2->account->gender = gender[0];
-            student1->account->doB = student2->account->doB = dob;
-            student1->account->socialID = student2->account->socialID = socialID;
+            student1->account->firstname = student2->account->firstname = tmp->firstname = firstname;
+            student1->account->lastname = student2->account->lastname = tmp->lastname = lastname;
+            student1->account->gender = student2->account->gender = tmp->gender = gender[0];
+            student1->account->doB = student2->account->doB = tmp->doB = dob;
+            student1->account->socialID = student2->account->socialID = tmp->socialID = socialID;
+            student1->account->pwd = student2->account->pwd = tmp->socialID = "123456";
+            student1->account->uName = student2->account->uName = tmp->uName = studentID;
+            student1->classID = student2->classID = classID;
             student1->next = studentList;
             studentList = student1;
             student2->next = classes->students;
             classes->students = student2;
+            if (!accountList) {
+                accountList = tmp;
+            }
+            else {
+                tmp->next = accountList;
+                accountList = tmp;
+            }
         }
     }
     f.close();

@@ -129,7 +129,7 @@ void viewCourseScoreboards(Courses* course) {
 		Scoreboards* scoreBoards = student->scoreBoards;
 		cout << student->account->firstname << ' ' << student->account->lastname << ": \n";
 		while (scoreBoards) {
-			cout << ">>>" << scoreBoards->courseName << ": " << scoreBoards->finalScore << '\n';
+			if (scoreBoards->courseID==course->courseID) cout << ">>>" << scoreBoards->courseName << ": " << scoreBoards->finalScore << '\n';
 			scoreBoards = scoreBoards->next;
 		}
 		student = student->next;
@@ -215,7 +215,7 @@ void Change_password(Accounts*& current_account) {
 	}
 }
 //
-void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist, Students*& studentList) {
+void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist, Students*& studentList, Accounts*& accountList) {
 	int cur_key; bool flag = true;
 	while (flag == true) {
 		system("cls");
@@ -436,7 +436,14 @@ void Staffs_functions(Accounts*& current_account, AcademicYears*& yearlist, Stud
 		}
 		case 14: {
 			system("cls");
-			CSVFirstYearStudent(studentList, yearlist->classes);
+			cout << "Please enter the class ID: ";
+			string importClass;
+			cin >> importClass;
+			Classes* import = yearlist->classes->findByID(importClass);
+			if (!import) {
+				cout << "No class found!\n";
+			}
+			else CSVFirstYearStudent(studentList, import, accountList);
 			cout << "\nPress any key to return to menu...";
 			_getch();
 			break;
@@ -555,7 +562,7 @@ void Login(Accounts*& accountList, int& status, AcademicYears*& yearlist, Studen
 				}
 				case 1: {
 					cout << "LOGIN SUCCESSFULLY" << '\n';
-					Staffs_functions(cur_account, yearlist, studentlist);
+					Staffs_functions(cur_account, yearlist, studentlist, accountList);
 					break;
 				}
 				default: {

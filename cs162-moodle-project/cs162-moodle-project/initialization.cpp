@@ -165,6 +165,7 @@ void inpStudents(Students*& studentList, Accounts*& accountList, Courses* course
             curStudent = curStudent->next;
         }
         cin >> curStudent->studentID;
+
         inpAccount(curStudent->account);
         if (!accountList) {
             accountList = curAccount = curStudent->account;
