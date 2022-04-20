@@ -327,11 +327,9 @@ void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts
     // INPUT STUDENTS
     if (f.open("./Database/Students.txt")) {
         if (year) {
-            cout << 1;
             inpStudents(student, account, year, year->classes);
             f.back();
         } else {
-            cout << 2;
             f.back();
         }
     }

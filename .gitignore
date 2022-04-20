@@ -49,3 +49,4 @@ obj/
 # generated files
 *.vcxproj
 x64/
+Release/
