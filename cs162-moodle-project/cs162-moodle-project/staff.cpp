@@ -77,6 +77,8 @@ void updateCourseInfomation(Courses* courseList) {
             }
 
             cout << "Update course successfully!\n";
+            cout << "Press any key to Return to Main Screen!";
+            //_getch();
             return;
         } else {
             cout << "Can't find course with ID " << courseID << ". Double check and try again!\n";
@@ -84,41 +86,65 @@ void updateCourseInfomation(Courses* courseList) {
     }
 }
 
-void deleteCourseByID(Courses*& courseList) {
-    string courseID;
-    while (true) {
-        cout << "Enter the course ID to delete: \n>> ";
-        cin >> courseID;
-        Courses *curCourse = courseList, *father = nullptr;
-        while (curCourse && curCourse->courseID != courseID) {
-            father = curCourse;
-            curCourse = curCourse->next;
+void deleteCourseByID(Courses*& courseList, string courseID, Students *student) {
+    
+    Courses *curCourse = courseList, *father = nullptr;
+    while (curCourse->courseID != courseID) {
+        father = curCourse;
+        curCourse = curCourse->next;
+    }
+
+    if (curCourse) {
+        while (curCourse->studentList) {
+            Students* tmp = curCourse->studentList->next;
+            delete curCourse->studentList;
+            curCourse->studentList = tmp;
         }
-        if (curCourse) {
-            while (curCourse->studentList) {
-                Students* tmp = curCourse->studentList->next;
-                delete curCourse->studentList;
-                curCourse->studentList = tmp;
+        if (father)
+            father->next = curCourse->next;
+        else
+            courseList = courseList->next;
+        // remove enrolled course for students here
+
+        while (student) {
+            Courses *pre = nullptr, *enroll = student->enrolledCourse;
+            Scoreboards *preSB = nullptr, *sb = student->scoreBoards;
+            while (enroll) {
+                if (enroll->courseID == courseID) {
+                    if (pre)
+                        pre->next = enroll->next;
+                    else
+                        student->enrolledCourse = student->enrolledCourse->next;
+                    delete enroll;
+                    break;
+                }
+                pre = enroll;
+                enroll = enroll->next;
             }
-            if (father)
-                father->next = curCourse->next;
-            else
-                courseList = courseList->next;
-            // remove enrolled course for students here
-            delete curCourse;
-            cout << "Delete course successfully!\n";
-            return;
-        } else {
-            cout << "Can't find course with ID " << courseID << ". Double check and try again!\n";
+
+            while (sb) {
+                if (sb->courseID == courseID) {
+                    if (preSB)
+                        preSB->next = sb->next;
+                    else
+                        student->scoreBoards = student->scoreBoards->next;
+                    delete sb;
+                    break;
+                }
+                preSB = sb;
+                sb = sb->next;
+            }
+
+            student = student->next;
         }
+
+        delete curCourse;
     }
 }
-pair<Scoreboards*, Scoreboards*> AddScoreBoard(Students* student, string courseID, Courses* courses) {
+Scoreboards* AddScoreBoard(Students* student, string courseID) {
     Scoreboards* scoreboard = student->scoreBoards;
-    Scoreboards* scoreboard2 = courses->findCourseByID(courseID)->studentList->findStudentByID(student->studentID)->scoreBoards;
     while (scoreboard && scoreboard->next) {
         scoreboard = scoreboard->next;
-        scoreboard2 = scoreboard2->next;
     }
     string courseName = student->enrolledCourse->findCourseByID(courseID)->courseName;
     if (scoreboard) {
@@ -126,12 +152,7 @@ pair<Scoreboards*, Scoreboards*> AddScoreBoard(Students* student, string courseI
         scoreboard->next->next = nullptr;
         scoreboard->next->courseID = courseID;
         scoreboard->next->courseName = courseName;
-
-        scoreboard2->next = new Scoreboards;
-        scoreboard2->next->next = nullptr;
-        scoreboard2->next->courseID = courseID;
-        scoreboard2->next->courseName = courseName;
-        return { scoreboard->next, scoreboard2->next };
+        return scoreboard->next;
     }
     else {
         scoreboard = new Scoreboards;
@@ -139,13 +160,7 @@ pair<Scoreboards*, Scoreboards*> AddScoreBoard(Students* student, string courseI
         scoreboard->courseID = courseID;
         student->scoreBoards = scoreboard;
         scoreboard->courseName = courseName;
-
-        scoreboard2 = new Scoreboards;
-        scoreboard2->next = nullptr;
-        scoreboard2->courseID = courseID;
-        courses->findCourseByID(courseID)->studentList->findStudentByID(student->studentID)->scoreBoards = scoreboard;
-        scoreboard2->courseName = courseName;
-        return { scoreboard, scoreboard2 };
+        return scoreboard;
     }
 }
 
@@ -153,53 +168,45 @@ bool UpdateStudentScoreboard(Students* allStudentList, string studentID, string 
     Students* student = allStudentList->findStudentByID(studentID);
     if (!student) return false;
     Scoreboards* scoreboard = student->findScoreboardByID(courseID);
-    Scoreboards* scoreboard2 = coursesList->findCourseByID(courseID)->studentList->findStudentByID(studentID)->findScoreboardByID(courseID);
     if (!scoreboard) {
-        if (coursesList->findCourseByID(courseID)) {
-            auto tmp = AddScoreBoard(student, courseID, coursesList);
-            scoreboard = tmp.first;
-            scoreboard2 = tmp.second;
-        }
+        if (coursesList->findCourseByID(courseID))
+            scoreboard = AddScoreBoard(student, courseID);
         else return false;
     }
-    cout << ">>>" << student->account->firstname << " " << student->account->lastname << "'s Scoreboard of " << coursesList->findCourseByID(courseID)->courseName << " Update Session<<<\n";
+    cout << ">>>" << student->account->firstname << " " << student->account->lastname << "'s Scoreboard of " << coursesList->findCourseByID(courseID) << " Update Session<<<\n";
     double sc;
     cout << "(Input nothing to skip editing a session)\n";
     cout << "Midterm Score update to: ";
     cin >> sc;
     scoreboard->midtermScore = sc;
-    scoreboard2->midtermScore = sc;
-    cout << "Total Score update to: ";
+    cout << "Lab Score update to: ";
     cin >> sc;
     scoreboard->totalScore = sc;
-    scoreboard2->totalScore = sc;
     cout << "Final Score update to: ";
     cin >> sc;
     scoreboard->finalScore = sc;
-    scoreboard2->finalScore = sc;
-    cout << "Other Score update to: ";
+    cout << "Bonus Score update to: ";
     cin >> sc;
     scoreboard->otherScore = sc;
-    scoreboard2->otherScore = sc;
     return true;
 }
 
-void courseToCSV(Courses* course) {
+void courseToCSV(Courses* course, string filename) {
     ofstream f;
-    f.open("./Database/courseCSV.txt");
-    f << course->courseID << '\n';
+    f.open(filename);
+    f << course->courseID << " student list" << '\n';
     f << "Student ID, Name\n";
     Students* student = course->studentList;
     while (student) {
-        f << student->studentID << ", " << student->account->firstname << " " << student->account->lastname << '\n';
+        f << student->studentID << ", " << student->account->lastname << " " << student->account->firstname << '\n';
         student = student->next;
     }
     f.close();
 }
 
-void CSVToScoreboard(Courses* course, Students* studentList) {
+void CSVToScoreboard(Courses* course, Students* student, string filename) {
     ifstream f;
-    f.open("./Database/scoreboardCSV.txt");
+    f.open(filename);
     string trash="231", courseID;
     f >> courseID;
     f.get();
@@ -212,13 +219,20 @@ void CSVToScoreboard(Courses* course, Students* studentList) {
         f.get();
         getline(f, name, ',');
         f.get();
-        Scoreboards* scoreboard = course->findStudentByID(studentID)->findScoreboardByID(courseID);
-        Scoreboards* scoreboard2 = studentList->findStudentByID(studentID)->findScoreboardByID(courseID);
+        Scoreboards* scoreboard = course->findStudentByID(studentID)->findScoreboardByID(courseID),
+                   * scoreboard2 = student->findStudentByID(studentID)->findScoreboardByID(courseID);
+
         if (!scoreboard) {
-            auto tmp = AddScoreBoard(studentList->findStudentByID(studentID), courseID, course);
-            scoreboard = tmp.first;
-            scoreboard2 = tmp.second;
+            scoreboard = AddScoreBoard(course->findStudentByID(studentID), courseID);
         }
+        if (!scoreboard2) {
+            scoreboard2 = AddScoreBoard(student->findStudentByID(studentID), courseID);
+        }
+        scoreboard->courseID = course->courseID;
+        scoreboard->courseName = course->courseName;
+        scoreboard2->courseID = course->courseID;
+        scoreboard2->courseName = course->courseName;
+
         f >> scoreboard->totalScore;
         scoreboard2->totalScore = scoreboard->totalScore;
         f.get();
@@ -279,61 +293,4 @@ void addSemester(Semesters* &smt){
         cur_smt->next = smt;
         smt = cur_smt;
     }
-}
-
-void CSVFirstYearStudent(Students*& studentList, Classes* classes, Accounts*& accountList) {
-    ifstream f;
-    f.open("./Database/FirstYearStudents.txt");
-    string trash;
-    getline(f, trash);
-    while (!f.eof()) {
-        string studentID = "", no = "", firstname = "", lastname = "", gender = "", socialID = "", classID = "";
-        Date dob;
-        getline(f, no, ',');
-        f.get();
-        getline(f, studentID, ',');
-        f.get();
-        getline(f, firstname, ',');
-        f.get();
-        getline(f, lastname, ',');
-        f.get();
-        getline(f, gender, ',');
-        f.get();
-        f >> dob.day >> dob.month;
-        getline(f, dob.year, ',');
-        f.get();
-        getline(f, socialID, ',');
-        f.get();
-        f >> classID;
-        if (classID != classes->classID) continue;
-        if (!studentList->findStudentByID(studentID)) {
-            Students* student1 = new Students;
-            Students* student2 = new Students;
-            student1->account = new Accounts;
-            student2->account = new Accounts;
-            Accounts* tmp = new Accounts;
-            student1->studentID = student2->studentID = studentID;
-            student1->account->firstname = student2->account->firstname = tmp->firstname = firstname;
-            student1->account->lastname = student2->account->lastname = tmp->lastname = lastname;
-            student1->account->gender = student2->account->gender = tmp->gender = gender[0];
-            student1->account->doB = student2->account->doB = tmp->doB = dob;
-            student1->account->socialID = student2->account->socialID = tmp->socialID = socialID;
-            student1->account->pwd = student2->account->pwd = tmp->socialID = "123456";
-            student1->account->uName = student2->account->uName = tmp->uName = studentID;
-            student1->classID = student2->classID = classID;
-            student1->next = studentList;
-            studentList = student1;
-            student2->next = classes->students;
-            classes->students = student2;
-            if (!accountList) {
-                accountList = tmp;
-            }
-            else {
-                tmp->next = accountList;
-                accountList = tmp;
-            }
-        }
-    }
-    f.close();
-    cout << "First year students imported successfully!\n";
 }

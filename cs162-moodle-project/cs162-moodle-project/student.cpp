@@ -77,6 +77,8 @@ void studentEnrollment(Students* student, Courses* courseList) {
 
             student->enrolledCourse->next = prevCourse;
             cout << "Succesfully enroll in " << student->enrolledCourse->courseID << "!\n";
+            cout << "Press any key to Return to Main Screen!";
+            //_getch();
             return;
         } else {
             if (!choosenCourse)
@@ -101,8 +103,22 @@ bool deleteEnrolledCourse(Students*& student, string courseID, Date curday) {
         student->enrolledCourse = student->enrolledCourse->next;
         //check
         Date left, right;
-        left = courses->startDate;
-        right = courses->endDate;
+        left.day += courses->day1[0];
+        left.day += courses->day1[1];
+        left.month += courses->day1[3];
+        left.month += courses->day1[4];
+        left.year += courses->day1[6];
+        left.year += courses->day1[7];
+        left.year += courses->day1[8];
+        left.year += courses->day1[9];
+        right.day += courses->day2[0];
+        right.day += courses->day2[1];
+        right.month += courses->day2[3];
+        right.month += courses->day2[4];
+        right.year += courses->day2[6];
+        right.year += courses->day2[7];
+        right.year += courses->day2[8];
+        right.year += courses->day2[9];
         if (!cmpDate(left, right, curday)) return false;
         //check
         delete courses;
@@ -114,8 +130,22 @@ bool deleteEnrolledCourse(Students*& student, string courseID, Date curday) {
             courses->next = courses->next->next;
             //check
             Date left, right;
-            left = courses->startDate;
-            right = courses->endDate;
+            left.day += erase->day1[0];
+            left.day += erase->day1[1];
+            left.month += erase->day1[3];
+            left.month += erase->day1[4];
+            left.year += erase->day1[6];
+            left.year += erase->day1[7];
+            left.year += erase->day1[8];
+            left.year += erase->day1[9];
+            right.day += erase->day2[0];
+            right.day += erase->day2[1];
+            right.month += erase->day2[3];
+            right.month += erase->day2[4];
+            right.year += erase->day2[6];
+            right.year += erase->day2[7];
+            right.year += erase->day2[8];
+            right.year += erase->day2[9];
             if (!cmpDate(left, right, curday)) return false;
             //check
             delete erase;

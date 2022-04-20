@@ -1,28 +1,65 @@
 #pragma once
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-#include <stdio.h>
-#include <cstdio>
-#include <io.h>  
-#include <stdlib.h> 
 #include <chrono>
-#include <ctime>
-#include <string>
 #include <conio.h>
+#include <cstdio>
+#include <ctime>
+#include <fstream>
+#include <io.h>
+#include <iomanip>
+#include <iostream>
+#include <msclr/marshal_cppstd.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string>
+#include <list>
+#include <direct.h>
+#include <winuser.h>
+#include <functional>
 using namespace std;
+using namespace System;
+using namespace System::Windows::Forms;
 #pragma warning(disable : 4996)
+
+struct Scoreboards;
+namespace CS162MoodleProject {
+    public ref class studentClass : public System::Object {
+    public:
+        System::String ^ studentID;
+        System::String ^ lName;
+        System::String ^ fName;
+        System::String ^ socialID;
+        System::DateTime date;
+        int gender;
+    };
+    public
+        ref class courseClass : public System::Object {
+        public:
+            System::String ^ courseName;
+            System::String ^ courseID;
+            System::String ^ credits;
+            System::String ^ maxStd;
+            System::String ^ room;
+            System::String ^ lecturer;
+            System::DateTime regisS;
+            System::DateTime regisE;
+            int d1, s1, d2, s2;
+        };
+    
+        }
+
 struct Courses;
 struct Date {
     string day = "", month = "", year = "";
-    void getCurrentDate() {
+    void getCurrentDate()
+    {
         time_t now = time(0);
         tm* ltm = localtime(&now);
         year = to_string(ltm->tm_year + 1900);
         month = to_string(ltm->tm_mon + 1);
         day = to_string(ltm->tm_mday);
     }
-    string formatYYYYmmDD() {
+    string formatYYYYmmDD()
+    {
         string res = year;
         if (month.length() == 1)
             res += "0";
@@ -42,7 +79,7 @@ struct Accounts {
     int role = 0; //1 (true): staff / 0 (false): student
     string socialID = "";
     string lastname = "", firstname = "";
-    char gender; //Female Male, Prefer not to say -> F,M,O
+    char gender; //female male, prefer not to say -> f,m,o
     Date doB;
     Accounts* next = nullptr;
 };
@@ -62,28 +99,23 @@ struct Students {
     Courses* enrolledCourse = nullptr;
     Students* next = nullptr;
 
-    Students* findStudentByID(string studentID) {
+    Students* findStudentByID(string studentID)
+    {
         Students* list = this;
         while (list) {
-            if (list->studentID == studentID) return list;
+            if (list->studentID == studentID)
+                return list;
             list = list->next;
         }
         return nullptr;
     }
 
-    Students* findStudentByAccount(Accounts* acc) {
-        Students* list = this;
-        while (list) {
-            if (list->account == acc) return list;
-            list = list->next;
-        }
-        return nullptr;
-    }
-
-    Scoreboards* findScoreboardByID(string courseID) {
+    Scoreboards* findScoreboardByID(string courseID)
+    {
         Scoreboards* list = this->scoreBoards;
         while (list) {
-            if (list->courseID == courseID) return list;
+            if (list->courseID == courseID)
+                return list;
             list = list->next;
         }
         return nullptr;
@@ -95,10 +127,12 @@ struct Classes {
     Students* students = nullptr;
     Classes* next = nullptr;
 
-    Classes* findByID(string classID) {
+    Classes* findByID(string classID)
+    {
         Classes* list = this;
         while (list) {
-            if (list->classID == classID) return list;
+            if (list->classID == classID)
+                return list;
             list = list->next;
         }
         return nullptr;
@@ -120,10 +154,12 @@ struct Courses {
     string lecturerName = "";
     Courses* next = nullptr;
 
-    Students* findStudentByID(string studentID) {
+    Students* findStudentByID(string studentID)
+    {
         Students* list = this->studentList;
         while (list) {
-            if (list->studentID == studentID) return list;
+            if (list->studentID == studentID)
+                return list;
             list = list->next;
         }
         return nullptr;
@@ -169,6 +205,10 @@ struct AcademicYears {
     Semesters* semesters = nullptr;
     Classes* classes = nullptr;
     AcademicYears* next = nullptr;
+    string getFullYear() {
+        string tmp = "20";
+        return tmp + year.substr(0, 2) + " - " + tmp + year.substr(2, 2);
+    }
 };
 
 struct FileInputManager {
@@ -189,9 +229,17 @@ struct FileInputManager {
         fsetpos(stdin, &pos); /* for C9X */
         cin.clear();
     }
-    void open(string fileName) {
+    bool open(string fileName)
+    {
+        ifstream fin(fileName);
+        if (!fin.is_open()) {
+            fin.close();
+            return false;
+        }
+        fin.close();
         store();
-        freopen(fileName.c_str(), "r", stdin);
+        freopen(fileName.c_str(), "r", stdin); 
+        return true;
     }
 };
 struct FileOutputManager {
@@ -217,3 +265,11 @@ struct FileOutputManager {
         freopen(fileName.c_str(), "w", stdout);
     }
 };
+
+
+
+int getWindowWidth();
+void setConsoleCursorPosition(const short& x, const short& y);
+int getStartPositionOfACenteredText(const int& textSize);
+int printCenteredText(const std::string& text, const int& coordY);
+void setWindowSize(const short& width, const short& height);

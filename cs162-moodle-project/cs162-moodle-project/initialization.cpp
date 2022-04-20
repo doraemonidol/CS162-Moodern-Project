@@ -22,6 +22,8 @@ void inpScoreboards(Scoreboards*& scoreBoard){
     Scoreboards* cur = nullptr;
     int n;
     cin >> n;
+    if (n == 0)
+        return;
     while (n--){
         if (!scoreBoard) {
             scoreBoard = new Scoreboards;
@@ -39,9 +41,10 @@ void inpScoreboards(Scoreboards*& scoreBoard){
 
 void inpStaffs(Staffs*& staffList, Accounts*& accountList){
     Staffs* curStaff = nullptr;
-    Accounts* curAccount = accountList; // Khong gan nullptr vi luc nay accountList da chua du lieu cua studen
     int n;
     cin >> n;
+    if (n == 0)
+        return;
     while (n--){
         if (!staffList) {
             staffList = new Staffs;
@@ -53,10 +56,10 @@ void inpStaffs(Staffs*& staffList, Accounts*& accountList){
         }
         inpAccount(curStaff->account);
         if (!accountList) {
-            accountList = curAccount = curStaff->account;
+            accountList = curStaff->account;
         } else {
-            curAccount->next = curStaff->account;
-            curAccount = curAccount->next;
+            curStaff->account->next = accountList;
+            accountList = curStaff->account;
         }
     }
 }
@@ -65,7 +68,9 @@ void inpYears(AcademicYears*& yearList) {
     AcademicYears* cur = yearList = nullptr;
     int n;
     cin >> n;
-    cin.get();
+    if (n == 0)
+        return;
+
     while (n--) {
         if (!yearList) {
             yearList = new AcademicYears;
@@ -74,14 +79,15 @@ void inpYears(AcademicYears*& yearList) {
             cur->next = new AcademicYears;
             cur = cur->next;
         }
+        cin.get();
         getline(cin, cur->year);
         int nClasses;
         cin >> nClasses;
         while (nClasses--) {
             Classes* tem = new Classes;
             cin >> tem->classID;
-            tem->next = cur->classes;
-            cur->classes = tem;
+            tem->next = yearList->classes;
+            yearList->classes = tem;
         }
     }
 }
@@ -90,6 +96,8 @@ void inpCourses(Courses*& courseList) {
     Courses* cur = courseList;
     int n;
     cin >> n;
+    if (n == 0)
+        return;
     while (n--) {
         if (!courseList) {
             courseList = new Courses;
@@ -104,7 +112,7 @@ void inpCourses(Courses*& courseList) {
         cin >> cur->credits >> cur->maxStudents >> cur->numStudents;
         cin.get();
         getline(cin, cur->lecturerName);
-        cin >> cur->room;
+        getline(cin, cur->room);
         inpDate(cur->startDate);
         inpDate(cur->endDate);
         cin >> cur->day1 >> cur->day2 >> cur->session1 >> cur->session2;
@@ -115,6 +123,8 @@ void inpCoursesUser(Courses*& courseList, Date startDate, Date endDate) {
     int n;
     cout << "Number of courses: ";
     cin >> n;
+    if (n == 0)
+        return;
     while (n--) {
         if (!courseList) {
             courseList = new Courses;
@@ -151,11 +161,12 @@ void inpCoursesUser(Courses*& courseList, Date startDate, Date endDate) {
         courseList = cur;
     }
 }
-void inpStudents(Students*& studentList, Accounts*& accountList, Courses* courseList, Classes* classList) {
+void inpStudents(Students*& studentList, Accounts*& accountList, AcademicYears* yearList, Classes* classList) {
     Students* curStudent = studentList = nullptr;
-    Accounts* curAccount = accountList = nullptr;
     int n;
     cin >> n;
+    if (n == 0)
+        return;
     while (n--) {
         if (!studentList) {
             studentList = new Students;
@@ -168,12 +179,11 @@ void inpStudents(Students*& studentList, Accounts*& accountList, Courses* course
 
         inpAccount(curStudent->account);
         if (!accountList) {
-            accountList = curAccount = curStudent->account;
+            accountList = curStudent->account;
         } else {
-            curAccount->next = curStudent->account;
-            curAccount = curAccount->next;
+            curStudent->account->next = accountList;
+            accountList = curStudent->account;
         }
-
         cin >> curStudent->classID;
         Classes* tmp = classList->findByID(curStudent->classID);
         inpScoreboards(curStudent->scoreBoards);
@@ -182,6 +192,7 @@ void inpStudents(Students*& studentList, Accounts*& accountList, Courses* course
             student->studentID = curStudent->studentID;
             student->account = curStudent->account;
             student->enrolledCourse = curStudent->enrolledCourse;
+            student->scoreBoards = curStudent->scoreBoards;
             student->next = tmp->students;
             tmp->students = student;
         }
@@ -190,36 +201,45 @@ void inpStudents(Students*& studentList, Accounts*& accountList, Courses* course
         while (nCourse--) {
             Courses* newCourse = new Courses;
             cin >> newCourse->courseID;
-            Courses* course = courseList->findCourseByID(newCourse->courseID);
+            bool kt = true;
+            AcademicYears* year = yearList;
+            while (year && kt) {
+                Semesters* sem = year->semesters;
+                if (sem) {
+                    Courses* course = sem->courses->findCourseByID(newCourse->courseID);
 
-            if (!course) {
-                delete newCourse;
-                continue;
+                    if (!course) {
+                    } else {
+                        newCourse->courseName = course->courseName;
+                        newCourse->credits = course->credits;
+                        newCourse->maxStudents = course->maxStudents;
+                        newCourse->numStudents = course->numStudents;
+                        newCourse->startDate = course->startDate;
+                        newCourse->endDate = course->endDate;
+                        newCourse->day1 = course->day1;
+                        newCourse->day2 = course->day2;
+                        newCourse->session1 = course->session1;
+                        newCourse->session2 = course->session2;
+                        newCourse->room = course->room;
+                        newCourse->lecturerName = course->lecturerName;
+                        newCourse->next = curStudent->enrolledCourse;
+                        curStudent->enrolledCourse = newCourse;
+
+                        Students* tmp = course->studentList;
+                        course->studentList = new Students;
+                        course->studentList->studentID = curStudent->studentID;
+                        course->studentList->account = curStudent->account;
+                        course->studentList->classID = curStudent->classID;
+                        course->studentList->scoreBoards = curStudent->scoreBoards;
+                        course->studentList->enrolledCourse = curStudent->enrolledCourse;
+                        course->studentList->next = tmp;
+                        kt = false;
+                    }
+                }
+                year = year->next;
             }
-
-            newCourse->courseName = course->courseName;
-            newCourse->credits = course->credits;
-            newCourse->maxStudents = course->maxStudents;
-            newCourse->numStudents = course->numStudents;
-            newCourse->startDate = course->startDate;
-            newCourse->endDate = course->endDate;
-            newCourse->day1 = course->day1;
-            newCourse->day2 = course->day2;
-            newCourse->session1 = course->session1;
-            newCourse->session2 = course->session2;
-            newCourse->room = course->room;
-            newCourse->lecturerName = course->lecturerName;
-            newCourse->next = curStudent->enrolledCourse;
-            curStudent->enrolledCourse = newCourse;
-
-            Students* tmp = course->studentList;
-            course->studentList = new Students;
-            course->studentList->studentID = curStudent->studentID;
-            course->studentList->account = curStudent->account;
-            course->studentList->classID = curStudent->classID;
-            course->studentList->scoreBoards = curStudent->scoreBoards;
-            course->studentList->enrolledCourse = curStudent->enrolledCourse;
-            course->studentList->next = tmp;
+            if (kt)
+                delete newCourse;
         }
     }
 }
@@ -228,6 +248,8 @@ void inpSemester(Semesters*& semesterList) {
     Semesters* cur = semesterList = nullptr;
     int n;
     cin >> n;
+    if (n == 0)
+        return;
     while (n--) {
         if (!semesterList) {
             semesterList = new Semesters;
@@ -260,23 +282,29 @@ void inpClasses(Classes*& classList) {
     }
 }
 
-void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts*& account) {
+void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts*& account)
+{
     year = nullptr;
     student = nullptr;
     staff = nullptr;
     account = nullptr;
     FileInputManager f;
     // INPUT ACADEMIC YEARS
-    f.open("./Database/AcademicYears.txt");
-    inpYears(year);
-    f.back();
+    if (f.open("./Database/AcademicYears.txt")) {
+        inpYears(year);
+        f.back();
+    } /*else {
+        ofstream fout("./Database/AcademicYears.txt");
+        fout.close();
+    }*/
     cout << "*Academic Years* Loaded!\n";
     // INPUT SEMESTERS
     AcademicYears* curYear = year;
     while (curYear) {
-        f.open("./Database/" + curYear->year + "-Semesters.txt");
-        inpSemester(curYear->semesters);
-        f.back();
+        if (f.open("./Database/" + curYear->year + "-Semesters.txt")) {
+            inpSemester(curYear->semesters);
+            f.back();
+        }
         curYear = curYear->next;
     }
 
@@ -286,10 +314,10 @@ void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts
     while (curYear) {
         Semesters* curSem = curYear->semesters;
         while (curSem) {
-            Date tmp;
-            f.open("./Database/" + year->year + "-S" + string(1, (curSem->semesterNo + '0')) + "-Courses.txt");
-            inpCourses(year->semesters->courses);
-            f.back();
+            if (f.open("./Database/" + curYear->year + "-S" + string(1, (curSem->semesterNo + '0')) + "-Courses.txt")) {
+                inpCourses(curSem->courses);
+                f.back();
+            }
             curSem = curSem->next;
         }
         curYear = curYear->next;
@@ -297,14 +325,38 @@ void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts
     cout << "*Courses* Loaded!\n";
 
     // INPUT STUDENTS
-    f.open("./Database/Students.txt");
-    inpStudents(student, account, year->semesters->courses, year->classes);
-    f.back();
+    if (f.open("./Database/Students.txt")) {
+        if (year) {
+            cout << 1;
+            inpStudents(student, account, year, year->classes);
+            f.back();
+        } else {
+            cout << 2;
+            f.back();
+        }
+    }
     cout << "*Students Info* Loaded!\n";
 
     // INPUT STAFFS
-    f.open("./Database/Staffs.txt");
-    inpStaffs(staff, account);
-    f.back();
+    if (f.open("./Database/Staffs.txt")) {
+        inpStaffs(staff, account);
+        f.back();
+    } else {
+        mkdir("./Database");
+        ofstream fout("./Database/Staffs.txt");
+        fout << 1 << endl
+             << 123456 << endl
+             << "admin" << endl
+             << 1 << endl
+             << 0 << endl
+             << "Admin" << endl
+             << "System" << endl
+             << 'M' << endl
+             << "17 08 2003" << endl; 
+        fout.close();
+        f.open("./Database/Staffs.txt");
+        inpStaffs(staff, account);
+        f.back();
+    }
     cout << "*Staffs Info* Loaded*\n";
 }
