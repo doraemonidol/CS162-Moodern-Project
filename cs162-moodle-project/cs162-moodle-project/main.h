@@ -13,6 +13,8 @@
 #include <string>
 #include <list>
 #include <direct.h>
+#include <winuser.h>
+#include <functional>
 using namespace std;
 using namespace System;
 using namespace System::Windows::Forms;
@@ -22,24 +24,24 @@ struct Scoreboards;
 namespace CS162MoodleProject {
     public ref class studentClass : public System::Object {
     public:
-        String ^ studentID;
-        String ^ lName;
-        String ^ fName;
-        String ^ socialID;
-        DateTime date;
+        System::String ^ studentID;
+        System::String ^ lName;
+        System::String ^ fName;
+        System::String ^ socialID;
+        System::DateTime date;
         int gender;
     };
     public
         ref class courseClass : public System::Object {
         public:
-            String ^ courseName;
-            String ^ courseID;
-            String ^ credits;
-            String ^ maxStd;
-            String ^ room;
-            String ^ lecturer;
-            DateTime regisS;
-            DateTime regisE;
+            System::String ^ courseName;
+            System::String ^ courseID;
+            System::String ^ credits;
+            System::String ^ maxStd;
+            System::String ^ room;
+            System::String ^ lecturer;
+            System::DateTime regisS;
+            System::DateTime regisE;
             int d1, s1, d2, s2;
         };
     
@@ -230,8 +232,11 @@ struct FileInputManager {
     bool open(string fileName)
     {
         ifstream fin(fileName);
-        if (!fin.is_open())
+        if (!fin.is_open()) {
+            fin.close();
             return false;
+        }
+        fin.close();
         store();
         freopen(fileName.c_str(), "r", stdin); 
         return true;
@@ -260,3 +265,11 @@ struct FileOutputManager {
         freopen(fileName.c_str(), "w", stdout);
     }
 };
+
+
+
+int getWindowWidth();
+void setConsoleCursorPosition(const short& x, const short& y);
+int getStartPositionOfACenteredText(const int& textSize);
+int printCenteredText(const std::string& text, const int& coordY);
+void setWindowSize(const short& width, const short& height);

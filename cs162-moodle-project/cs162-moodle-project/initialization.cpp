@@ -324,13 +324,16 @@ void initData(AcademicYears*& year, Students*& student, Staffs*& staff, Accounts
     cout << "*Courses* Loaded!\n";
 
     // INPUT STUDENTS
-    if (f.open("./Database/Students.txt") && year) {
-        inpStudents(student, account, year, year->classes);
-        f.back();
-    } /* else {
-        ofstream fout("./Database/Students.txt");
-        fout.close();
-    }*/
+    if (f.open("./Database/Students.txt")) {
+        if (year) {
+            cout << 1;
+            inpStudents(student, account, year, year->classes);
+            f.back();
+        } else {
+            cout << 2;
+            f.back();
+        }
+    }
     cout << "*Students Info* Loaded!\n";
 
     // INPUT STAFFS

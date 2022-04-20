@@ -747,6 +747,12 @@ namespace CS162MoodleProject {
 
             private:
 
+
+            private:
+
+
+            private:
+
                 Accounts* curAccount;
 	public:
 		functionScreen(void)
@@ -962,13 +968,13 @@ namespace CS162MoodleProject {
 		{
                     this->components = (gcnew System::ComponentModel::Container());
                     System::ComponentModel::ComponentResourceManager ^ resources = (gcnew System::ComponentModel::ComponentResourceManager(functionScreen::typeid));
-                    System::Windows::Forms::ListViewGroup ^ listViewGroup1 = (gcnew System::Windows::Forms::ListViewGroup(L"aaaa", System::Windows::Forms::HorizontalAlignment::Right));
-                    System::Windows::Forms::ListViewGroup ^ listViewGroup2 = (gcnew System::Windows::Forms::ListViewGroup(L"aaaa", System::Windows::Forms::HorizontalAlignment::Right));
-                    System::Windows::Forms::ListViewGroup ^ listViewGroup3 = (gcnew System::Windows::Forms::ListViewGroup(L"aaaa", System::Windows::Forms::HorizontalAlignment::Right));
-                    System::Windows::Forms::ListViewGroup ^ listViewGroup4 = (gcnew System::Windows::Forms::ListViewGroup(L"Overall Gpa", System::Windows::Forms::HorizontalAlignment::Center));
-                    System::Windows::Forms::ListViewGroup ^ listViewGroup5 = (gcnew System::Windows::Forms::ListViewGroup(L"Overall Gpa", System::Windows::Forms::HorizontalAlignment::Center));
-                    System::Windows::Forms::ListViewGroup ^ listViewGroup6 = (gcnew System::Windows::Forms::ListViewGroup(L"aaaa", System::Windows::Forms::HorizontalAlignment::Right));
-                    System::Windows::Forms::ListViewGroup ^ listViewGroup7 = (gcnew System::Windows::Forms::ListViewGroup(L"aaaa", System::Windows::Forms::HorizontalAlignment::Right));
+                    System::Windows::Forms::ListViewGroup ^ listViewGroup15 = (gcnew System::Windows::Forms::ListViewGroup(L"aaaa", System::Windows::Forms::HorizontalAlignment::Right));
+                    System::Windows::Forms::ListViewGroup ^ listViewGroup16 = (gcnew System::Windows::Forms::ListViewGroup(L"aaaa", System::Windows::Forms::HorizontalAlignment::Right));
+                    System::Windows::Forms::ListViewGroup ^ listViewGroup17 = (gcnew System::Windows::Forms::ListViewGroup(L"aaaa", System::Windows::Forms::HorizontalAlignment::Right));
+                    System::Windows::Forms::ListViewGroup ^ listViewGroup18 = (gcnew System::Windows::Forms::ListViewGroup(L"Overall Gpa", System::Windows::Forms::HorizontalAlignment::Center));
+                    System::Windows::Forms::ListViewGroup ^ listViewGroup19 = (gcnew System::Windows::Forms::ListViewGroup(L"Overall Gpa", System::Windows::Forms::HorizontalAlignment::Center));
+                    System::Windows::Forms::ListViewGroup ^ listViewGroup20 = (gcnew System::Windows::Forms::ListViewGroup(L"aaaa", System::Windows::Forms::HorizontalAlignment::Right));
+                    System::Windows::Forms::ListViewGroup ^ listViewGroup21 = (gcnew System::Windows::Forms::ListViewGroup(L"aaaa", System::Windows::Forms::HorizontalAlignment::Right));
                     this->greetText = (gcnew System::Windows::Forms::Label());
                     this->btMinimise = (gcnew System::Windows::Forms::Button());
                     this->btCloseApp = (gcnew System::Windows::Forms::Button());
@@ -1833,10 +1839,10 @@ namespace CS162MoodleProject {
                         this->enrolledCourseD2, this->enrolledCourseRoom, this->enrolledCourseLecturer });
                     this->viewCourseUI->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F));
                     this->viewCourseUI->ForeColor = System::Drawing::Color::White;
-                    listViewGroup1->Header = L"aaaa";
-                    listViewGroup1->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Right;
-                    listViewGroup1->Name = L"aaaaa";
-                    this->viewCourseUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup1 });
+                    listViewGroup15->Header = L"aaaa";
+                    listViewGroup15->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Right;
+                    listViewGroup15->Name = L"aaaaa";
+                    this->viewCourseUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup15 });
                     this->viewCourseUI->HideSelection = false;
                     this->viewCourseUI->Location = System::Drawing::Point(280, 107);
                     this->viewCourseUI->Name = L"viewCourseUI";
@@ -1913,10 +1919,10 @@ namespace CS162MoodleProject {
                         this->viewStudentClassID });
                     this->viewStudentUI->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F));
                     this->viewStudentUI->ForeColor = System::Drawing::Color::White;
-                    listViewGroup2->Header = L"aaaa";
-                    listViewGroup2->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Right;
-                    listViewGroup2->Name = L"aaaaa";
-                    this->viewStudentUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup2 });
+                    listViewGroup16->Header = L"aaaa";
+                    listViewGroup16->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Right;
+                    listViewGroup16->Name = L"aaaaa";
+                    this->viewStudentUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup16 });
                     this->viewStudentUI->HideSelection = false;
                     this->viewStudentUI->Location = System::Drawing::Point(280, 107);
                     this->viewStudentUI->Name = L"viewStudentUI";
@@ -1986,10 +1992,10 @@ namespace CS162MoodleProject {
                         this->viewCoSBStudentName, this->viewCOSBClass, this->viewCoSBTotal, this->viewCoSBFinal, this->viewCoSBMid, this->viewCoSBOther });
                     this->viewCoSBUI->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F));
                     this->viewCoSBUI->ForeColor = System::Drawing::Color::White;
-                    listViewGroup3->Header = L"aaaa";
-                    listViewGroup3->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Right;
-                    listViewGroup3->Name = L"aaaaa";
-                    this->viewCoSBUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup3 });
+                    listViewGroup17->Header = L"aaaa";
+                    listViewGroup17->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Right;
+                    listViewGroup17->Name = L"aaaaa";
+                    this->viewCoSBUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup17 });
                     this->viewCoSBUI->HideSelection = false;
                     this->viewCoSBUI->Location = System::Drawing::Point(280, 107);
                     this->viewCoSBUI->Name = L"viewCoSBUI";
@@ -2059,11 +2065,11 @@ namespace CS162MoodleProject {
                         this->viewClSBStudentName, this->viewClSBCourseID, this->viewClSBTotalMark, this->viewClSBGPA, this->viewClSBOGPA });
                     this->viewClSBUI->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F));
                     this->viewClSBUI->ForeColor = System::Drawing::Color::White;
-                    listViewGroup4->Header = L"Overall Gpa";
-                    listViewGroup4->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Center;
-                    listViewGroup4->Name = L"aaaaaadff";
-                    listViewGroup4->Tag = L"aa";
-                    this->viewClSBUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup4 });
+                    listViewGroup18->Header = L"Overall Gpa";
+                    listViewGroup18->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Center;
+                    listViewGroup18->Name = L"aaaaaadff";
+                    listViewGroup18->Tag = L"aa";
+                    this->viewClSBUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup18 });
                     this->viewClSBUI->HideSelection = false;
                     this->viewClSBUI->Location = System::Drawing::Point(280, 107);
                     this->viewClSBUI->Name = L"viewClSBUI";
@@ -2126,11 +2132,11 @@ namespace CS162MoodleProject {
                         this->viewClassUIYear, this->viewClassUIClID });
                     this->viewClassUI->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F));
                     this->viewClassUI->ForeColor = System::Drawing::Color::White;
-                    listViewGroup5->Header = L"Overall Gpa";
-                    listViewGroup5->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Center;
-                    listViewGroup5->Name = L"aaaaaadff";
-                    listViewGroup5->Tag = L"aa";
-                    this->viewClassUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup5 });
+                    listViewGroup19->Header = L"Overall Gpa";
+                    listViewGroup19->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Center;
+                    listViewGroup19->Name = L"aaaaaadff";
+                    listViewGroup19->Tag = L"aa";
+                    this->viewClassUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup19 });
                     this->viewClassUI->HideSelection = false;
                     this->viewClassUI->Location = System::Drawing::Point(280, 107);
                     this->viewClassUI->Name = L"viewClassUI";
@@ -4266,10 +4272,10 @@ namespace CS162MoodleProject {
                         this->columnHeader8, this->columnHeader9 });
                     this->stdViewCourseUI->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F));
                     this->stdViewCourseUI->ForeColor = System::Drawing::Color::White;
-                    listViewGroup6->Header = L"aaaa";
-                    listViewGroup6->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Right;
-                    listViewGroup6->Name = L"aaaaa";
-                    this->stdViewCourseUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup6 });
+                    listViewGroup20->Header = L"aaaa";
+                    listViewGroup20->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Right;
+                    listViewGroup20->Name = L"aaaaa";
+                    this->stdViewCourseUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup20 });
                     this->stdViewCourseUI->HideSelection = false;
                     this->stdViewCourseUI->Location = System::Drawing::Point(280, 107);
                     this->stdViewCourseUI->Name = L"stdViewCourseUI";
@@ -4345,10 +4351,10 @@ namespace CS162MoodleProject {
                         this->columnHeader11, this->columnHeader12, this->columnHeader16, this->columnHeader15, this->columnHeader14, this->columnHeader17 });
                     this->stdViewSBUI->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.2F));
                     this->stdViewSBUI->ForeColor = System::Drawing::Color::White;
-                    listViewGroup7->Header = L"aaaa";
-                    listViewGroup7->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Right;
-                    listViewGroup7->Name = L"aaaaa";
-                    this->stdViewSBUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup7 });
+                    listViewGroup21->Header = L"aaaa";
+                    listViewGroup21->HeaderAlignment = System::Windows::Forms::HorizontalAlignment::Right;
+                    listViewGroup21->Name = L"aaaaa";
+                    this->stdViewSBUI->Groups->AddRange(gcnew cli::array<System::Windows::Forms::ListViewGroup ^>(1) { listViewGroup21 });
                     this->stdViewSBUI->HideSelection = false;
                     this->stdViewSBUI->Location = System::Drawing::Point(280, 107);
                     this->stdViewSBUI->Name = L"stdViewSBUI";
@@ -4840,9 +4846,11 @@ namespace CS162MoodleProject {
                     this->Controls->Add(this->newSemesterUI);
                     this->Controls->Add(this->updateStdRes);
                     this->Controls->Add(this->profilePanel);
+                    this->DoubleBuffered = true;
                     this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16.2F));
                     this->ForeColor = System::Drawing::Color::Black;
                     this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+                    this->Icon = (cli::safe_cast<System::Drawing::Icon ^>(resources->GetObject(L"$this.Icon")));
                     this->Margin = System::Windows::Forms::Padding(6, 7, 6, 7);
                     this->Name = L"functionScreen";
                     this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
@@ -6453,6 +6461,7 @@ namespace CS162MoodleProject {
 
                             List<scoreBoardU ^> ^ cl = scoreBoardUList[classIDIndex];
                             scoreBoardU ^ std = cl[studentIndex];
+                            if (sbUCourse->Items->Count > 0)
                             if (midMark->Text == convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->midtermScore)) && finMark->Text == convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->finalScore)) && totMark->Text == convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->totalScore)) && oMark->Text == convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->otherScore))) {
                             } else {
                                 System::Windows::Forms::DialogResult dialogResult = MessageBox::Show("Are you sure you want to discard the changes you made?", "Warning", MessageBoxButtons::YesNo, MessageBoxIcon::Exclamation);
@@ -6461,6 +6470,7 @@ namespace CS162MoodleProject {
                                 }
                             }
                         }
+                            sbUCoursePan->Hide();
                             updateStdRes->Hide();
 
                             classIDIndex = -1;
@@ -6617,6 +6627,8 @@ namespace CS162MoodleProject {
                     std->course[sbUCourse->SelectedIndex]->mark->totalScore = stoi(convertToString(totMark->Text));
                     std->course[sbUCourse->SelectedIndex]->mark->otherScore = stoi(convertToString(oMark->Text));
                     MessageBox::Show("Scoreboard Updated Successfully!", "Status", MessageBoxButtons::OK, MessageBoxIcon::Asterisk);
+
+                    sbUCoursePan->Hide();
                 }
 
             private:
@@ -6845,6 +6857,7 @@ namespace CS162MoodleProject {
                         } else {
                             List<scoreBoardU ^> ^ cl = scoreBoardUList[classIDIndex];
                             scoreBoardU ^ std = cl[studentIndex];
+                            if (sbUCourse->Items->Count > 0)
                             if (midMark->Text == convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->midtermScore)) && finMark->Text == convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->finalScore)) && totMark->Text == convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->totalScore)) && oMark->Text == convertString(formatDouble(std->course[sbUCourse->SelectedIndex]->mark->otherScore))) {
                             } else {
                                 System::Windows::Forms::DialogResult dialogResult = MessageBox::Show("Are you sure you want to discard the changes you made?", "Warning", MessageBoxButtons::YesNo, MessageBoxIcon::Exclamation);

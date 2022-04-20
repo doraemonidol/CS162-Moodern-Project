@@ -48,3 +48,4 @@ obj/
 ### main ###
 # generated files
 *.vcxproj
+x64/

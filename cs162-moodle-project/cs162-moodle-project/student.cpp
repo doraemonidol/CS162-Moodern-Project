@@ -78,7 +78,7 @@ void studentEnrollment(Students* student, Courses* courseList) {
             student->enrolledCourse->next = prevCourse;
             cout << "Succesfully enroll in " << student->enrolledCourse->courseID << "!\n";
             cout << "Press any key to Return to Main Screen!";
-            _getch();
+            //_getch();
             return;
         } else {
             if (!choosenCourse)

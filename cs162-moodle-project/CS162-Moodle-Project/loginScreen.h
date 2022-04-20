@@ -9,7 +9,7 @@
 
 namespace CS162MoodleProject {
 
-	using namespace System;
+	//using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
@@ -27,6 +27,11 @@ namespace CS162MoodleProject {
         Students* studentList1 = nullptr;
         Staffs* staffList1 = nullptr;
         Accounts* accountList1 = nullptr;
+
+    private:
+        System::Windows::Forms::PictureBox ^ pictureBox1;
+
+    public:
         Accounts* cur_account;
     public:
 		loginScreen(void)
@@ -105,6 +110,8 @@ namespace CS162MoodleProject {
                     this->panel2 = (gcnew System::Windows::Forms::Panel());
                     this->passwordInput = (gcnew System::Windows::Forms::TextBox());
                     this->loginExit = (gcnew System::Windows::Forms::Button());
+                    this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
+                    (cli::safe_cast<System::ComponentModel::ISupportInitialize ^>(this->pictureBox1))->BeginInit();
                     this->SuspendLayout();
                     //
                     // button1
@@ -216,11 +223,25 @@ namespace CS162MoodleProject {
                     this->loginExit->UseVisualStyleBackColor = false;
                     this->loginExit->Click += gcnew System::EventHandler(this, &loginScreen::loginExit_Click);
                     //
+                    // pictureBox1
+                    //
+                    this->pictureBox1->Anchor = static_cast<System::Windows::Forms::AnchorStyles>((System::Windows::Forms::AnchorStyles::Left | System::Windows::Forms::AnchorStyles::Right));
+                    this->pictureBox1->BackColor = System::Drawing::Color::Transparent;
+                    this->pictureBox1->BackgroundImageLayout = System::Windows::Forms::ImageLayout::None;
+                    this->pictureBox1->Image = (cli::safe_cast<System::Drawing::Image ^>(resources->GetObject(L"pictureBox1.Image")));
+                    this->pictureBox1->Location = System::Drawing::Point(428, 108);
+                    this->pictureBox1->Name = L"pictureBox1";
+                    this->pictureBox1->Size = System::Drawing::Size(250, 250);
+                    this->pictureBox1->SizeMode = System::Windows::Forms::PictureBoxSizeMode::StretchImage;
+                    this->pictureBox1->TabIndex = 13;
+                    this->pictureBox1->TabStop = false;
+                    //
                     // loginScreen
                     //
                     this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::None;
                     this->BackgroundImage = (cli::safe_cast<System::Drawing::Image ^>(resources->GetObject(L"$this.BackgroundImage")));
                     this->ClientSize = System::Drawing::Size(725, 469);
+                    this->Controls->Add(this->pictureBox1);
                     this->Controls->Add(this->loginExit);
                     this->Controls->Add(this->panel2);
                     this->Controls->Add(this->passwordInput);
@@ -234,12 +255,14 @@ namespace CS162MoodleProject {
                     this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16.2F, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
                         static_cast<System::Byte>(0)));
                     this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
+                    this->Icon = (cli::safe_cast<System::Drawing::Icon ^>(resources->GetObject(L"$this.Icon")));
                     this->Margin = System::Windows::Forms::Padding(6, 7, 6, 7);
                     this->Name = L"loginScreen";
                     this->RightToLeft = System::Windows::Forms::RightToLeft::No;
                     this->StartPosition = System::Windows::Forms::FormStartPosition::CenterScreen;
                     this->Text = L"Moodle";
                     this->Load += gcnew System::EventHandler(this, &loginScreen::MyForm_Load);
+                    (cli::safe_cast<System::ComponentModel::ISupportInitialize ^>(this->pictureBox1))->EndInit();
                     this->ResumeLayout(false);
                     this->PerformLayout();
                 }
@@ -269,6 +292,7 @@ namespace CS162MoodleProject {
             private:
                 System::Void MyForm_Load(System::Object ^ sender, System::EventArgs ^ e)
                 {
+                    usernameInput->Focus();
                 }
 
             private:

@@ -78,7 +78,7 @@ void updateCourseInfomation(Courses* courseList) {
 
             cout << "Update course successfully!\n";
             cout << "Press any key to Return to Main Screen!";
-            _getch();
+            //_getch();
             return;
         } else {
             cout << "Can't find course with ID " << courseID << ". Double check and try again!\n";
