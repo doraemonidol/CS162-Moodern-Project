@@ -50,3 +50,4 @@ obj/
 *.vcxproj
 x64/
 Release/
+installer
