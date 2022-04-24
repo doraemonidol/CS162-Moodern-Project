@@ -4822,7 +4822,6 @@ namespace CS162MoodleProject {
                     this->ClientSize = System::Drawing::Size(1436, 771);
                     this->Controls->Add(this->greetText);
                     this->Controls->Add(this->allRolePanel);
-                    this->Controls->Add(this->studentFunctionPanel);
                     this->Controls->Add(this->date);
                     this->Controls->Add(this->time);
                     this->Controls->Add(this->staffFunctionPanel);
@@ -4846,6 +4845,7 @@ namespace CS162MoodleProject {
                     this->Controls->Add(this->newSemesterUI);
                     this->Controls->Add(this->updateStdRes);
                     this->Controls->Add(this->profilePanel);
+                    this->Controls->Add(this->studentFunctionPanel);
                     this->DoubleBuffered = true;
                     this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16.2F));
                     this->ForeColor = System::Drawing::Color::Black;
