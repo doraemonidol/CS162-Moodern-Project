@@ -26,9 +26,9 @@
 
 ## About The Project
 
-![image](screenshots/staff-all-function.png)
-
 Moodern is a combination of Moodle, which is a course management system, and Modern. It is used to help students, lecturers and staffs manage courses, with a modern and user-friendly GUI.
+
+![image](screenshots/staff-all-function.png)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -57,7 +57,7 @@ $ choco install make
 $ git clone https://github.com/doraemonidol/CS162-Moodern-Project.git
 
 # Go into the repository
-$ cd CS162-Moodle-Project\cs162-moodle-project
+$ cd CS162-Moodle-Project/cs162-moodle-project
 
 # Build the executable
 $ make
@@ -71,8 +71,9 @@ $ Release/CS162-Moodle-Project.exe
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-For detail guide on how to use the program please refer to the [Documentation](https://example.com)
-Or watch the demo video here [Moodern Demo](https://www.youtube.com/)
+For detail guide on how to use the program please refer to the [Documentation](documentations/moodern-manual-guide.pdf).
+
+Or watch the demo video [here](https://youtu.be/1caRDVyvWWI).
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
@@ -143,8 +144,6 @@ Project Link: [https://github.com/doraemonidol/CS162-Moodern-Project](https://gi
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
-
-Use this space to list resources you find helpful and would like to give credit to. I've included a few of my favorites to kick things off!
 
 * [Notion Workspace](https://www.notion.so/CS162-Project-3d85252f0f574f2195ee750498b70d53)
 * [Youtube Playlist to Learn WinForms](https://www.youtube.com/watch?v=HcxlYkU8aY0&list=PL2i17lRog5pBe7t9zJdFdugQ6bxgjntJD)
