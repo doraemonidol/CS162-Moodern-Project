@@ -1,3 +1,0 @@
-No, Student ID, First name, Last name, Gender, Date of Birth, Social ID
-1, 21125041, Hung, Dang Hoang Nhat, M, 17 08 2003, 080203012852
-2, 21125079, Long, Nguyen Ngoc, M, 04 02 2003, 079203040445
