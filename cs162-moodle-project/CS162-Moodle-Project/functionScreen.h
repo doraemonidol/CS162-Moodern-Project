@@ -3174,6 +3174,7 @@ namespace CS162MoodleProject {
                     //
                     this->nsCourseID->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
                         static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->nsCourseID->CharacterCasing = System::Windows::Forms::CharacterCasing::Upper;
                     this->nsCourseID->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
                     this->nsCourseID->ForeColor = System::Drawing::SystemColors::Control;
                     this->nsCourseID->Location = System::Drawing::Point(6, 149);
@@ -4501,6 +4502,7 @@ namespace CS162MoodleProject {
                     //
                     this->courseRegisID->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(26)), static_cast<System::Int32>(static_cast<System::Byte>(26)),
                         static_cast<System::Int32>(static_cast<System::Byte>(26)));
+                    this->courseRegisID->CharacterCasing = System::Windows::Forms::CharacterCasing::Upper;
                     this->courseRegisID->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
                     this->courseRegisID->ForeColor = System::Drawing::SystemColors::Control;
                     this->courseRegisID->Location = System::Drawing::Point(6, 149);
@@ -4829,6 +4831,10 @@ namespace CS162MoodleProject {
                     this->Controls->Add(this->btCloseApp);
                     this->Controls->Add(this->btMinimiseBG);
                     this->Controls->Add(this->btCloseBG);
+                    this->Controls->Add(this->studentFunctionPanel);
+                    this->Controls->Add(this->newSemesterUI);
+                    this->Controls->Add(this->updateStdRes);
+                    this->Controls->Add(this->profilePanel);
                     this->Controls->Add(this->panelSchoolYear);
                     this->Controls->Add(this->courseUpdateUI);
                     this->Controls->Add(this->stdViewCourseUI);
@@ -4842,10 +4848,6 @@ namespace CS162MoodleProject {
                     this->Controls->Add(this->changePassPanel);
                     this->Controls->Add(this->stdViewSBUI);
                     this->Controls->Add(this->courseRegisPanel);
-                    this->Controls->Add(this->newSemesterUI);
-                    this->Controls->Add(this->updateStdRes);
-                    this->Controls->Add(this->profilePanel);
-                    this->Controls->Add(this->studentFunctionPanel);
                     this->DoubleBuffered = true;
                     this->Font = (gcnew System::Drawing::Font(L"Segoe UI", 16.2F));
                     this->ForeColor = System::Drawing::Color::Black;
@@ -5274,7 +5276,8 @@ namespace CS162MoodleProject {
                         if (Class == L"" && Course == L"")
                             return;
                         if (Class != L"") {
-
+                            if (!yearList2)
+                                return;
                             Classes* classes = yearList2->classes;
                             while (classes && classes->classID != convertToString(Class))
                                 classes = classes->next;
@@ -6504,14 +6507,16 @@ namespace CS162MoodleProject {
 
                                 treeViewsbU->Nodes[classIndex]->Nodes->Add(gcnew TreeNode(sbU->stdID));
 
-                                Scoreboards* sb = std->scoreBoards;
+                                Scoreboards* sb = studentList2->findStudentByID(std->studentID)->scoreBoards;
                                 sbU->course = gcnew List<courseMark ^>();
                                 while (sb) {
-                                    courseMark ^ mark = gcnew courseMark();
-                                    mark->mark = sb;
+                                    if (yearList2->semesters->courses->findCourseByID(sb->courseID)) {
+                                        courseMark ^ mark = gcnew courseMark();
+                                        mark->mark = sb;
 
-                                    sbU->course->Add(mark);
-                                    sb = sb->next;
+                                        sbU->course->Add(mark);
+                                        sb = sb->next;
+                                    }
                                 }
                                 sbList->Add(sbU);
 
@@ -6627,6 +6632,12 @@ namespace CS162MoodleProject {
                     std->course[sbUCourse->SelectedIndex]->mark->finalScore = stoi(convertToString(finMark->Text));
                     std->course[sbUCourse->SelectedIndex]->mark->totalScore = stoi(convertToString(totMark->Text));
                     std->course[sbUCourse->SelectedIndex]->mark->otherScore = stoi(convertToString(oMark->Text));
+                    
+                    Scoreboards* sb2 = yearList2->semesters->courses->findCourseByID(convertToString(sbUCourse->Text))->studentList->findStudentByID(convertToString(std->stdID))->findScoreboardByID(convertToString(sbUCourse->Text));
+                    sb2->midtermScore = stoi(convertToString(midMark->Text));
+                    sb2->finalScore = stoi(convertToString(finMark->Text));
+                    sb2->totalScore = stoi(convertToString(totMark->Text));
+                    sb2->otherScore = stoi(convertToString(oMark->Text));
                     MessageBox::Show("Scoreboard Updated Successfully!", "Status", MessageBoxButtons::OK, MessageBoxIcon::Asterisk);
 
                     sbUCoursePan->Hide();
@@ -6999,10 +7010,6 @@ namespace CS162MoodleProject {
                         courseEnrolled = courseEnrolled->next;
                     }
                     courseRegisCount = n;
-                    if (n >= 5) {
-                        MessageBox::Show("You have reached course registration limit (5/5).", "Warning", MessageBoxButtons::OK, MessageBoxIcon::Error);
-                        return;
-                    }
 
                     n = 0;
                     if (!yearList2->semesters)
@@ -7112,6 +7119,7 @@ namespace CS162MoodleProject {
                         course->courseID = curCourseUpdate->courseID;
                         course->credits = curCourseUpdate->credits;
                         course->maxStudents = curCourseUpdate->maxStudents;
+                        course->numStudents = curCourseUpdate->numStudents;
                         course->room = curCourseUpdate->room;
 
                         course->startDate = curCourseUpdate->startDate;
@@ -7154,17 +7162,32 @@ namespace CS162MoodleProject {
                 {
                     Students* tmp = curCourseUpdate->studentList->next;
                     delete curCourseUpdate->studentList;
-
+                    //cout << 1;
                     curCourseUpdate->studentList = tmp;
                     curCourseUpdate->numStudents--;
+                    //cout << 2;
+                    if (currentStudent->enrolledCourse->courseID == curCourseUpdate->courseID) {
+                        Courses* course = currentStudent->enrolledCourse->next;
+                        MessageBox::Show("Succesfully unregister " + convertString(currentStudent->enrolledCourse->courseID), "Course Registration Session", MessageBoxButtons::OK, MessageBoxIcon::Asterisk);
+                        delete currentStudent->enrolledCourse->findCourseByID(curCourseUpdate->courseID);
+                        //cout << 3;
+                        currentStudent->enrolledCourse = course;
+                    } else {
+                        Courses* courseUnregis = currentStudent->enrolledCourse, * pre;
+                        while (courseUnregis && courseUnregis->courseID != curCourseUpdate->courseID) {
+                            pre = courseUnregis;
+                            courseUnregis = courseUnregis->next;
+                        }
+                        MessageBox::Show("Succesfully unregister " + convertString(curCourseUpdate->courseID), "Course Registration Session", MessageBoxButtons::OK, MessageBoxIcon::Asterisk);
+                        Courses* course = courseUnregis->next;
+                        delete courseUnregis;
+                        //cout << 3;
+                        pre->next = course;
+                    }
 
-                    Courses* course = currentStudent->enrolledCourse->next;
-                    delete currentStudent->enrolledCourse;
 
-                    currentStudent->enrolledCourse = course;
                     courseRegisCount--;
-                    MessageBox::Show("Succesfully unregister " + convertString(course->courseID), "Course Registration Session", MessageBoxButtons::OK, MessageBoxIcon::Asterisk);
-                
+                    
                     courseUnRegisPanelBtn->Hide();
                     courseRegisPanelBtn->Show();                
                 }

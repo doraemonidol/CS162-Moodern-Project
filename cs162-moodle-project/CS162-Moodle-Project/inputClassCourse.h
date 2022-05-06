@@ -151,6 +151,7 @@ namespace CS162MoodleProject {
                     // courseInput
                     //
                     this->courseInput->BorderStyle = System::Windows::Forms::BorderStyle::None;
+                    this->courseInput->CharacterCasing = System::Windows::Forms::CharacterCasing::Upper;
                     this->courseInput->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
                     this->courseInput->HideSelection = false;
                     this->courseInput->Location = System::Drawing::Point(41, 184);
@@ -196,6 +197,7 @@ namespace CS162MoodleProject {
                     // classInput
                     //
                     this->classInput->BorderStyle = System::Windows::Forms::BorderStyle::None;
+                    this->classInput->CharacterCasing = System::Windows::Forms::CharacterCasing::Upper;
                     this->classInput->Font = (gcnew System::Drawing::Font(L"Segoe UI", 10.75F));
                     this->classInput->HideSelection = false;
                     this->classInput->Location = System::Drawing::Point(45, 109);
